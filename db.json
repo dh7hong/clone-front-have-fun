@@ -25,5 +25,22 @@
       "id": 4
     }
   ],
-  "comments": []
+  "comments": [
+    {
+      "commentId": 1375736,
+      "postId": "220228",
+      "userId": "754237886",
+      "username": "se7entheman",
+      "contents": "sedfsdgsdgsdg",
+      "id": 1
+    },
+    {
+      "commentId": 1381766,
+      "postId": "220228",
+      "userId": "754237886",
+      "username": "se7entheman",
+      "contents": "sdfsdfdsafewwfawefqwfw",
+      "id": 2
+    }
+  ]
 }
