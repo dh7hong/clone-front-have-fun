@@ -3,7 +3,7 @@ const cors = require("cors");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-
+server.use(jsonServer.bodyParser); 
 server.use(cors());
 
 server.get("/api", (req, res) => {
@@ -35,6 +35,7 @@ server.delete("/api/users/:memberId/posts/:postId", (req, res) => {
 
 server.patch("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
+  console.log("Received comment:", req.body);
   const updates = req.body;
 
   const post = router.db.get("posts").find({ postId }).value();
@@ -52,19 +53,14 @@ server.patch("/api/users/:memberId/posts/:postId", (req, res) => {
   }
 });
 
-// POST method for adding a new comment to a post
 server.post("/api/users/:memberId/posts/:postId/comments", (req, res) => {
-  const postId = parseInt(req.params.postId);
-  const memberId = parseInt(req.params.memberId);
   const newComment = req.body;
-  console.log('newComment', newComment);
-  console.log('Full Request:', req);
-  // Add the comment to the 'comments' array in db.json
-  router.db.get("comments").push(newComment).write();
 
+  // Optional: Add any additional validation or logic here
+
+  router.db.get("comments").push(newComment).write();
   res.status(201).jsonp(newComment);
 });
-
 
 server.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
   const postId = parseInt(req.params.postId);
@@ -72,25 +68,25 @@ server.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
   res.jsonp(comments);
 });
 
-server.get("/api/users/:memberId/posts/:postId/comments/:commentId", (req, res) => {
-  const postId = parseInt(req.params.postId);
-  const commentId = parseInt(req.params.commentId);
-  let comment = router.db
-    .get("comments")
-    .find({ commentId, postId }) // Adjusted to use commentId and postId
-    .value();
+// server.get("/api/users/:memberId/posts/:postId/comments/:commentId", (req, res) => {
+//   const postId = parseInt(req.params.postId);
+//   const commentId = parseInt(req.params.commentId);
+//   let comment = router.db
+//     .get("comments")
+//     .find({ commentId, postId }) // Adjusted to use commentId and postId
+//     .value();
 
-  if (comment) {
-    const user = router.db
-      .get("users")
-      .find({ userId: comment.userId })
-      .value();
-    comment = { ...comment, user };
-    res.jsonp(comment);
-  } else {
-    res.status(404).send("Comment not found");
-  }
-});
+//   if (comment) {
+//     const user = router.db
+//       .get("users")
+//       .find({ userId: comment.userId })
+//       .value();
+//     comment = { ...comment, user };
+//     res.jsonp(comment);
+//   } else {
+//     res.status(404).send("Comment not found");
+//   }
+// });
 
 server.use("/api", router); // Prefix all json-server routes with /api
 server.use(middlewares);

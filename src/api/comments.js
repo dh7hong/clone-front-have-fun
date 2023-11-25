@@ -7,9 +7,9 @@ export const addNewComment = async (postId, commentData) => {
       `${process.env.REACT_APP_GAME_URL}/api/users/${memberId}/posts/${postId}/comments`,
       commentData
     );
-    console.log("Server response:", response.data);
     return response.data;
   } catch (error) {
+    // handle error
     console.error("Error posting comment:", error);
   }
 };
@@ -25,3 +25,4 @@ export const getCommentsByPostId = async (postId) => {
     console.error("Error fetching comments:", error);
   }
 };
+

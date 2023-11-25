@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = !!localStorage.getItem("token"); // Check if the user is logged in
 
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  return isLoggedIn ? children : <Navigate to="/api/login" />;
 };
 
 export default PrivateRoute;
