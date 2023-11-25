@@ -1,0 +1,29 @@
+{
+    "posts": [
+      {
+        "postId": 1751373,
+        "title": "aaaaaaaaaaa",
+        "userId": "118135487",
+        "contents": "aaaaaaaaaaaaaaaaaaaa",
+        "username": "dh7hong",
+        "id": 1
+      },
+      {
+        "postId": 1760893,
+        "title": "bbbbbbbbbbbbbb",
+        "userId": "118135487",
+        "contents": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "username": "dh7hong",
+        "id": 2
+      },
+      {
+        "postId": 1769000,
+        "title": "ccccccc",
+        "userId": "118135487",
+        "contents": "cccccccccccccccccccccccccc",
+        "username": "dh7hong",
+        "id": 3
+      }
+    ],
+    "comments": []
+  }
