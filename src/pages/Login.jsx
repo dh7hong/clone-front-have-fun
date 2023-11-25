@@ -74,7 +74,7 @@ function Login() {
   };
 
   const handleRegisterPageLinkClick = () => {
-    navigate(`/register`);
+    navigate(`/api/register`);
   };
 
   return (

@@ -19,8 +19,9 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const limit = 10;
   const offset = (page - 1) * limit;
+  const memberId = localStorage.getItem("memberId");
   const onClickSubmitBtn = () => {
-    navigate("/api/posts");
+    navigate(`/api/users/${memberId}/posts`);
   };
   const onChangeKeyWord = (event) => {
     setKeyWord(event.target.value);

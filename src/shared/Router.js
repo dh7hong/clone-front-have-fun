@@ -21,8 +21,8 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/api/login" element={<Login />} />
+        <Route path="/api/register" element={<Register />} />
         <Route path="/" element={<Layout />}>
           <Route
             path="/"
@@ -36,8 +36,8 @@ export default function Router() {
             path="/"
             element={isLoggedIn ? <Navigate to="/" /> : <Login />}
           />
-          <Route path="api/posts" element={<NewPost />} />
-          <Route path="/api/posts/:postId" element={<DetailedPage />} />
+          <Route path="/api/users/:memberId/posts" element={<NewPost />} />
+          <Route path="/api/users/:memberId/posts/:postId" element={<DetailedPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/diary" element={<Diary />} />

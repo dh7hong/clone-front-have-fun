@@ -7,6 +7,7 @@ import Navigation from "./Navigation";
 
 export default function Layout() {
   const { pathname } = useLocation();
+/* need some adjustments here maybe */
   const isMyPage = pathname === "/api/posts";
   return (
     <div

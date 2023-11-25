@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
-import { authUser } from "../api/authService";
+// import { authUser } from "../api/authService";
 import axios from "axios";
 import { Button } from "../components/button";
 
@@ -19,12 +19,12 @@ export default function Header() {
     setIsActive((prev) => !prev);
   };
 
-  const { mutate: auth } = useMutation(authUser);
+  // const { mutate: auth } = useMutation(authUser);
 
-  const handleAuth = (event) => {
-    event.preventDefault();
-    auth();
-  };
+  // const handleAuth = (event) => {
+  //   event.preventDefault();
+  //   auth();
+  // };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -34,7 +34,7 @@ export default function Header() {
     dispatch(logout());
     setIsLoggedIn(false);
     console.log(isLoggedIn);
-    navigate("/login"); // Navigate to login page on logout
+    navigate("/api/login"); // Navigate to login page on logout
   };
 
   const moveToHome = () => {

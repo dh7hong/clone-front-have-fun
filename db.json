@@ -1,29 +1,18 @@
 {
   "posts": [
     {
-      "postId": 1760893,
-      "title": "bbbbbbbbbbbbbb",
-      "userId": "118135487",
-      "contents": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "username": "dh7hong",
-      "id": 2
-    },
-    {
-      "postId": 204333,
-      "title": "124214",
-      "userId": "118135487",
-      "contents": "sdafsdfsdfsdf",
-      "username": "dh7hong",
-      "id": 3
-    },
-    {
-      "postId": 220228,
-      "title": "wqqwerqweqweewq",
-      "userId": "118135487",
-      "contents": "1234124eadsfwedfewdeedddddddddddddddddddddddddddddddddddddddddd",
-      "username": "dh7hong",
-      "id": 4
+      "postId": 2501321,
+      "title": "gffgdggfd",
+      "userId": "754237886",
+      "contents": "dfgfgddfgdfgfgddfg",
+      "username": "se7entheman",
+      "id": 1
     }
   ],
-  "comments": []
+  "comments": [
+    null,
+    null,
+    null,
+    null
+  ]
 }

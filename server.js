@@ -10,7 +10,7 @@ server.get("/api", (req, res) => {
   res.jsonp(router.db.getState());
 });
 
-server.get("/api/posts/:postId", (req, res) => {
+server.get("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
   const post = router.db.get("posts").find({ postId }).value();
   if (post) {
@@ -21,7 +21,7 @@ server.get("/api/posts/:postId", (req, res) => {
   }
 });
 
-server.delete("/api/posts/:postId", (req, res) => {
+server.delete("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
   const post = router.db.get("posts").find({ postId }).value();
 
@@ -33,7 +33,7 @@ server.delete("/api/posts/:postId", (req, res) => {
   }
 });
 
-server.patch("/api/posts/:postId", (req, res) => {
+server.patch("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
   const updates = req.body;
 
@@ -52,13 +52,27 @@ server.patch("/api/posts/:postId", (req, res) => {
   }
 });
 
-server.get("/api/posts/:postId/comments", (req, res) => {
+// POST method for adding a new comment to a post
+server.post("/api/users/:memberId/posts/:postId/comments", (req, res) => {
+  const postId = parseInt(req.params.postId);
+  const memberId = parseInt(req.params.memberId);
+  const newComment = req.body;
+  console.log('newComment', newComment);
+  console.log('Full Request:', req);
+  // Add the comment to the 'comments' array in db.json
+  router.db.get("comments").push(newComment).write();
+
+  res.status(201).jsonp(newComment);
+});
+
+
+server.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
   const postId = parseInt(req.params.postId);
   const comments = router.db.get("comments").filter({ postId: postId.toString() }).value();
   res.jsonp(comments);
 });
 
-server.get("/api/posts/:postId/comments/:commentId", (req, res) => {
+server.get("/api/users/:memberId/posts/:postId/comments/:commentId", (req, res) => {
   const postId = parseInt(req.params.postId);
   const commentId = parseInt(req.params.commentId);
   let comment = router.db

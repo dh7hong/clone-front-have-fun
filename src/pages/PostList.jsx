@@ -9,7 +9,8 @@ export default function PostList({ post, keyWord }) {
   const navigate = useNavigate();
 
   const moveToDetailedPage = (postId) => () => {
-    navigate(`api/posts/${postId}`);
+    const memberId = localStorage.getItem("memberId");
+    navigate(`api/users/${memberId}/posts/${postId}`);
   };
 
 

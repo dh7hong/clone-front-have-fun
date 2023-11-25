@@ -18,11 +18,11 @@ function Register() {
     alert(`Thanks for signing up! ${id}`);
     setId('');
     setPassword('');
-    navigate(`/login`);
+    navigate(`/api/login`);
   };
 
   const handleLoginPageButtonClick = () => {
-    navigate(`/login`);
+    navigate(`/api/login`);
   };
 
   return (

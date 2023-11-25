@@ -38,7 +38,7 @@ const writeDatabase = (db) => {
 };
 
 // Register endpoint
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { id, password } = req.body;
   let db = readDatabase();
 
@@ -47,7 +47,8 @@ app.post("/register", async (req, res) => {
   }
 
   const userId = generateUniqueId();
-  const newUser = { id, userId, password }; // Storing unhashed password as requested
+  const memberId = userId
+  const newUser = { id, userId, password, memberId }; // Storing unhashed password as requested
   db.users.push(newUser);
   writeDatabase(db);
 
@@ -55,7 +56,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Login endpoint
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { id, password } = req.body;
   let db = readDatabase();
 
@@ -63,11 +64,10 @@ app.post("/login", async (req, res) => {
   if (!user || user.password !== password) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
-
-  const token = jwt.sign({ userId: user.userId, id: user.id }, JWT_SECRET, {
+  const token = jwt.sign({ userId: user.userId, id: user.id, memberId: user.userId }, JWT_SECRET, {
     expiresIn: "1h",
   });
-  res.json({ token, userId: user.userId, id: user.id });
+  res.json({ token, userId: user.userId, id: user.id, memberId: user.userId });
 });
 
 const PORT = 4001;
