@@ -9,7 +9,7 @@ import { Button } from "../components/button";
 const CommentForm = () => {
   const [contents, setContents] = useState("");
   const dispatch = useDispatch();
-  const { postId } = useParams();
+  const { memberId, postId } = useParams();
 
   const generateUniqueId = () => {
     let now = new Date();
@@ -20,17 +20,17 @@ const CommentForm = () => {
     return minutes * 60000 + seconds * 1000 + milliseconds;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const uniqueId = generateUniqueId();
     const id = localStorage.getItem("id");
     const nickname = localStorage.getItem("nickname");
-    const memberId = localStorage.getItem("memberId");
+    
     dispatch(addComment({ commentId: uniqueId, postId, id, nickname, contents, memberId }));
 
     const commentData = { commentId: uniqueId, postId, id, nickname, contents, memberId };
 
-    addNewComment(postId, commentData);
+    await addNewComment(postId, commentData);
     
     setContents("");
   };

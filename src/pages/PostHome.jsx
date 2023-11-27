@@ -23,12 +23,8 @@ export default function PostHome() {
   });
 
   useEffect(() => {
-    if (!memberId) {
-      navigate("/api/login"); // Redirect to login if memberId is not available
-    } else {
-      refetch(); // Refetch posts data when memberId changes
-    }
-  }, [memberId, navigate, refetch]);
+    refetch();
+  }, [memberId, refetch]);
 
   //data = 객체형태로 모든 값들 다있음
   const [page, setPage] = useState(1);

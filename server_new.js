@@ -78,22 +78,21 @@ server.post("/api/login", (req, res) => {
   });
 });
 
-server.post("/api/users/:memberId/posts", (req, res) => {
-  const newPost = req.body;
-  router.db.get("posts").push(newPost).write();
-
-  res.status(201).jsonp(newPost);
-});
-
 server.get("/api/users/:memberId/posts", (req, res) => {
   const memberId = req.params.memberId;
 
-  const posts = router.db.get("posts").value();
-
-  const userPosts = posts.filter((post) => post.memberId === memberId);
-
-  res.jsonp(userPosts);
+  // Fetch posts based on the memberId in the URL
+  const posts = router.db.get("posts").filter({ memberId }).value();
+  res.jsonp(posts);
 });
+
+// For adding a new post
+server.post("/api/users/:memberId/posts", (req, res) => {
+  const newPost = { ...req.body, memberId: req.params.memberId };
+  router.db.get("posts").push(newPost).write();
+  res.status(201).jsonp(newPost);
+});
+
 
 server.get("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
@@ -137,21 +136,27 @@ server.patch("/api/users/:memberId/posts/:postId", (req, res) => {
   }
 });
 
-server.post("/api/users/:memberId/posts/:postId/comments", (req, res) => {
-  const newComment = req.body;
 
+
+server.post("/api/users/:memberId/posts/:postId/comments", (req, res) => {
+  const newComment = { ...req.body, postId: req.params.postId };
   router.db.get("comments").push(newComment).write();
   res.status(201).jsonp(newComment);
 });
 
+
 server.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
-  const postId = parseInt(req.params.postId);
-  const comments = router.db
-    .get("comments")
-    .filter({ postId: postId.toString() })
-    .value();
+  const postId = req.params.postId;
+  const comments = router.db.get("comments").filter({ postId }).value();
   res.jsonp(comments);
 });
+
+server.get("/api/users", (req, res) => {
+  const users = router.db.get("users").value();
+  res.jsonp(users);
+});
+
+
 
 server.use("/api", router);
 

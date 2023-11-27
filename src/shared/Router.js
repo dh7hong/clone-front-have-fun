@@ -16,6 +16,7 @@ import Jukebox from "../pages/Jukebox";
 import Guestbook from "../pages/Guestbook";
 import PostHome from "../pages/PostHome";
 import AddFriendComponent from "../pages/AddFriendComponent";
+import UserList from '../pages/UserList';
 
 export default function Router() {
   const isLoggedIn = !!localStorage.getItem("token"); // Check login status
@@ -27,6 +28,7 @@ export default function Router() {
         <Route path="/api/login" element={<Login />} />
         <Route path="/api/register" element={<Register />} />
         <Route path="/" element={<Layout />}>
+          <Route path="/api/users" element={<UserList />} />
           {isLoggedIn && memberId ? (
             <>
               <Route path="/api/users/:memberId/posts" element={<PostHome />} />

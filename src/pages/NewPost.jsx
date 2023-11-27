@@ -12,15 +12,24 @@ export default function NewPost() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [titleError, setTitleError] = useState("");
-  const { memberId } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { memberId } = useParams(); // Use memberId from URL
   const queryClient = new QueryClient();
-  const mutation = useMutation(AddPost, {
+
+  const mutation = useMutation(post => AddPost(post, memberId), {
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
     },
   });
+
+  const handleSubmit = () => {
+    if (!title || !contents) return alert("Please enter both title and contents");
+    const newPost = { title, contents };
+    mutation.mutate(newPost);
+    navigate(`/api/users/${memberId}/posts`);
+  };
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -50,7 +59,6 @@ export default function NewPost() {
     const uniqueId = generateUniqueId();
     const id = localStorage.getItem("id");
     const nickname = localStorage.getItem("nickname");
-    const memberId = localStorage.getItem("memberId");
     console.log("id", id);
     console.log("nickname", nickname);
     console.log("memberId", memberId);
@@ -66,10 +74,11 @@ export default function NewPost() {
     mutation.mutate(newPost);
 
     alert("정상적으로 등록됐습니다");
+    navigate(`/api/users/${memberId}/posts`);
   };
 
   const moveToBoard = () => {
-    navigate("/");
+    navigate(`/api/users/${memberId}/posts`);
   };
   return (
     <S.NewPostWrapper>
