@@ -80,5 +80,15 @@ app.post("/api/login", async (req, res) => {
   });
 });
 
+// GET endpoint for /api/users
+app.get('/api/users', (req, res) => {
+  try {
+    const dbData = readDatabase();
+    res.json(dbData.users);
+  } catch (error) {
+    res.status(500).send("Error fetching users");
+  }
+});
+
 const PORT = 4002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

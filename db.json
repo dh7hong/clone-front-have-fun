@@ -1,55 +1,5 @@
 {
-  "users": [
-    {
-      "id": "dh7hong",
-      "password": "GDhs0903??",
-      "nickname": "dannyhong",
-      "memberId": 595759437
-    },
-    {
-      "id": "se7entheman",
-      "password": "GDhs0903??",
-      "nickname": "se7enhong",
-      "memberId": 750906532
-    },
-    {
-      "id": "laznise7en",
-      "password": "GDhs0903??",
-      "nickname": "laznihong",
-      "memberId": 817551869
-    },
-    {
-      "id": "aescientists",
-      "password": "GDhs0903??",
-      "nickname": "scientist",
-      "memberId": 356403027
-    }
-  ],
   "posts": [
-    {
-      "postId": 676358,
-      "title": "323423",
-      "id": "dh7hong",
-      "contents": "dvdccxzcxzczxc",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
-    },
-    {
-      "postId": 1752139,
-      "title": "12412",
-      "id": "dh7hong",
-      "contents": "zdfcvzdxfvc",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
-    },
-    {
-      "postId": 1839626,
-      "title": "32532r32",
-      "id": "dh7hong",
-      "contents": "cxvzcxzxzxczx",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
-    },
     {
       "postId": 2021544,
       "title": "vdcxvcxcv",
@@ -57,22 +7,6 @@
       "contents": "xcvxcvxcvxc",
       "nickname": "se7enhong",
       "memberId": "750906532"
-    },
-    {
-      "postId": 2333133,
-      "title": "dfsdfd",
-      "id": "dh7hong",
-      "contents": "3223ffsdfsdfsd",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
-    },
-    {
-      "postId": 2404793,
-      "title": "qwqwrqwr",
-      "id": "dh7hong",
-      "contents": "qwqweqwrqwr",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
     },
     {
       "postId": 2458460,
@@ -107,28 +41,12 @@
       "memberId": "750906532"
     },
     {
-      "postId": 1406796,
-      "title": "ryerr",
-      "id": "dh7hong",
-      "contents": "gvbvvcbcvbcv",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
-    },
-    {
       "postId": 1664178,
       "title": "xcxcvxcvcx",
       "id": "grantcho",
       "contents": "xcxcvxcvxcvxcvxc",
       "nickname": "Grant Cho",
       "memberId": "34677427"
-    },
-    {
-      "postId": 2999784,
-      "title": "rgdfgf",
-      "id": "dh7hong",
-      "contents": "fgdfgdfgfd",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
     },
     {
       "postId": 3199179,
@@ -155,14 +73,6 @@
       "memberId": "750906532"
     },
     {
-      "postId": 543997,
-      "title": "1124124",
-      "id": "dh7hong",
-      "contents": "zczxczxczxc",
-      "nickname": "dannyhong",
-      "memberId": "595759437"
-    },
-    {
       "postId": 561635,
       "title": "3dsxczvxc",
       "id": "dh7hong",
@@ -187,28 +97,168 @@
       "memberId": "750906532"
     },
     {
-      "postId": 100035,
-      "title": "xczxczx",
-      "id": null,
-      "contents": "zxcxzvzxczx",
-      "nickname": null,
-      "memberId": "356403027"
-    },
-    {
-      "postId": 139689,
-      "title": "zxczzxczxx",
-      "id": null,
-      "contents": "zzzzzzzzzzzzzzzzzzzzzzzzzzzz",
-      "nickname": null,
-      "memberId": "356403027"
-    },
-    {
       "postId": 1002699,
       "title": "xxxxxxx",
       "id": "se7entheman",
       "contents": "zzz",
       "nickname": "se7enhong",
       "memberId": "750906532"
+    },
+    {
+      "postId": 250877,
+      "title": "zzzzzzz",
+      "id": "se7entheman",
+      "contents": "zzzzzzzzzzzzz",
+      "nickname": "se7enhong",
+      "memberId": "817551869"
+    },
+    {
+      "postId": 751534,
+      "title": "hey",
+      "id": "se7entheman",
+      "contents": "heyhey",
+      "nickname": "se7enhong",
+      "memberId": "957098644"
+    },
+    {
+      "postId": 894610,
+      "title": "rrrrrrrrrrrrr",
+      "id": "se7entheman",
+      "contents": "zzzzzzzzzzzzzzzzz",
+      "nickname": "se7enhong",
+      "memberId": "957098644"
+    },
+    {
+      "postId": 1304084,
+      "title": "yyyyyyyyyyyyyy",
+      "id": "se7entheman",
+      "contents": "yyyy",
+      "nickname": "se7enhong",
+      "memberId": "595759437"
+    },
+    {
+      "postId": 1347857,
+      "title": "ttttttttttttttt",
+      "id": "se7entheman",
+      "contents": "tts",
+      "nickname": "se7enhong",
+      "memberId": "595759437"
+    },
+    {
+      "postId": 277590,
+      "title": "have a ",
+      "id": "se7entheman",
+      "contents": "good 1",
+      "nickname": "se7enhong",
+      "memberId": "817551869"
+    },
+    {
+      "postId": 384750,
+      "title": "postpost",
+      "id": "se7entheman",
+      "contents": "post",
+      "nickname": "se7enhong",
+      "memberId": "817551869"
+    },
+    {
+      "postId": 661774,
+      "title": "hng",
+      "id": "se7entheman",
+      "contents": "hngg",
+      "nickname": "se7enhong",
+      "memberId": "750906532"
+    },
+    {
+      "postId": 1449219,
+      "title": "se7777",
+      "id": "se7entheman",
+      "contents": "777777",
+      "nickname": "se7enhong",
+      "memberId": "595759437"
+    },
+    {
+      "postId": 1142193,
+      "title": "shaco",
+      "id": "shaclone",
+      "contents": "stfu",
+      "nickname": "shaco",
+      "memberId": "997310404"
+    },
+    {
+      "postId": 1307868,
+      "title": "lolololol",
+      "id": "shaclone",
+      "contents": "lolol",
+      "nickname": "shaco",
+      "memberId": "486565047"
+    },
+    {
+      "postId": 1396329,
+      "title": "lololol",
+      "id": "se7enthemanman",
+      "contents": "olololol",
+      "nickname": "GD",
+      "memberId": "957098644"
+    },
+    {
+      "postId": 1879989,
+      "title": "haaaaaaaaa",
+      "id": "se7enthehell",
+      "contents": "haaaaaaaaaaa",
+      "nickname": "thehell",
+      "memberId": "767491850"
+    },
+    {
+      "postId": 1908668,
+      "title": "12124",
+      "id": "se7enthehell",
+      "contents": "asdfsdfsd",
+      "nickname": "thehell",
+      "memberId": "767491850"
+    },
+    {
+      "postId": 2334472,
+      "title": "ffsdfsd",
+      "id": "se7ense7en",
+      "contents": "dsfsdfsd",
+      "nickname": "se7en",
+      "memberId": "166709848"
+    },
+    {
+      "postId": 3596058,
+      "title": "ffsdfsd",
+      "id": "se7ense7en",
+      "contents": "dsfsdfsd",
+      "nickname": "se7en",
+      "memberId": "166709848"
+    },
+    {
+      "title": "plz",
+      "contents": "omgosh",
+      "memberId": "387913889"
+    },
+    {
+      "title": "plzzzzzzzz",
+      "id": "se7enlazni",
+      "contents": "work.",
+      "nickname": "lazni",
+      "memberId": "699182001"
+    },
+    {
+      "postId": 1371850,
+      "title": "please ",
+      "id": "se7enlazni",
+      "contents": "work",
+      "nickname": "lazni",
+      "memberId": "699182001"
+    },
+    {
+      "postId": 1396370,
+      "title": "will it ",
+      "id": "se7enlazni",
+      "contents": "work?",
+      "nickname": "lazni",
+      "memberId": "595759437"
     }
   ],
   "comments": [
@@ -354,6 +404,78 @@
       "nickname": "se7enhong",
       "contents": "xxxxxxxxxxxxxxxxxxxxxxx",
       "memberId": "750906532"
+    },
+    {
+      "commentId": 467468,
+      "postId": "2458460",
+      "id": "se7entheman",
+      "nickname": "se7enhong",
+      "contents": "zxczxzcxzzzzzzzzzzzzzz",
+      "memberId": "750906532"
+    },
+    {
+      "commentId": 473731,
+      "postId": "2458460",
+      "id": "se7entheman",
+      "nickname": "se7enhong",
+      "contents": "ccccccccccczzzzzzzzzzzzzzzzzzz",
+      "memberId": "750906532"
+    },
+    {
+      "commentId": 1150210,
+      "postId": "676358",
+      "id": "se7entheman",
+      "nickname": "se7enhong",
+      "contents": "zxczxczxcxz",
+      "memberId": "750906532"
+    },
+    {
+      "commentId": 1454101,
+      "postId": "1752139",
+      "id": "se7entheman",
+      "nickname": "se7enhong",
+      "contents": "zxxczxzxczxc",
+      "memberId": "750906532"
+    },
+    {
+      "commentId": 2068900,
+      "postId": "1752139",
+      "id": "se7entheman",
+      "nickname": "se7enhong",
+      "contents": "zxczxzcxzx",
+      "memberId": "750906532"
+    },
+    {
+      "commentId": 1973623,
+      "postId": "1879989",
+      "id": "se7enthehell",
+      "nickname": "thehell",
+      "contents": "asasfasdfw",
+      "memberId": "767491850"
+    },
+    {
+      "commentId": 1977439,
+      "postId": "1879989",
+      "id": "se7enthehell",
+      "nickname": "thehell",
+      "contents": "asfsafasfasd",
+      "memberId": "767491850"
+    },
+    {
+      "commentId": 1484903,
+      "postId": "1396370",
+      "id": "se7enlazni",
+      "nickname": "lazni",
+      "contents": "dfsdsddsdgsd",
+      "memberId": "595759437"
+    },
+    {
+      "commentId": 1494137,
+      "postId": "1396370",
+      "id": "se7enlazni",
+      "nickname": "lazni",
+      "contents": "dsfgsdfsdfds",
+      "memberId": "595759437"
     }
   ]
 }

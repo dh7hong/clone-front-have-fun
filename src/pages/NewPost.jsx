@@ -1,50 +1,28 @@
-import React, { useState } from "react";
-import { QueryClient, useMutation, useQuery } from "react-query";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddPost, getPost } from "../api/posts";
-import { useDispatch, useSelector } from "react-redux";
+import { AddPost } from "../api/posts";
+import { addPost } from "../redux/modules/postSlice";
 import * as S from "../shared/style/NewPostStyle";
-import { v4 as uuidv4 } from "uuid";
-import { uniq } from "lodash";
 import { Button } from "../components/button";
 
 export default function NewPost() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [titleError, setTitleError] = useState("");
-
+  const [id, setId] = useState(localStorage.getItem("id"));
+  const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { memberId } = useParams(); // Use memberId from URL
-  const queryClient = new QueryClient();
+  const { memberId } = useParams();
 
-  const mutation = useMutation(post => AddPost(post, memberId), {
-    onSuccess: () => {
-      queryClient.invalidateQueries("posts");
-    },
-  });
+  useEffect(() => {
+    // Update state if localStorage changes
+    setId(localStorage.getItem("id"));
+    setNickname(localStorage.getItem("nickname"));
+  }, []);
 
-  const handleSubmit = () => {
-    if (!title || !contents) return alert("Please enter both title and contents");
-    const newPost = { title, contents };
-    mutation.mutate(newPost);
-    navigate(`/api/users/${memberId}/posts`);
-  };
-
-  const onChangeTitle = (event) => {
-    setTitle(event.target.value);
-    const test = event.target.value;
-    if (test?.length > 15) {
-      alert("15글자까지 입력 가능합니다.");
-    } else {
-      setTitleError("");
-    }
-  };
-
-  const onChangeContents = (event) => {
-    setContents(event.target.value);
-  };
-
+  const onChangeTitle = (event) => setTitle(event.target.value);
+  const onChangeContents = (event) => setContents(event.target.value);
   const generateUniqueId = () => {
     let now = new Date();
     let minutes = now.getMinutes();
@@ -53,33 +31,33 @@ export default function NewPost() {
 
     return minutes * 60000 + seconds * 1000 + milliseconds;
   };
+  
+  const uniqueId = generateUniqueId();
 
-  const onClickSubmitBtn = () => {
-    if (!title || !contents) return alert("제목과 내용을 입력하세요");
-    const uniqueId = generateUniqueId();
-    const id = localStorage.getItem("id");
-    const nickname = localStorage.getItem("nickname");
-    console.log("id", id);
-    console.log("nickname", nickname);
-    console.log("memberId", memberId);
-    const newPost = {
-      postId: uniqueId,
-      title: title,
-      id: id,
-      contents: contents,
-      nickname: nickname,
-      memberId: memberId,
-    };
-    console.log("newPost before mutation:", newPost);
-    mutation.mutate(newPost);
+  const onSubmit = async () => {
+    if (!title || !contents) {
+      alert("Title and contents are required.");
+      return;
+    }
 
-    alert("정상적으로 등록됐습니다");
-    navigate(`/api/users/${memberId}/posts`);
+    try {
+      const newPostData = {
+        postId: uniqueId,
+        title,
+        id,
+        contents,
+        nickname,
+        memberId,
+      };
+      const response = await AddPost(newPostData, memberId);
+      dispatch(addPost(response));
+      navigate(`/api/users/${memberId}/posts`);
+    } catch (error) {
+      console.error("Error adding new post:", error);
+      // Handle error appropriately
+    }
   };
 
-  const moveToBoard = () => {
-    navigate(`/api/users/${memberId}/posts`);
-  };
   return (
     <S.NewPostWrapper>
       <S.InputWrapper>
@@ -92,21 +70,26 @@ export default function NewPost() {
             <S.TitleInput
               placeholder="제목을 입력하세요"
               maxLength={15}
+              value={title}
               onChange={onChangeTitle}
             />
-            <span>{titleError}</span>
           </S.TitleWrapper>
           <S.ContentsWrapper>
             <h3>내용</h3>
             <S.ContentsInput
               placeholder="내용을 입력하세요"
+              value={contents}
               onChange={onChangeContents}
             />
           </S.ContentsWrapper>
         </S.ContentsBody>
         <S.ButtonWrapper>
-          <Button onClick={onClickSubmitBtn}>등록하기</Button>
-          <Button onClick={moveToBoard}>목록가기</Button>
+          <Button onClick={onSubmit} disabled={!title || !contents}>
+            등록하기
+          </Button>
+          <Button onClick={() => navigate(`/api/users/${memberId}/posts`)}>
+            목록가기
+          </Button>
         </S.ButtonWrapper>
       </S.InputWrapper>
     </S.NewPostWrapper>

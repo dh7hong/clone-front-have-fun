@@ -7,7 +7,7 @@ export default function UserList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users`)
+    axios.get(`${process.env.REACT_APP_AUTH_URL}/api/users`)
       .then(response => {
         setUsers(response.data);
       })

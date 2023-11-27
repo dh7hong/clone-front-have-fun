@@ -30,6 +30,7 @@ export default function Header() {
     setIsLoggedIn(false);
     console.log(isLoggedIn);
     navigate("/api/login"); // Navigate to login page on logout
+    window.location.reload();  
   };
 
   const moveToHome = () => {

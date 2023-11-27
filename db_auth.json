@@ -2,9 +2,39 @@
   "users": [
     {
       "id": "dh7hong",
-      "password": "GDhs0815**",
+      "password": "GDhs0903??",
       "nickname": "dannyhong",
-      "memberId": 788618678
+      "memberId": 595759437
+    },
+    {
+      "id": "se7entheman",
+      "password": "GDhs0903??",
+      "nickname": "se7enhong",
+      "memberId": 750906532
+    },
+    {
+      "id": "laznise7en",
+      "password": "GDhs0903??",
+      "nickname": "laznihong",
+      "memberId": 817551869
+    },
+    {
+      "id": "aescientists",
+      "password": "GDhs0903??",
+      "nickname": "scientist",
+      "memberId": 356403027
+    },
+    {
+      "id": "se7enthemanman",
+      "password": "GDhs0903??",
+      "nickname": "GD",
+      "memberId": 957098644
+    },
+    {
+      "id": "se7enlazni",
+      "password": "GDhs0903??",
+      "nickname": "lazni",
+      "memberId": 699182001
     }
   ]
 }

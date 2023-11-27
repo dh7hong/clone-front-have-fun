@@ -33,50 +33,50 @@ const generateUniqueId = () => {
   return Math.floor(Math.random() * 1000000000);
 };
 
-// Simulate user registration
-server.post("/api/register", (req, res) => {
-  const { id, password, nickname } = req.body;
-  const db = readDatabase();
+// // Simulate user registration
+// server.post("/api/register", (req, res) => {
+//   const { id, password, nickname } = req.body;
+//   const db = readDatabase();
 
-  if (db.users.some((u) => u.id === id || u.nickname === nickname)) {
-    return res.status(400).json({ message: "User already exists" });
-  }
-  const memberId = generateUniqueId();
-  const newUser = { id, password, nickname, memberId }; // Use Date.now() for simplicity
-  db.users.push(newUser);
-  fs.writeFileSync("db.json", JSON.stringify(db));
+//   if (db.users.some((u) => u.id === id || u.nickname === nickname)) {
+//     return res.status(400).json({ message: "User already exists" });
+//   }
+//   const memberId = generateUniqueId();
+//   const newUser = { id, password, nickname, memberId }; // Use Date.now() for simplicity
+//   db.users.push(newUser);
+//   fs.writeFileSync("db.json", JSON.stringify(db));
 
-  res
-    .status(201)
-    .json({ message: "User registered successfully", id: newUser.id });
-});
+//   res
+//     .status(201)
+//     .json({ message: "User registered successfully", id: newUser.id });
+// });
 
-// Simulate user login
-server.post("/api/login", (req, res) => {
-  const { id } = req.body;
-  const db = readDatabase();
+// // Simulate user login
+// server.post("/api/login", (req, res) => {
+//   const { id } = req.body;
+//   const db = readDatabase();
 
-  const user = db.users.find((u) => u.id === id);
-  if (!user) {
-    return res.status(401).json({ message: "Invalid credentials" });
-  }
+//   const user = db.users.find((u) => u.id === id);
+//   if (!user) {
+//     return res.status(401).json({ message: "Invalid credentials" });
+//   }
 
-  const token = jwt.sign(
-    {
-      id: user.id,
-      nickname: user.nickname,
-      memberId: user.memberId,
-    },
-    JWT_SECRET,
-    { expiresIn: "1h" }
-  );
-  res.json({
-    token,
-    id: user.id,
-    nickname: user.nickname,
-    memberId: user.memberId,
-  });
-});
+//   const token = jwt.sign(
+//     {
+//       id: user.id,
+//       nickname: user.nickname,
+//       memberId: user.memberId,
+//     },
+//     JWT_SECRET,
+//     { expiresIn: "1h" }
+//   );
+//   res.json({
+//     token,
+//     id: user.id,
+//     nickname: user.nickname,
+//     memberId: user.memberId,
+//   });
+// });
 
 server.get("/api/users/:memberId/posts", (req, res) => {
   const memberId = req.params.memberId;

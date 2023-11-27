@@ -15,13 +15,14 @@ import { Button } from "../components/button";
 
 export default function DetailedPage() {
   const navigate = useNavigate();
-  const { postId } = useParams();
+  const { memberId, postId } = useParams();
   const queryClient = useQueryClient();
-
+  
   console.log("postId", postId);
 
-  const { data: detailedInfo } = useQuery(["post", postId], () =>
-    getOnePost(postId)
+  
+  const { data: detailedInfo } = useQuery(["post", postId, memberId], () =>
+    getOnePost(postId, memberId)
   );
 
   console.log("detailedInfo", detailedInfo);
@@ -29,16 +30,16 @@ export default function DetailedPage() {
   const deleteMutation = useMutation(() => deletePost(postId), {
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
-      navigate("/api/users/" + memberId + "/posts");
+      navigate(`/api/users/${memberId}/posts`);
     },
   });
 
   const deleteBtn = () => {
     deleteMutation.mutate();
   };
-  const memberId = localStorage.getItem("memberId");
+
   const moveToList = () => {
-    navigate("/api/users/" + memberId + "/posts");
+    navigate(`/api/users/${memberId}/posts`);
   };
 
   return (
@@ -46,9 +47,9 @@ export default function DetailedPage() {
       <h2 style={{ color: "white" }}>게시물 등록</h2>
       <S.NewBoardWrapper>
         <h2>제목</h2>
-        <S.TitleStyle>{detailedInfo?.data.title}</S.TitleStyle>
+        <S.TitleStyle>{detailedInfo?.title}</S.TitleStyle>
         <h2>내용</h2>
-        <S.ContentsStyle> {detailedInfo?.data.contents}</S.ContentsStyle>
+        <S.ContentsStyle> {detailedInfo?.contents}</S.ContentsStyle>
       </S.NewBoardWrapper>
       <S.ButtonWrapper>
         <Button onClick={moveToList}>목록으로</Button>

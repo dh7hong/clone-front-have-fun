@@ -16,10 +16,10 @@ import Jukebox from "../pages/Jukebox";
 import Guestbook from "../pages/Guestbook";
 import PostHome from "../pages/PostHome";
 import AddFriendComponent from "../pages/AddFriendComponent";
-import UserList from '../pages/UserList';
+import UserList from "../pages/UserList";
 
 export default function Router() {
-  const isLoggedIn = !!localStorage.getItem("token"); // Check login status
+  // Check login status
   const memberId = localStorage.getItem("memberId"); // Get memberId from localStorage
   console.log(`memberId is ${memberId}`);
   return (
@@ -29,38 +29,13 @@ export default function Router() {
         <Route path="/api/register" element={<Register />} />
         <Route path="/" element={<Layout />}>
           <Route path="/api/users" element={<UserList />} />
-          {isLoggedIn && memberId ? (
-            <>
-              <Route path="/api/users/:memberId/posts" element={<PostHome />} />
-              <Route
-                path="/api/users/:memberId/posts/new"
-                element={<NewPost />}
-              />
-              <Route
-                path="/api/users/:memberId/posts/:postId"
-                element={<DetailedPage />}
-              />
-              <Route
-                path="/api/users/:memberId/friends"
-                element={<AddFriendComponent />}
-              />
-              <Route
-                path="/api/users/:memberId/profile"
-                element={<Profile />}
-              />
-              <Route path="/api/users/:memberId/diary" element={<Diary />} />
-              <Route
-                path="/api/users/:memberId/jukebox"
-                element={<Jukebox />}
-              />
-              <Route
-                path="/api/users/:memberId/guestbook"
-                element={<Guestbook />}
-              />
-            </>
-          ) : (
-            <Route path="*" element={<Navigate to="/api/login" />} />
-          )}
+          <Route path="/api/users/:memberId/posts" element={<PostHome />} />
+          <Route path="/api/users/:memberId/posts/new" element={<NewPost />} />
+          <Route path="/api/users/:memberId/posts/:postId" element={<DetailedPage />} />
+          <Route path="/api/users/:memberId/profile" element={<Profile />} />
+          <Route path="/api/users/:memberId/diary" element={<Diary />} />
+          <Route path="/api/users/:memberId/jukebox" element={<Jukebox />} />
+          <Route path="/api/users/:memberId/guestbook" element={<Guestbook />} />
         </Route>
       </Routes>
     </BrowserRouter>

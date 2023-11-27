@@ -26,7 +26,7 @@ const catchErrors = (error) => {
 const registerUser = async (userData) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/api/register`,
+      `${process.env.REACT_APP_AUTH_URL}/api/register`,
       userData
     );
     console.log(response);
@@ -38,7 +38,7 @@ const registerUser = async (userData) => {
 const loginUser = async (userData) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/api/login`,
+      `${process.env.REACT_APP_AUTH_URL}/api/login`,
       userData
     );
     console.log(`response ${response.data}`);
