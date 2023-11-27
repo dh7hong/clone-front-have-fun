@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
-import { setToken, setUserId, setUsername } from "../redux/modules/userSlice";
+import {
+  setToken,
+  setNickname,
+  setMemberId,
+} from "../redux/modules/userSlice";
 import { loginUser } from "../api/authService";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -31,22 +35,19 @@ function Login() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
-    if (token && userId) {
+    const id = localStorage.getItem("id"); // Retrieve userId from localStorage
+    if (token && id) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       dispatch(setToken(token));
-      dispatch(setUserId(userId));
+      dispatch(setId(id));
       setIsLoggedIn(true);
     }
   }, [dispatch]);
 
   const { mutate: login } = useMutation(loginUser, {
     onSuccess: (data) => {
-      if (data && data.token && data.userId && data.username) {
-        // Destructure only if all properties are available
-        const { token, userId, username } = data;
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        handleLoginSuccess(token, userId, username);
+      if (data && data.token && data.id && data.nickname) {
+        handleLoginSuccess(data);
       } else {
         console.error("Login unsuccessful or data missing");
       }
@@ -59,16 +60,19 @@ function Login() {
     navigate(`/`);
   };
 
-  const handleLoginSuccess = (token, userId, username) => {
-    localStorage.setItem("username", username);
+  const handleLoginSuccess = (token, id, nickname, memberId) => {
     localStorage.setItem("token", token);
-    localStorage.setItem("userId", userId); // Store userId in localStorage
+    localStorage.setItem("id", id);
+    localStorage.setItem("nickname", nickname);
+    localStorage.setItem("memberId", memberId); // Store userId in localStorage
     console.log("token", token);
-    console.log("userId", userId);
-    console.log("username", username);
+    console.log("id", id);
+    console.log("nickname", nickname);
+    console.log("memberId", memberId);
     dispatch(setToken(token));
-    dispatch(setUserId(userId));
-    dispatch(setUsername(username));
+    dispatch(setId(id));
+    dispatch(setNickname(nickname));
+    dispatch(setMemberId(memberId)); // Store info in Redux store
     setIsLoggedIn(true);
     navigate("/");
   };

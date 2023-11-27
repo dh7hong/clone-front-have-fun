@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { QueryClient, useMutation, useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AddPost, getPost } from "../api/posts";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "../shared/style/NewPostStyle";
@@ -12,6 +12,7 @@ export default function NewPost() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [titleError, setTitleError] = useState("");
+  const { memberId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = new QueryClient();
@@ -47,17 +48,21 @@ export default function NewPost() {
   const onClickSubmitBtn = () => {
     if (!title || !contents) return alert("제목과 내용을 입력하세요");
     const uniqueId = generateUniqueId();
-    const username = localStorage.getItem("username");
-    const userId = localStorage.getItem("userId");
+    const id = localStorage.getItem("id");
+    const nickname = localStorage.getItem("nickname");
+    const memberId = localStorage.getItem("memberId");
+    console.log("id", id);
+    console.log("nickname", nickname);
+    console.log("memberId", memberId);
     const newPost = {
       postId: uniqueId,
       title: title,
-      userId: userId,
+      id: id,
       contents: contents,
-      username: username,
-      // likedCount: 0,
-      // isActive: false,
+      nickname: nickname,
+      memberId: memberId,
     };
+    console.log("newPost before mutation:", newPost);
     mutation.mutate(newPost);
 
     alert("정상적으로 등록됐습니다");

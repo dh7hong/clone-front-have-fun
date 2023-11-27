@@ -12,12 +12,10 @@ app.use(cors());
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Revised generateUniqueId function to return a random number
 const generateUniqueId = () => {
-  return Math.floor(Math.random() * 1000000000); // Generates a random number
+  return Math.floor(Math.random() * 1000000000); 
 };
 
-// Function to read the database
 const readDatabase = () => {
   try {
     return JSON.parse(fs.readFileSync("db_auth.json", "utf8"));
@@ -27,7 +25,6 @@ const readDatabase = () => {
   }
 };
 
-// Function to write to the database
 const writeDatabase = (db) => {
   try {
     fs.writeFileSync("db_auth.json", JSON.stringify(db, null, 2)); // Pretty print the JSON
@@ -37,25 +34,25 @@ const writeDatabase = (db) => {
   }
 };
 
-// Register endpoint
 app.post("/api/register", async (req, res) => {
-  const { id, password } = req.body;
+  const { id, password, nickname } = req.body;
   let db = readDatabase();
 
   if (db.users.some((u) => u.id === id)) {
     return res.status(400).json({ message: "Username already exists" });
   }
-
+  if (db.users.some((u) => u.nickname === nickname)) {
+    return res.status(400).json({ message: "Nickname already exists" });
+  }
   const userId = generateUniqueId();
-  const memberId = userId
-  const newUser = { id, userId, password, memberId }; // Storing unhashed password as requested
+  const memberId = generateUniqueId();
+  const newUser = { id, password, nickname, userId, memberId };
   db.users.push(newUser);
   writeDatabase(db);
 
   res.status(201).json({ message: "User registered successfully", userId });
 });
 
-// Login endpoint
 app.post("/api/login", async (req, res) => {
   const { id, password } = req.body;
   let db = readDatabase();
@@ -64,10 +61,56 @@ app.post("/api/login", async (req, res) => {
   if (!user || user.password !== password) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
-  const token = jwt.sign({ userId: user.userId, id: user.id, memberId: user.userId }, JWT_SECRET, {
-    expiresIn: "1h",
+  const token = jwt.sign(
+    {
+      userId: user.userId,
+      id: user.id,
+      nickname: user.nickname,
+      memberId: user.memberId,
+    },
+    JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+  res.json({
+    token,
+    userId: user.userId,
+    id: user.id,
+    nickname: user.nickname,
+    memberId: user.memberId,
   });
-  res.json({ token, userId: user.userId, id: user.id, memberId: user.userId });
+});
+
+app.post("/api/users/:memberId/friends", (req, res) => {
+  const { memberId } = req.params;
+  const { friendNickname } = req.body;
+
+  let db = readDatabase();
+
+  // Find friend by nickname
+  const friend = db.users.find((u) => u.nickname === friendNickname);
+  if (!friend) {
+    return res.status(404).json({ message: "Friend not found" });
+  }
+
+  // Check if the relationship already exists to avoid duplicates
+  const relationshipExists = db.relationships.some(r => 
+    (r.memberId === memberId && r.friendMemberId === friend.memberId) ||
+    (r.memberId === friend.memberId && r.friendMemberId === memberId)
+  );
+
+  if (relationshipExists) {
+    return res.status(409).json({ message: "Friendship already exists" });
+  }
+
+  // Create a new relationship
+  const newRelationship = { memberId, friendMemberId: friend.memberId };
+  db.relationships = db.relationships || []; // Ensure the relationships array exists
+  db.relationships.push(newRelationship);
+  writeDatabase(db);
+
+  res.status(201).json(newRelationship);
 });
 
 const PORT = 4001;

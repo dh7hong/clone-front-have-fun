@@ -13,9 +13,10 @@ export const commentSlice = createSlice({
       state.comments.push({
         commentId: action.payload.commentId,
         postId: action.payload.postId,
-        userId: action.payload.userId,
-        username: action.payload.username,
-        contents: action.payload.contents
+        id: action.payload.id,
+        nickname: action.payload.nickname,
+        contents: action.payload.contents,
+        memberId: action.payload.memberId,
       });
     },
     setComments: (state, action) => {

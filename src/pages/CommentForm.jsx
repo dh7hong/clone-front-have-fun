@@ -7,7 +7,6 @@ import * as S from "../shared/style/CommentStyle";
 import { Button } from "../components/button";
 
 const CommentForm = () => {
-  const [username, setUsername] = useState("");
   const [contents, setContents] = useState("");
   const dispatch = useDispatch();
   const { postId } = useParams();
@@ -24,26 +23,20 @@ const CommentForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const uniqueId = generateUniqueId();
-    const username = localStorage.getItem("username");
-    const userId = localStorage.getItem("userId");
-    dispatch(addComment({ commentId: uniqueId, postId, userId, username, contents }));
+    const id = localStorage.getItem("id");
+    const nickname = localStorage.getItem("nickname");
+    const memberId = localStorage.getItem("memberId");
+    dispatch(addComment({ commentId: uniqueId, postId, id, nickname, contents, memberId }));
 
-    const commentData = { commentId: uniqueId, postId, userId, username, contents };
+    const commentData = { commentId: uniqueId, postId, id, nickname, contents, memberId };
 
     addNewComment(postId, commentData);
-
-    setUsername("");
+    
     setContents("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <input
-        type="text"
-        placeholder="Nickname"
-        value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
-      /> */}
       <br />
       <S.CommentWrapper>
         <textarea

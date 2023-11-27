@@ -1,6 +1,6 @@
 import axios from "axios";
 import { store } from "../redux/config/configStore";
-import { setToken, setUserId, setUsername, setMemberId } from "../redux/modules/userSlice";
+import { setToken, setId, setNickname, setMemberId } from "../redux/modules/userSlice";
 
 const catchErrors = (error) => {
   if (error.response) {
@@ -39,18 +39,18 @@ const loginUser = async (userData) => {
     );
     console.log(`response ${response.data}`);
 
-    const { token, userId, id: username, memberId } = response.data;
+    const { token, id, nickname, memberId } = response.data;
     localStorage.setItem("token", token);
-    localStorage.setItem("username", username);
-    localStorage.setItem("userId", userId);
+    localStorage.setItem("id", id);
+    localStorage.setItem("nickname", nickname);
     localStorage.setItem("memberId", memberId);
 
     store.dispatch(setToken(token));
-    store.dispatch(setUsername(username));
-    store.dispatch(setUserId(userId));
+    store.dispatch(setId(id));
+    store.dispatch(setNickname(nickname));
     store.dispatch(setMemberId(memberId));
 
-    return { token, username, userId, memberId };
+    return { token, id, nickname, memberId };
   } catch (error) {
     catchErrors(error);
   }

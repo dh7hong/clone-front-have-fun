@@ -1,22 +1,46 @@
 {
   "users": [
     {
-      "id": "se7entheman",
-      "userId": 754237886,
+      "id": "dh7hong",
       "password": "GDhs0815**",
-      "memberId": 754237886
+      "nickname": "dannyhong",
+      "userId": 458846682,
+      "memberId": 846437229
     },
     {
-      "id": "dh7hong",
-      "userId": 429547006,
+      "id": "se7entheman",
       "password": "GDhs0815**",
-      "memberId": 429547006
+      "nickname": "se7enhong",
+      "userId": 436455930,
+      "memberId": 157976522
     },
     {
       "id": "laznise7en",
-      "userId": 697045225,
       "password": "GDhs0815**",
-      "memberId": 697045225
+      "nickname": "laznihong",
+      "userId": 599748357,
+      "memberId": 66282228
+    },
+    {
+      "id": "remethus",
+      "password": "GDhs0815**",
+      "nickname": "briankwon",
+      "userId": 428892003,
+      "memberId": 682447651
+    }
+  ],
+  "relationships": [
+    {
+      "memberId": "846437229",
+      "friendMemberId": 682447651
+    },
+    {
+      "memberId": "846437229",
+      "friendMemberId": 157976522
+    },
+    {
+      "memberId": "846437229",
+      "friendMemberId": 66282228
     }
   ]
 }

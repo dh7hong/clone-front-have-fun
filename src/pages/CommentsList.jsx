@@ -17,15 +17,15 @@ const CommentsList = () => {
       const fetchedComments = await getCommentsByPostId(postId);
       dispatch(setComments(fetchedComments)); // Update comments in Redux store
     };
-
     fetchComments();
   }, [postId, dispatch]);
+  console.log("comments", comments)
   return (
     <div>
       {comments.map((comment) => (
         <div key={comment.commentId}>
-          <strong>{comment.username}:</strong> {comment.contents}{" "}
-          {comment.commentId} {`userId: ${comment.userId}`}
+          <strong>{comment.id}:</strong> {comment.contents}{" "}
+          {`nickname ${comment.nickname}`} {`memberId: ${comment.memberId}`}
         </div>
       ))}
     </div>
