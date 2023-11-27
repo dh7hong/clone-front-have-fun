@@ -17,10 +17,9 @@ export default function DetailedPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const queryClient = useQueryClient();
-  
+
   console.log("postId", postId);
 
-  
   const { data: detailedInfo } = useQuery(["post", postId], () =>
     getOnePost(postId)
   );
@@ -30,16 +29,16 @@ export default function DetailedPage() {
   const deleteMutation = useMutation(() => deletePost(postId), {
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
-      navigate("/");
+      navigate("/api/users/" + memberId + "/posts");
     },
   });
 
   const deleteBtn = () => {
     deleteMutation.mutate();
   };
-
+  const memberId = localStorage.getItem("memberId");
   const moveToList = () => {
-    navigate("/");
+    navigate("/api/users/" + memberId + "/posts");
   };
 
   return (

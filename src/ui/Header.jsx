@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "../shared/style/HeaderStyle";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
-import { authUser } from "../api/authService";
+// import { authUser } from "../api/authService";
 import axios from "axios";
 import { Button } from "../components/button";
 
@@ -19,22 +19,17 @@ export default function Header() {
     setIsActive((prev) => !prev);
   };
 
-  const { mutate: auth } = useMutation(authUser);
-
-  const handleAuth = (event) => {
-    event.preventDefault();
-    auth();
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("username");
+    localStorage.removeItem("id");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("memberId");
+    localStorage.clear();
     delete axios.defaults.headers.common["Authorization"];
     dispatch(logout());
     setIsLoggedIn(false);
     console.log(isLoggedIn);
-    navigate("/login"); // Navigate to login page on logout
+    navigate("/api/login"); // Navigate to login page on logout
   };
 
   const moveToHome = () => {

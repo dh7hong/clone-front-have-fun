@@ -1,24 +1,10 @@
 {
   "users": [
     {
-      "id": "se7entheman",
-      "userId": 718483218,
-      "password": "GDhs0815**"
-    },
-    {
       "id": "dh7hong",
-      "userId": 118135487,
-      "password": "GDhs0815**"
-    },
-    {
-      "id": "laznise7en",
-      "userId": 821322856,
-      "password": "GDhs0815**"
-    },
-    {
-      "id": "aescientists",
-      "userId": 836664331,
-      "password": "GDhs0815**"
+      "password": "GDhs0815**",
+      "nickname": "dannyhong",
+      "memberId": 788618678
     }
   ]
 }

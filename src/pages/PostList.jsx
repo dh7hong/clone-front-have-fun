@@ -9,7 +9,8 @@ export default function PostList({ post, keyWord }) {
   const navigate = useNavigate();
 
   const moveToDetailedPage = (postId) => () => {
-    navigate(`api/posts/${postId}`);
+    const memberId = localStorage.getItem("memberId");
+    navigate(`/api/users/${memberId}/posts/${postId}`);
   };
 
 
@@ -30,8 +31,8 @@ export default function PostList({ post, keyWord }) {
               </span>
             ))}
         </S.RowTitle>
-        <S.Row>{post.username}</S.Row>
-        <S.Row>{post.userId}</S.Row>
+        <S.Row>{post.nickname}</S.Row>
+        <S.Row>{post.memberId}</S.Row>
         <S.Row>{getDate()}</S.Row>
         <S.detailedBtnWrapper>
           <Button onClick={moveToDetailedPage(post.postId)}>상세보기</Button>

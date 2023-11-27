@@ -7,7 +7,8 @@ import Navigation from "./Navigation";
 
 export default function Layout() {
   const { pathname } = useLocation();
-  const isMyPage = pathname === "/api/posts";
+/* need some adjustments here maybe */
+  const isMyPage = pathname === "/api/users/:memberId";
   return (
     <div
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}

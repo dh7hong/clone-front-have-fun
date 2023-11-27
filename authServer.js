@@ -12,12 +12,10 @@ app.use(cors());
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Revised generateUniqueId function to return a random number
 const generateUniqueId = () => {
-  return Math.floor(Math.random() * 1000000000); // Generates a random number
+  return Math.floor(Math.random() * 1000000000); 
 };
 
-// Function to read the database
 const readDatabase = () => {
   try {
     return JSON.parse(fs.readFileSync("db_auth.json", "utf8"));
@@ -27,7 +25,6 @@ const readDatabase = () => {
   }
 };
 
-// Function to write to the database
 const writeDatabase = (db) => {
   try {
     fs.writeFileSync("db_auth.json", JSON.stringify(db, null, 2)); // Pretty print the JSON
@@ -37,25 +34,26 @@ const writeDatabase = (db) => {
   }
 };
 
-// Register endpoint
-app.post("/register", async (req, res) => {
-  const { id, password } = req.body;
+app.post("/api/register", async (req, res) => {
+  const { id, password, nickname } = req.body;
   let db = readDatabase();
 
   if (db.users.some((u) => u.id === id)) {
     return res.status(400).json({ message: "Username already exists" });
   }
-
+  if (db.users.some((u) => u.nickname === nickname)) {
+    return res.status(400).json({ message: "Nickname already exists" });
+  }
   const userId = generateUniqueId();
-  const newUser = { id, userId, password }; // Storing unhashed password as requested
+  const memberId = generateUniqueId();
+  const newUser = { id, password, nickname, memberId };
   db.users.push(newUser);
   writeDatabase(db);
 
   res.status(201).json({ message: "User registered successfully", userId });
 });
 
-// Login endpoint
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { id, password } = req.body;
   let db = readDatabase();
 
@@ -63,12 +61,24 @@ app.post("/login", async (req, res) => {
   if (!user || user.password !== password) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
-
-  const token = jwt.sign({ userId: user.userId, id: user.id }, JWT_SECRET, {
-    expiresIn: "1h",
+  const token = jwt.sign(
+    {
+      id: user.id,
+      nickname: user.nickname,
+      memberId: user.memberId,
+    },
+    JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+  res.json({
+    token,
+    id: user.id,
+    nickname: user.nickname,
+    memberId: user.memberId,
   });
-  res.json({ token, userId: user.userId, id: user.id });
 });
 
-const PORT = 4001;
+const PORT = 4002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

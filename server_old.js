@@ -48,7 +48,7 @@ server.post("/api/register", (req, res) => {
 
   res
     .status(201)
-    .json({ message: "User registered successfully", id: newUser.id });
+    .json({ message: "User registered successfully", userId: newUser.userId });
 });
 
 // Simulate user login
@@ -78,6 +78,43 @@ server.post("/api/login", (req, res) => {
   });
 });
 
+server.post("/api/users/:memberId/friends", (req, res) => {
+    const { memberId } = req.params;
+    const { friendNickname } = req.body;
+
+    const dbFilePath = path.join(__dirname, 'db.json'); // Replace with correct path to db.json
+    let db = JSON.parse(fs.readFileSync(dbFilePath, 'utf8'));
+
+    // Find the friend by nickname and ensure memberId is a number
+    const friend = db.users.find(u => u.nickname === friendNickname);
+    if (!friend) {
+        return res.status(404).json({ message: "Friend not found" });
+    }
+
+    // Parse memberId and friendMemberId as integers
+    const numericMemberId = parseInt(memberId, 10);
+    const numericFriendMemberId = parseInt(friend.memberId, 10);
+
+    // Check if the relationship already exists
+    const relationshipExists = db.relationships.some(r => 
+        (r.memberId === numericMemberId && r.friendMemberId === numericFriendMemberId) ||
+        (r.memberId === numericFriendMemberId && r.friendMemberId === numericMemberId)
+    );
+
+    if (relationshipExists) {
+        return res.status(409).json({ message: "Friendship already exists" });
+    }
+
+    // Create and add the new relationship
+    const newRelationship = { memberId: numericMemberId, friendMemberId: numericFriendMemberId };
+    db.relationships = db.relationships || [];
+    db.relationships.push(newRelationship);
+
+    // Write the updated data back to db.json
+    fs.writeFileSync(dbFilePath, JSON.stringify(db, null, 2));
+    res.status(201).json(newRelationship);
+});
+
 server.post("/api/users/:memberId/posts", (req, res) => {
   const newPost = req.body;
   router.db.get("posts").push(newPost).write();
@@ -90,7 +127,7 @@ server.get("/api/users/:memberId/posts", (req, res) => {
 
   const posts = router.db.get("posts").value();
 
-  const userPosts = posts.filter((post) => post.memberId === memberId);
+  const userPosts = posts.filter((post) => post.toMemberId === memberId);
 
   res.jsonp(userPosts);
 });
@@ -99,10 +136,7 @@ server.get("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
   const post = router.db.get("posts").find({ postId }).value();
   if (post) {
-    const user = router.db
-      .get("users")
-      .find({ memberId: post.memberId })
-      .value();
+    const user = router.db.get("users").find({ userId: post.userId }).value();
     res.jsonp({ ...post, user });
   } else {
     res.status(404).send("Post not found");
