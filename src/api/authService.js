@@ -1,6 +1,11 @@
 import axios from "axios";
 import { store } from "../redux/config/configStore";
-import { setToken, setId, setNickname, setMemberId } from "../redux/modules/userSlice";
+import {
+  setToken,
+  setId,
+  setNickname,
+  setMemberId,
+} from "../redux/modules/userSlice";
 
 const catchErrors = (error) => {
   if (error.response) {
@@ -30,7 +35,6 @@ const registerUser = async (userData) => {
     catchErrors(error);
   }
 };
-
 const loginUser = async (userData) => {
   try {
     const response = await axios.post(
@@ -40,6 +44,11 @@ const loginUser = async (userData) => {
     console.log(`response ${response.data}`);
 
     const { token, id, nickname, memberId } = response.data;
+    console.log(`at authService token ${token}`);
+    console.log(`at authService id ${id}`);
+    console.log(`at authService nickname ${nickname}`);
+    console.log(`at authService memberId ${memberId}`);
+
     localStorage.setItem("token", token);
     localStorage.setItem("id", id);
     localStorage.setItem("nickname", nickname);

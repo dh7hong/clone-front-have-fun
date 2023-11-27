@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
-import {
-  setToken,
-  setNickname,
-  setMemberId,
-} from "../redux/modules/userSlice";
+import { setToken, setMemberId, setNickname } from "../redux/modules/userSlice";
 import { loginUser } from "../api/authService";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -27,27 +23,31 @@ function Login() {
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // Ensure the key is consistent
+    const memberId = localStorage.getItem("memberId"); // Retrieve userId from localStorage
     if (token) {
       alert("You are already logged in.");
-      navigate("/"); // Redirect to home page
+      navigate(`/api/users/${memberId}/posts`); // Redirect to home page
     }
   }, [navigate]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id"); // Retrieve userId from localStorage
-    if (token && id) {
+    const memberId = localStorage.getItem("memberId"); // Retrieve userId from localStorage
+    if (token && memberId) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       dispatch(setToken(token));
-      dispatch(setId(id));
+      dispatch(setMemberId(memberId));
       setIsLoggedIn(true);
     }
   }, [dispatch]);
 
   const { mutate: login } = useMutation(loginUser, {
     onSuccess: (data) => {
-      if (data && data.token && data.id && data.nickname) {
-        handleLoginSuccess(data);
+      if (data && data.token && data.id && data.nickname && data.memberId) {
+        // Destructure only if all properties are available
+        const { token, id, nickname, memberId } = data;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        handleLoginSuccess(token, id, nickname, memberId);
       } else {
         console.error("Login unsuccessful or data missing");
       }
@@ -64,19 +64,21 @@ function Login() {
     localStorage.setItem("token", token);
     localStorage.setItem("id", id);
     localStorage.setItem("nickname", nickname);
-    localStorage.setItem("memberId", memberId); // Store userId in localStorage
-    console.log("token", token);
-    console.log("id", id);
-    console.log("nickname", nickname);
-    console.log("memberId", memberId);
-    dispatch(setToken(token));
-    dispatch(setId(id));
-    dispatch(setNickname(nickname));
-    dispatch(setMemberId(memberId)); // Store info in Redux store
-    setIsLoggedIn(true);
-    navigate("/");
-  };
+    localStorage.setItem("memberId", memberId);
 
+    console.log("from Login token", token);
+    console.log("from Login id", id);
+    console.log("from Login nickname", nickname);
+    console.log("from Login memberId", memberId);
+
+    // dispatch(setToken(token));
+    // // dispatch(setId(id));
+    // dispatch(setNickname(nickname));
+    dispatch(setMemberId(memberId));
+  
+    // Then navigate to the user-specific page
+    navigate(`/api/users/${memberId}/posts`, { replace: true });
+  };
   const handleRegisterPageLinkClick = () => {
     navigate(`/api/register`);
   };

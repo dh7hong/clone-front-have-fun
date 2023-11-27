@@ -2,24 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { AddPost, getPost } from "../api/posts";
 import * as S from "../shared/style/HomeStyle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PostList from "./PostList";
 import Pagination from "./Pagination";
 import { Button } from "../components/button";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/modules/userSlice";
 
 export default function PostHome() {
   const [isActive, setIsActive] = useState(false);
   const [keyWord, setKeyWord] = useState("");
   const [searchPost, setSearchPost] = useState([]);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const { data } = useQuery("posts", getPost);
+  const dispatch = useDispatch();
+  const { memberId } = useParams();
+  const { data, refetch } = useQuery("posts", () => getPost(memberId), {
+    enabled: !!memberId,
+  });
+
+  useEffect(() => {
+    if (!memberId) {
+      navigate("/api/login"); // Redirect to login if memberId is not available
+    } else {
+      refetch(); // Refetch posts data when memberId changes
+    }
+  }, [memberId, navigate, refetch]);
+
   //data = 객체형태로 모든 값들 다있음
   const [page, setPage] = useState(1);
   const limit = 10;
   const offset = (page - 1) * limit;
-  const memberId = localStorage.getItem("memberId");
+  
+  
+  
   const onClickSubmitBtn = () => {
     navigate(`/api/users/${memberId}/posts/new`);
   };
@@ -43,6 +60,19 @@ export default function PostHome() {
     setIsActive(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("memberId");
+    localStorage.clear();
+    delete axios.defaults.headers.common["Authorization"];
+    dispatch(logout());
+    setIsLoggedIn(false);
+    console.log(isLoggedIn);
+    navigate("/api/login", { replace: true }); // Navigate to login page on logout
+  };
+
   console.log("data", data);
 
   return (
@@ -58,6 +88,7 @@ export default function PostHome() {
             <Button onClick={onClickSearchBtn}>검색</Button>
             <Button onClick={onClickAllPost}>전체 글 보기</Button>
             <Button onClick={onClickSubmitBtn}>등록하기</Button>
+            <Button onClick={handleLogout}>로그아웃</Button>
           </div>
         </S.HeaderWrapper>
         <S.BoardWrapper>
@@ -84,6 +115,7 @@ export default function PostHome() {
             ))}
           </S.PostStyle>
         )}
+        
         <Pagination page={page} setPage={setPage} data={data} />
       </S.HomeWrapper>
     </S.Wrapper>

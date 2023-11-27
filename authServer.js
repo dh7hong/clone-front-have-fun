@@ -46,7 +46,7 @@ app.post("/api/register", async (req, res) => {
   }
   const userId = generateUniqueId();
   const memberId = generateUniqueId();
-  const newUser = { id, password, nickname, userId, memberId };
+  const newUser = { id, password, nickname, memberId };
   db.users.push(newUser);
   writeDatabase(db);
 
@@ -63,7 +63,6 @@ app.post("/api/login", async (req, res) => {
   }
   const token = jwt.sign(
     {
-      userId: user.userId,
       id: user.id,
       nickname: user.nickname,
       memberId: user.memberId,
@@ -75,43 +74,11 @@ app.post("/api/login", async (req, res) => {
   );
   res.json({
     token,
-    userId: user.userId,
     id: user.id,
     nickname: user.nickname,
     memberId: user.memberId,
   });
 });
 
-app.post("/api/users/:memberId/friends", (req, res) => {
-  const { memberId } = req.params;
-  const { friendNickname } = req.body;
-
-  let db = readDatabase();
-
-  // Find friend by nickname
-  const friend = db.users.find((u) => u.nickname === friendNickname);
-  if (!friend) {
-    return res.status(404).json({ message: "Friend not found" });
-  }
-
-  // Check if the relationship already exists to avoid duplicates
-  const relationshipExists = db.relationships.some(r => 
-    (r.memberId === memberId && r.friendMemberId === friend.memberId) ||
-    (r.memberId === friend.memberId && r.friendMemberId === memberId)
-  );
-
-  if (relationshipExists) {
-    return res.status(409).json({ message: "Friendship already exists" });
-  }
-
-  // Create a new relationship
-  const newRelationship = { memberId, friendMemberId: friend.memberId };
-  db.relationships = db.relationships || []; // Ensure the relationships array exists
-  db.relationships.push(newRelationship);
-  writeDatabase(db);
-
-  res.status(201).json(newRelationship);
-});
-
-const PORT = 4001;
+const PORT = 4002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

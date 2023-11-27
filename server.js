@@ -48,7 +48,7 @@ server.post("/api/register", (req, res) => {
 
   res
     .status(201)
-    .json({ message: "User registered successfully", userId: newUser.userId });
+    .json({ message: "User registered successfully", id: newUser.id });
 });
 
 // Simulate user login
@@ -99,7 +99,10 @@ server.get("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
   const post = router.db.get("posts").find({ postId }).value();
   if (post) {
-    const user = router.db.get("users").find({ memberId: post.memberId }).value();
+    const user = router.db
+      .get("users")
+      .find({ memberId: post.memberId })
+      .value();
     res.jsonp({ ...post, user });
   } else {
     res.status(404).send("Post not found");
