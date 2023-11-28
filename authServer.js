@@ -44,7 +44,6 @@ app.post("/api/register", async (req, res) => {
   if (db.users.some((u) => u.nickname === nickname)) {
     return res.status(400).json({ message: "Nickname already exists" });
   }
-  const userId = generateUniqueId();
   const memberId = generateUniqueId();
   const newUser = { id, password, nickname, memberId, name };
   db.users.push(newUser);

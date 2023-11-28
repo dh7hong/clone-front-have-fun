@@ -31,7 +31,7 @@ function Login() {
         dispatch(setMemberId(memberId));
   
         // Navigate to the user's posts page
-        navigate(`/api/users/${memberId}/posts`);
+        navigate(`/api/users/${memberId}`);
       } else {
         // Handle case where data is not in the expected format
         console.error("Login unsuccessful or data missing");

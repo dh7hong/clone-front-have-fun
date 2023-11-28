@@ -34,6 +34,20 @@
       "nickname": "Han D. Dragon",
       "memberId": 757257961,
       "name": "한덕용"
+    },
+    {
+      "id": "gdragon",
+      "password": "GDhs0903??",
+      "nickname": "GD",
+      "memberId": 179513143,
+      "name": "권지용"
+    },
+    {
+      "id": "andrewli",
+      "password": "GDhs0903??",
+      "nickname": "andrew54",
+      "memberId": 260033894,
+      "name": "Andrew Li"
     }
   ]
 }

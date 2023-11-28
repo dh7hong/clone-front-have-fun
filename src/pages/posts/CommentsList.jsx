@@ -20,12 +20,13 @@ const CommentsList = () => {
     fetchComments();
   }, [postId, dispatch]);
   console.log("comments", comments);
+
   return (
     <div>
       {comments.map((comment) => (
         <div key={comment.commentId}>
-          <strong>{comment.id}:</strong> {comment.contents}
-          {`nickname ${comment.nickname}`} {`name ${comment.name}`}
+          <strong>{comment.id}:</strong> {comment.contents} {comment.createdAt}
+          
         </div>
       ))}
     </div>

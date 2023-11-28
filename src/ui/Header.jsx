@@ -13,12 +13,8 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
   const imageArr = useSelector((state) => state.image.imageArr);
   const queryClient = useQueryClient();
-  const onClickProfileImage = () => {
-    setIsActive((prev) => !prev);
-  };
 
   const handleLogout = () => {
     queryClient.clear();
@@ -41,9 +37,9 @@ export default function Header() {
   };
   const image = localStorage.getItem("image");
 
-  const moveToMyPage = () => {
-    navigate("/mypage");
-    setIsActive(false);
+  const handleLogin = () => {
+    navigate("/api/login");
+    
   };
   return (
     <S.Wrapper>
@@ -53,7 +49,6 @@ export default function Header() {
         <S.MyProfileStyle>
           {imageArr && (
             <S.MyProfileImage
-              onClick={onClickProfileImage}
               src={imageArr}
               alt="엑박"
             />
@@ -62,7 +57,6 @@ export default function Header() {
             <div>
               {!image && (
                 <S.MyProfile
-                  onClick={onClickProfileImage}
                   size={60}
                   alt="마이페이지"
                 />
@@ -70,19 +64,18 @@ export default function Header() {
               {image && (
                 <S.MyProfileImage
                   src={image}
-                  onClick={onClickProfileImage}
                   size={60}
                   alt="마이페이지"
                 />
               )}
             </div>
           )}
-          {isActive && (
+          
             <S.MypageStyle>
-              <Button onClick={moveToMyPage}>마이페이지</Button>
+              <Button onClick={handleLogin}>로그인</Button>
               <Button onClick={handleLogout}>로그아웃</Button>
             </S.MypageStyle>
-          )}
+          
         </S.MyProfileStyle>
       </S.HeaderWrapper>
     </S.Wrapper>
