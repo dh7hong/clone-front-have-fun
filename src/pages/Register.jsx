@@ -16,13 +16,14 @@ function Register() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate(); // Hook to navigate programmatically
 
   const { mutate: register } = useMutation(registerUser);
 
   const handleRegister = (event) => {
     event.preventDefault();
-    register({ id, password, nickname });
+    register({ id, password, nickname, name });
     alert(`Thanks for signing up! ${nickname}`);
     setId("");
     setPassword("");
@@ -60,6 +61,12 @@ function Register() {
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 placeholder="Nickname"
+              />
+              <InputStyle
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="name"
               />
             </IdPwBox>
             <ClickBox>

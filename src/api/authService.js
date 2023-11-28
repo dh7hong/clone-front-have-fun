@@ -42,24 +42,32 @@ const loginUser = async (userData) => {
       userData
     );
     console.log(`response ${response.data}`);
-
-    const { token, id, nickname, memberId } = response.data;
+    
+    const token = response.data.token;
+    const id = response.data.data.id;
+    const nickname = response.data.data.nickname;
+    const memberId = response.data.data.memberId;
+    const name = response.data.data.name;
+    
     console.log(`at authService token ${token}`);
     console.log(`at authService id ${id}`);
     console.log(`at authService nickname ${nickname}`);
     console.log(`at authService memberId ${memberId}`);
+    console.log(`at authService name ${name}`);
 
     localStorage.setItem("token", token);
     localStorage.setItem("id", id);
     localStorage.setItem("nickname", nickname);
     localStorage.setItem("memberId", memberId);
+    localStorage.setItem("name", name);
 
     store.dispatch(setToken(token));
     store.dispatch(setId(id));
     store.dispatch(setNickname(nickname));
     store.dispatch(setMemberId(memberId));
+    store.dispatch(setMemberId(name));
 
-    return { token, id, nickname, memberId };
+    return { token, id, nickname, memberId , name};
   } catch (error) {
     catchErrors(error);
   }

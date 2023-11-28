@@ -35,7 +35,7 @@ const writeDatabase = (db) => {
 };
 
 app.post("/api/register", async (req, res) => {
-  const { id, password, nickname } = req.body;
+  const { id, password, nickname, name } = req.body;
   let db = readDatabase();
 
   if (db.users.some((u) => u.id === id)) {
@@ -46,7 +46,7 @@ app.post("/api/register", async (req, res) => {
   }
   const userId = generateUniqueId();
   const memberId = generateUniqueId();
-  const newUser = { id, password, nickname, memberId };
+  const newUser = { id, password, nickname, memberId, name };
   db.users.push(newUser);
   writeDatabase(db);
 
@@ -76,7 +76,7 @@ app.post("/api/login", async (req, res) => {
     token,
     id: user.id,
     nickname: user.nickname,
-    memberId: user.memberId,
+    memberId: user.memberId
   });
 });
 
