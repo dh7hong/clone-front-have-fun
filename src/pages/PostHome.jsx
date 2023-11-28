@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { AddPost, getPost } from "../api/posts";
 import * as S from "../shared/style/HomeStyle";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,6 +15,7 @@ export default function PostHome() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { memberId } = useParams();
+  const queryClient = useQueryClient();
   const { data, refetch } = useQuery("posts", () => getPost(memberId), {
     enabled: !!memberId,
   });
@@ -40,6 +41,7 @@ export default function PostHome() {
   };
 
   const handleLogout = () => {
+    queryClient.clear();
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     localStorage.removeItem("nickname");
@@ -68,8 +70,7 @@ export default function PostHome() {
           <S.BoardTitle>번호</S.BoardTitle>
           <S.BoardTitleStyle>제목</S.BoardTitleStyle>
           <S.BoardTitle>작성자</S.BoardTitle>
-          <S.BoardTitle>작성자 ID</S.BoardTitle>
-          <S.BoardTitle>작성날짜</S.BoardTitle>
+          <S.BoardTitleStyle>작성날짜</S.BoardTitleStyle>
           <S.BoardTitle>상세보기</S.BoardTitle>
         </S.BoardWrapper>
 

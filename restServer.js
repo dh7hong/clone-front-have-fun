@@ -14,8 +14,6 @@ server.use(jsonServer.bodyParser);
 
 server.use(cors());
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 const readDatabase = () => {
   try {
     return JSON.parse(fs.readFileSync("db.json", "utf8"));
@@ -32,51 +30,6 @@ server.get("/api", (req, res) => {
 const generateUniqueId = () => {
   return Math.floor(Math.random() * 1000000000);
 };
-
-// // Simulate user registration
-// server.post("/api/register", (req, res) => {
-//   const { id, password, nickname } = req.body;
-//   const db = readDatabase();
-
-//   if (db.users.some((u) => u.id === id || u.nickname === nickname)) {
-//     return res.status(400).json({ message: "User already exists" });
-//   }
-//   const memberId = generateUniqueId();
-//   const newUser = { id, password, nickname, memberId }; // Use Date.now() for simplicity
-//   db.users.push(newUser);
-//   fs.writeFileSync("db.json", JSON.stringify(db));
-
-//   res
-//     .status(201)
-//     .json({ message: "User registered successfully", id: newUser.id });
-// });
-
-// // Simulate user login
-// server.post("/api/login", (req, res) => {
-//   const { id } = req.body;
-//   const db = readDatabase();
-
-//   const user = db.users.find((u) => u.id === id);
-//   if (!user) {
-//     return res.status(401).json({ message: "Invalid credentials" });
-//   }
-
-//   const token = jwt.sign(
-//     {
-//       id: user.id,
-//       nickname: user.nickname,
-//       memberId: user.memberId,
-//     },
-//     JWT_SECRET,
-//     { expiresIn: "1h" }
-//   );
-//   res.json({
-//     token,
-//     id: user.id,
-//     nickname: user.nickname,
-//     memberId: user.memberId,
-//   });
-// });
 
 server.get("/api/users/:memberId/posts", (req, res) => {
   const memberId = req.params.memberId;
@@ -110,10 +63,11 @@ server.get("/api/users/:memberId/posts/:postId", (req, res) => {
 
 server.delete("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
-  const post = router.db.get("posts").find({ postId }).value();
+  const memberId = req.params.memberId;
+  const post = router.db.get("posts").find({ postId, memberId }).value();
 
   if (post) {
-    router.db.get("posts").remove({ postId }).write();
+    router.db.get("posts").remove({ postId, memberId }).write();
     res.status(200).send(`Post with postId ${postId} deleted`);
   } else {
     res.status(404).send("Post not found");
@@ -122,28 +76,30 @@ server.delete("/api/users/:memberId/posts/:postId", (req, res) => {
 
 server.patch("/api/users/:memberId/posts/:postId", (req, res) => {
   const postId = parseInt(req.params.postId);
-  console.log("Received comment:", req.body);
-  const updates = req.body;
-
-  const post = router.db.get("posts").find({ postId }).value();
+  const memberId = req.params.memberId
+  const db = router.db; // Get lowdb instance
+  let post = db.get("posts").find({ postId, memberId }).value();
 
   if (post) {
-    router.db.get("posts").find({ postId }).assign(updates).write();
+    // Update the post
+    db.get("posts")
+      .find({ postId, memberId })
+      .assign(req.body)
+      .write();
 
-    res.status(200).jsonp({ ...post, ...updates });
+    // Return the updated post
+    post = db.get("posts").find({ postId, memberId }).value();
+    res.jsonp(post);
   } else {
     res.status(404).send("Post not found");
   }
 });
-
-
 
 server.post("/api/users/:memberId/posts/:postId/comments", (req, res) => {
   const newComment = { ...req.body, postId: req.params.postId };
   router.db.get("comments").push(newComment).write();
   res.status(201).jsonp(newComment);
 });
-
 
 server.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
   const postId = req.params.postId;
@@ -155,8 +111,6 @@ server.get("/api/users", (req, res) => {
   const users = router.db.get("users").value();
   res.jsonp(users);
 });
-
-
 
 server.use("/api", router);
 

@@ -29,8 +29,7 @@ export const getOnePost = async (postId, memberId) => {
   }
 };
 
-export const deletePost = async (postId) => {
-  const memberId = localStorage.getItem("memberId");
+export const deletePost = async (postId, memberId) => {
   try {
     const response = await axios.delete(
       `${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts/${postId}`
@@ -38,4 +37,13 @@ export const deletePost = async (postId) => {
 
     return response;
   } catch (error) {}
+};
+
+export const editPost = async (postId, updatedPostData, memberId) => {
+  try {
+    const response = await axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts/${postId}`, updatedPostData);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating post:", error);
+  }
 };

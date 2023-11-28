@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import useQuery from 'react-query'
+import { getDateTime } from '../../util/getDateTime';
 
 const initialState = {
   comments: [],
@@ -18,6 +19,7 @@ export const commentSlice = createSlice({
         name: action.payload.name,
         contents: action.payload.contents,
         memberId: action.payload.memberId,
+        createdAt: action.payload.createdAt,
       });
     },
     setComments: (state, action) => {

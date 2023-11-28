@@ -66,6 +66,7 @@ app.post("/api/login", async (req, res) => {
       id: user.id,
       nickname: user.nickname,
       memberId: user.memberId,
+      name: user.name
     },
     JWT_SECRET,
     {
@@ -74,9 +75,12 @@ app.post("/api/login", async (req, res) => {
   );
   res.json({
     token,
-    id: user.id,
+    data:
+    { id: user.id,
     nickname: user.nickname,
-    memberId: user.memberId
+    memberId: user.memberId,
+    name: user.name
+    }
   });
 });
 

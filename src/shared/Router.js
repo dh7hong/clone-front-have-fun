@@ -27,7 +27,6 @@ export default function Router() {
         <Route path="/api/login" element={<Login />} />
         <Route path="/api/register" element={<Register />} />
         <Route path="/" element={<Layout />}>
-          <Route path="/api/users" element={<UserList />} />
           <Route path="/api/users/:memberId/posts" element={<PostHome />} />
           <Route path="/api/users/:memberId/posts/new" element={<NewPost />} />
           <Route path="/api/users/:memberId/posts/:postId" element={<DetailedPage />} />

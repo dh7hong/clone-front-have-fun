@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { addNewComment } from "../api/comments";
 import * as S from "../shared/style/CommentStyle";
 import { Button } from "../components/button";
+import { getDateTime } from "../util/getDateTime";
 
 const CommentForm = () => {
   const [contents, setContents] = useState("");
@@ -20,19 +21,41 @@ const CommentForm = () => {
     return minutes * 60000 + seconds * 1000 + milliseconds;
   };
 
+  const createdAt = getDateTime();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const uniqueId = generateUniqueId();
     const id = localStorage.getItem("id");
     const nickname = localStorage.getItem("nickname");
     const name = localStorage.getItem("name");
-    
-    dispatch(addComment({ commentId: uniqueId, postId, id, nickname, name, contents, memberId }));
 
-    const commentData = { commentId: uniqueId, postId, id, nickname, name, contents, memberId };
+    dispatch(
+      addComment({
+        commentId: uniqueId,
+        postId,
+        id,
+        nickname,
+        name,
+        contents,
+        memberId,
+        createdAt,
+      })
+    );
 
-    await addNewComment(postId, commentData);
-    
+    const commentData = {
+      commentId: uniqueId,
+      postId,
+      id,
+      nickname,
+      name,
+      contents,
+      memberId,
+      createdAt,
+    };
+
+    await addNewComment(postId, commentData, memberId);
+
     setContents("");
   };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "../shared/style/HeaderStyle";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
 // import { authUser } from "../api/authService";
@@ -15,14 +15,17 @@ export default function Header() {
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
   const imageArr = useSelector((state) => state.image.imageArr);
+  const queryClient = useQueryClient();
   const onClickProfileImage = () => {
     setIsActive((prev) => !prev);
   };
 
   const handleLogout = () => {
+    queryClient.clear();
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     localStorage.removeItem("nickname");
+    localStorage.removeItem("name");
     localStorage.removeItem("memberId");
     localStorage.clear();
     delete axios.defaults.headers.common["Authorization"];

@@ -62,6 +62,7 @@ function Register() {
                 onChange={(e) => setNickname(e.target.value)}
                 placeholder="Nickname"
               />
+              <p>Name</p>
               <InputStyle
                 type="text"
                 value={name}

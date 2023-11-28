@@ -1,4 +1,76 @@
 {
-  "posts": [],
-  "comments": []
+  "posts": [
+    {
+      "postId": 1512695,
+      "title": "Garp's Death",
+      "id": "aescientists",
+      "name": "Kobi",
+      "nickname": "scientist",
+      "contents": "It is a mystery for now.",
+      "memberId": "709643529",
+      "createdAt": "2023-11-28 23:25:12"
+    },
+    {
+      "postId": 1206272,
+      "title": "asdfadsfas",
+      "id": "aescientists",
+      "name": "Kobi",
+      "nickname": "scientist",
+      "contents": "afsfasafsdsadasdasdas asdasdasd",
+      "memberId": "709643529",
+      "createdAt": "2023-11-29 02:20:22"
+    },
+    {
+      "postId": 1265454,
+      "title": "Hey there Luffy!",
+      "id": "aescientists",
+      "name": "Kobi",
+      "nickname": "scientist",
+      "contents": "Guess who this is?",
+      "memberId": "77527169",
+      "createdAt": "2023-11-29 02:21:05"
+    },
+    {
+      "postId": 1812401,
+      "title": "my first post!!",
+      "id": "dukyong77",
+      "name": "한덕용",
+      "nickname": "Han D. Dragon",
+      "contents": "this is the details of my first post!! Yes!!",
+      "memberId": "757257961",
+      "createdAt": "2023-11-29 02:30:30"
+    },
+    {
+      "postId": 1887009,
+      "title": "Guess who?",
+      "id": "dukyong77",
+      "name": "한덕용",
+      "nickname": "Han D. Dragon",
+      "contents": "You know me? huh?",
+      "memberId": "709643529",
+      "createdAt": "2023-11-29 02:31:27"
+    }
+  ],
+  "comments": [
+    {
+      "commentId": 1660993,
+      "postId": "1512695",
+      "id": "aescientists",
+      "nickname": "scientist",
+      "name": "Kobi",
+      "contents": "Did garp die for nothing?",
+      "memberId": "709643529",
+      "createdAt": "2023-11-28 23:27:39"
+    },
+    {
+      "commentId": 1910256,
+      "postId": "1887009",
+      "id": "dukyong77",
+      "nickname": "Han D. Dragon",
+      "name": "한덕용",
+      "contents": "This is a super good comment",
+      "memberId": "709643529",
+      "createdAt": "2023-11-29 02:31:48"
+    }
+  ]
 }

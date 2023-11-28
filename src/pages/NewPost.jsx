@@ -5,12 +5,15 @@ import { AddPost } from "../api/posts";
 import { addPost } from "../redux/modules/postSlice";
 import * as S from "../shared/style/NewPostStyle";
 import { Button } from "../components/button";
+import { get } from "lodash";
+import { getDateTime } from "../util/getDateTime";
 
 export default function NewPost() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [id, setId] = useState(localStorage.getItem("id"));
   const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
+  const [name, setName] = useState(localStorage.getItem("name"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { memberId } = useParams();
@@ -19,21 +22,23 @@ export default function NewPost() {
     // Update state if localStorage changes
     setId(localStorage.getItem("id"));
     setNickname(localStorage.getItem("nickname"));
+    setName(localStorage.getItem("name"));
   }, []);
 
-  const onChangeTitle = (event) => setTitle(event.target.value);
-  const onChangeContents = (event) => setContents(event.target.value);
   const generateUniqueId = () => {
     let now = new Date();
     let minutes = now.getMinutes();
     let seconds = now.getSeconds();
     let milliseconds = now.getMilliseconds();
-
     return minutes * 60000 + seconds * 1000 + milliseconds;
   };
-  
-  const uniqueId = generateUniqueId();
 
+  const uniqueId = generateUniqueId();
+  const createdAt = getDateTime();
+
+  const onChangeTitle = (event) => setTitle(event.target.value);
+  const onChangeContents = (event) => setContents(event.target.value);
+  
   const onSubmit = async () => {
     if (!title || !contents) {
       alert("Title and contents are required.");
@@ -45,9 +50,11 @@ export default function NewPost() {
         postId: uniqueId,
         title,
         id,
-        contents,
+        name,
         nickname,
+        contents,
         memberId,
+        createdAt
       };
       const response = await AddPost(newPostData, memberId);
       dispatch(addPost(response));
@@ -69,7 +76,7 @@ export default function NewPost() {
             <h3>제목</h3>
             <S.TitleInput
               placeholder="제목을 입력하세요"
-              maxLength={15}
+              maxLength={30}
               value={title}
               onChange={onChangeTitle}
             />

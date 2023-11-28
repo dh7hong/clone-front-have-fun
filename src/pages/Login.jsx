@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 import { setToken, setMemberId, setNickname, logout } from "../redux/modules/userSlice";
 import { loginUser } from "../api/authService";
@@ -12,26 +12,35 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const queryClient = useQueryClient();
   const { mutate: login } = useMutation(loginUser, {
     onSuccess: (data) => {
-      if (data && data.token && data.id && data.nickname && data.memberId) {
+      // Check if data is defined and has the required properties
+      if (data?.token && data?.id && data?.name && data?.nickname && data?.memberId) {
         const { token, id, nickname, name, memberId } = data;
+        // Set axios defaults and localStorage
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         localStorage.setItem("token", token);
         localStorage.setItem("id", id);
         localStorage.setItem("name", name);
         localStorage.setItem("nickname", nickname);
         localStorage.setItem("memberId", memberId);
-
+  
+        // Dispatch Redux actions
         dispatch(setToken(token));
         dispatch(setMemberId(memberId));
-
-        navigate(`/api/users/${memberId}/posts`); // Navigate after successful login
+  
+        // Navigate to the user's posts page
+        navigate(`/api/users/${memberId}/posts`);
       } else {
+        // Handle case where data is not in the expected format
         console.error("Login unsuccessful or data missing");
       }
     },
+    // Add onError to handle API errors
+    onError: (error) => {
+      console.error("Login error:", error);
+    }
   });
 
   const handleLogin = (event) => {
@@ -44,6 +53,7 @@ function Login() {
   };
 
   const handleLogout = () => {
+    queryClient.clear();
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     localStorage.removeItem("nickname");

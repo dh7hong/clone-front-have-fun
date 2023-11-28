@@ -3,6 +3,7 @@ import { store } from "../redux/config/configStore";
 import {
   setToken,
   setId,
+  setName,
   setNickname,
   setMemberId,
 } from "../redux/modules/userSlice";
@@ -65,7 +66,7 @@ const loginUser = async (userData) => {
     store.dispatch(setId(id));
     store.dispatch(setNickname(nickname));
     store.dispatch(setMemberId(memberId));
-    store.dispatch(setMemberId(name));
+    store.dispatch(setName(name));
 
     return { token, id, nickname, memberId , name};
   } catch (error) {

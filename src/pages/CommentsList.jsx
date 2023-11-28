@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCommentsByPostId } from "../api/comments";
 import { setComments } from "../redux/modules/commentSlice";
-import { getDateTime } from "../util/DateTime";
+import { getDateTime } from "../util/getDateTime";
 
 const CommentsList = () => {
   const { postId } = useParams();
@@ -19,13 +19,13 @@ const CommentsList = () => {
     };
     fetchComments();
   }, [postId, dispatch]);
-  console.log("comments", comments)
+  console.log("comments", comments);
   return (
     <div>
       {comments.map((comment) => (
         <div key={comment.commentId}>
-          <strong>{comment.id}:</strong> {comment.contents}{" "}
-          {`nickname ${comment.nickname}`} {`memberId: ${comment.memberId}`}
+          <strong>{comment.id}:</strong> {comment.contents}
+          {`nickname ${comment.nickname}`} {`name ${comment.name}`}
         </div>
       ))}
     </div>

@@ -4,6 +4,7 @@ const initialState = {
   token: null,
   id: null,
   nickname: null,
+  name: null,
   memberId: null,
 };
 
@@ -22,6 +23,10 @@ const userSlice = createSlice({
       // Add a reducer to set useName
       state.nickname = action.payload;
     },
+    setName: (state, action) => {
+      // Add a reducer to set useName
+      state.name = action.payload;
+    },
     setMemberId: (state, action) => {
       // Add a reducer to set useName
       state.memberId = action.payload;
@@ -30,10 +35,11 @@ const userSlice = createSlice({
       state.token = null;
       state.id = null; // Clear id on logout
       state.nickname = null; // Clear nickname on logout
+      state.name = null; // Clear name on logout
       state.memberId = null; // Clear memberId on logout
     },
   },
 });
 
-export const { setToken, setId, logout, setNickname, setMemberId } = userSlice.actions;
+export const { setToken, setId, logout, setNickname, setName, setMemberId } = userSlice.actions;
 export default userSlice.reducer;
