@@ -6,16 +6,16 @@ import {
   getOnePost,
   getPost,
   // plusLikeCount,
-} from "../api/posts";
-import { editPost as editPostAPI } from "../api/posts"; // Renamed API function
+} from "../../api/posts";
+import { editPost as editPostAPI } from "../../api/posts"; // Renamed API function
 import { useDispatch } from "react-redux";
-import { editPost } from "../redux/modules/postSlice";
-import * as S from "../shared/style/DetailedPage";
-import * as T from "../shared/style/NewPostStyle";
-import { getDateTime } from "../util/getDateTime";
+import { editPost } from "../../redux/modules/postSlice";
+import * as S from "../../shared/style/DetailedPage";
+import * as T from "../../shared/style/NewPostStyle";
+import { getDateTime } from "../../util/getDateTime";
 import CommentForm from "./CommentForm";
 import CommentsList from "./CommentsList";
-import { Button } from "../components/button";
+import { Button } from "../../components/button";
 
 export default function DetailedPage() {
   const navigate = useNavigate();

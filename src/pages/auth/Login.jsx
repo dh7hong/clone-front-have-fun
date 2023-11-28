@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
-import { setToken, setMemberId, setNickname, logout } from "../redux/modules/userSlice";
-import { loginUser } from "../api/authService";
+import { setToken, setMemberId, setNickname, logout } from "../../redux/modules/userSlice";
+import { loginUser } from "../../api/authService";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Container, InputStyle, BoxStyle, ClickBoxStyle, ClickBox, IdPwBox } from "./styles";
+import { Container, InputStyle, BoxStyle, ClickBoxStyle, ClickBox, IdPwBox } from "../styles";
 
 function Login() {
   const [id, setId] = useState("");

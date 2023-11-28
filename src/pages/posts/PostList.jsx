@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import * as S from "../shared/style/PostStyle";
-import { getDateTime } from "../util/getDateTime";
+import * as S from "../../shared/style/PostStyle";
+import { getDateTime } from "../../util/getDateTime";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../components/button";
+import { Button } from "../../components/button";
 
 export default function PostList({ post }) {
   const navigate = useNavigate();

@@ -3,8 +3,8 @@ import { useQuery } from "react-query";
 import { AddPost, getPost } from "../api/posts";
 import * as S from "../shared/style/HomeStyle";
 import { useNavigate } from "react-router-dom";
-import PostList from "./PostList";
-import Pagination from "./Pagination";
+import PostList from "./posts/PostList";
+import Pagination from "./posts/Pagination";
 import { Button } from "../components/button";
 import axios from "axios";
 

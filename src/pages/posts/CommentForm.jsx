@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addComment } from "../redux/modules/commentSlice";
+import { addComment } from "../../redux/modules/commentSlice";
 import { useParams } from "react-router-dom";
-import { addNewComment } from "../api/comments";
-import * as S from "../shared/style/CommentStyle";
-import { Button } from "../components/button";
-import { getDateTime } from "../util/getDateTime";
+import { addNewComment } from "../../api/comments";
+import * as S from "../../shared/style/CommentStyle";
+import { Button } from "../../components/button";
+import { getDateTime } from "../../util/getDateTime";
 
 const CommentForm = () => {
   const [contents, setContents] = useState("");

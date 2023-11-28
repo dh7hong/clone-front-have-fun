@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCommentsByPostId } from "../api/comments";
-import { setComments } from "../redux/modules/commentSlice";
-import { getDateTime } from "../util/getDateTime";
+import { getCommentsByPostId } from "../../api/comments";
+import { setComments } from "../../redux/modules/commentSlice";
+import { getDateTime } from "../../util/getDateTime";
 
 const CommentsList = () => {
   const { postId } = useParams();

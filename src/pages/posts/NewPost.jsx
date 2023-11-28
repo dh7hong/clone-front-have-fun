@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddPost } from "../api/posts";
-import { addPost } from "../redux/modules/postSlice";
-import * as S from "../shared/style/NewPostStyle";
-import { Button } from "../components/button";
+import { AddPost } from "../../api/posts";
+import { addPost } from "../../redux/modules/postSlice";
+import * as S from "../../shared/style/NewPostStyle";
+import { Button } from "../../components/button";
 import { get } from "lodash";
-import { getDateTime } from "../util/getDateTime";
+import { getDateTime } from "../../util/getDateTime";
 
 export default function NewPost() {
   const [title, setTitle] = useState("");

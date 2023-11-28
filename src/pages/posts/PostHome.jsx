@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { AddPost, getPost } from "../api/posts";
-import * as S from "../shared/style/HomeStyle";
+import { AddPost, getPost } from "../../api/posts";
+import * as S from "../../shared/style/HomeStyle";
 import { useNavigate, useParams } from "react-router-dom";
 import PostList from "./PostList";
 import Pagination from "./Pagination";
-import { Button } from "../components/button";
+import { Button } from "../../components/button";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { logout } from "../redux/modules/userSlice";
+import { logout } from "../../redux/modules/userSlice";
 
 export default function PostHome() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

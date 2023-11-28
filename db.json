@@ -49,6 +49,26 @@
       "contents": "You know me? huh?",
       "memberId": "709643529",
       "createdAt": "2023-11-29 02:31:27"
+    },
+    {
+      "postId": 3246853,
+      "title": "My awesome title",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy777",
+      "contents": "My awesome contents.",
+      "memberId": "77527169",
+      "createdAt": "2023-11-29 03:54:06"
+    },
+    {
+      "postId": 3411775,
+      "title": "Hope this works",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy777",
+      "contents": "You better work",
+      "memberId": "576218739",
+      "createdAt": "2023-11-29 03:56:51"
     }
   ],
   "comments": [
@@ -71,6 +91,16 @@
       "contents": "This is a super good comment",
       "memberId": "709643529",
       "createdAt": "2023-11-29 02:31:48"
+    },
+    {
+      "commentId": 3428080,
+      "postId": "3411775",
+      "id": "dh7hong",
+      "nickname": "Luffy777",
+      "name": "Monkey D. Luffy",
+      "contents": "You better not cry",
+      "memberId": "576218739",
+      "createdAt": "2023-11-29 03:57:06"
     }
   ]
 }

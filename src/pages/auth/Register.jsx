@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { registerUser } from "../api/authService";
+import { registerUser } from "../../api/authService";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -10,7 +10,7 @@ import {
   ClickBoxStyle,
   ClickBox,
   IdPwBox,
-} from "./styles";
+} from "../styles";
 
 function Register() {
   const [id, setId] = useState("");

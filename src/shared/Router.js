@@ -1,20 +1,19 @@
 import React from "react";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
 import PrivateRoute from "./PrivateRoute";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import Layout from "../ui/Layout";
 import Home from "../pages/Home";
-import NewPost from "../pages/NewPost";
-import DetailedPage from "../pages/DetailedPage";
-import MyPage from "../pages/MyPage";
+import NewPost from "../pages/posts/NewPost";
+import DetailedPage from "../pages/posts/DetailedPage";
 import Profile from "../pages/Profile";
 import Diary from "../pages/Diary";
 import Jukebox from "../pages/Jukebox";
 import Guestbook from "../pages/Guestbook";
-import PostHome from "../pages/PostHome";
+import PostHome from "../pages/posts/PostHome";
 import Main from "../pages/Main";
 
 export default function Router() {
