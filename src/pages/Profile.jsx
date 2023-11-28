@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { store } from "../redux/config/configStore";
 import { useDispatch } from "react-redux";
-import { addImage } from "../redux/modules/Image";
+import { addImage } from "../redux/modules/ImageSlice";
 import { useNavigate } from "react-router-dom";
 import * as S from "../shared/style/MyPageStyle";
 import { checkValidationFile } from "../util/ImageValidation";
