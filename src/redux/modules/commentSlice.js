@@ -15,6 +15,7 @@ export const commentSlice = createSlice({
         postId: action.payload.postId,
         id: action.payload.id,
         nickname: action.payload.nickname,
+        name: action.payload.name,
         contents: action.payload.contents,
         memberId: action.payload.memberId,
       });

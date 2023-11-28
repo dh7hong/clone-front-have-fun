@@ -24,7 +24,7 @@ function Register() {
   const handleRegister = (event) => {
     event.preventDefault();
     register({ id, password, nickname, name });
-    alert(`Thanks for signing up! ${nickname}`);
+    alert(`Thanks for signing up! ${name}`);
     setId("");
     setPassword("");
     navigate(`/api/login`);

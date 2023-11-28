@@ -25,10 +25,11 @@ const CommentForm = () => {
     const uniqueId = generateUniqueId();
     const id = localStorage.getItem("id");
     const nickname = localStorage.getItem("nickname");
+    const name = localStorage.getItem("name");
     
-    dispatch(addComment({ commentId: uniqueId, postId, id, nickname, contents, memberId }));
+    dispatch(addComment({ commentId: uniqueId, postId, id, nickname, name, contents, memberId }));
 
-    const commentData = { commentId: uniqueId, postId, id, nickname, contents, memberId };
+    const commentData = { commentId: uniqueId, postId, id, nickname, name, contents, memberId };
 
     await addNewComment(postId, commentData);
     

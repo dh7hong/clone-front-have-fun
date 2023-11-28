@@ -15,8 +15,7 @@ import Diary from "../pages/Diary";
 import Jukebox from "../pages/Jukebox";
 import Guestbook from "../pages/Guestbook";
 import PostHome from "../pages/PostHome";
-import AddFriendComponent from "../pages/AddFriendComponent";
-import UserList from "../pages/UserList";
+import Main from "../pages/Main";
 
 export default function Router() {
   // Check login status
@@ -36,6 +35,7 @@ export default function Router() {
           <Route path="/api/users/:memberId/diary" element={<Diary />} />
           <Route path="/api/users/:memberId/jukebox" element={<Jukebox />} />
           <Route path="/api/users/:memberId/guestbook" element={<Guestbook />} />
+          <Route path="/api/users" element={<Main />} />
         </Route>
       </Routes>
     </BrowserRouter>

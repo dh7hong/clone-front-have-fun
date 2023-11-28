@@ -16,10 +16,11 @@ function Login() {
   const { mutate: login } = useMutation(loginUser, {
     onSuccess: (data) => {
       if (data && data.token && data.id && data.nickname && data.memberId) {
-        const { token, id, nickname, memberId } = data;
+        const { token, id, nickname, name, memberId } = data;
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         localStorage.setItem("token", token);
         localStorage.setItem("id", id);
+        localStorage.setItem("name", name);
         localStorage.setItem("nickname", nickname);
         localStorage.setItem("memberId", memberId);
 
@@ -46,6 +47,7 @@ function Login() {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     localStorage.removeItem("nickname");
+    localStorage.removeItem("name");
     localStorage.removeItem("memberId");
     localStorage.clear();
     delete axios.defaults.headers.common["Authorization"];
