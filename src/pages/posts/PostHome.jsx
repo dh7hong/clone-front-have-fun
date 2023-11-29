@@ -35,7 +35,8 @@ export default function PostHome() {
 
   const postsData = () => {
     if (data) {
-      let result = data?.slice(offset, offset + limit);
+      let reversedData = [...data].reverse(); // Reverse the entire data array
+      let result = reversedData.slice(offset, offset + limit);
       return result;
     }
   };

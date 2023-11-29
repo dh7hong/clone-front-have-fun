@@ -5,21 +5,14 @@ import { useParams } from "react-router-dom";
 import { addNewComment } from "../../api/comments";
 import * as S from "../../shared/style/CommentStyle";
 import { Button } from "../../components/button";
-import { getDateTime } from "../../util/getDateTime";
+import { generateUniqueId } from '../../util/generateUniqueId';
+import { getDateTime } from '../../util/getDateTime';
+
 
 const CommentForm = () => {
   const [contents, setContents] = useState("");
   const dispatch = useDispatch();
   const { memberId, postId } = useParams();
-
-  const generateUniqueId = () => {
-    let now = new Date();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    let milliseconds = now.getMilliseconds();
-
-    return minutes * 60000 + seconds * 1000 + milliseconds;
-  };
 
   const createdAt = getDateTime();
 

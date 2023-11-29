@@ -10,7 +10,7 @@ import Home from "../pages/Home";
 import NewPost from "../pages/posts/NewPost";
 import DetailedPage from "../pages/posts/DetailedPage";
 import Profile from "../pages/Profile";
-import Diary from "../pages/Diary";
+import DiaryHome from "../pages/diary/DiaryHome";
 import Jukebox from "../pages/Jukebox";
 import Guestbook from "../pages/Guestbook";
 import PostHome from "../pages/posts/PostHome";
@@ -29,11 +29,17 @@ export default function Router() {
           <Route path="/api/users/:memberId" element={<Home />} />
           <Route path="/api/users/:memberId/posts" element={<PostHome />} />
           <Route path="/api/users/:memberId/posts/new" element={<NewPost />} />
-          <Route path="/api/users/:memberId/posts/:postId" element={<DetailedPage />} />
+          <Route
+            path="/api/users/:memberId/posts/:postId"
+            element={<DetailedPage />}
+          />
           <Route path="/api/users/:memberId/profile" element={<Profile />} />
-          <Route path="/api/users/:memberId/diary" element={<Diary />} />
+          <Route path="/api/users/:memberId/diary" element={<DiaryHome />} />
           <Route path="/api/users/:memberId/jukebox" element={<Jukebox />} />
-          <Route path="/api/users/:memberId/guestbook" element={<Guestbook />} />
+          <Route
+            path="/api/users/:memberId/guestbook"
+            element={<Guestbook />}
+          />
           <Route path="/api/users" element={<Main />} />
         </Route>
       </Routes>

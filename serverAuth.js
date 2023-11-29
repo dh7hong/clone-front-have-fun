@@ -13,7 +13,7 @@ app.use(cors());
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const generateUniqueId = () => {
-  return Math.floor(Math.random() * 1000000000); 
+  return Math.floor(Math.random() * 1000000000);
 };
 
 const readDatabase = () => {
@@ -49,7 +49,9 @@ app.post("/api/register", async (req, res) => {
   db.users.push(newUser);
   writeDatabase(db);
 
-  res.status(201).json({ message: "User registered successfully", userId });
+  res
+    .status(201)
+    .json({ message: "User registered successfully", name: newUser.name });
 });
 
 app.post("/api/login", async (req, res) => {
@@ -65,7 +67,7 @@ app.post("/api/login", async (req, res) => {
       id: user.id,
       nickname: user.nickname,
       memberId: user.memberId,
-      name: user.name
+      name: user.name,
     },
     JWT_SECRET,
     {
@@ -74,17 +76,17 @@ app.post("/api/login", async (req, res) => {
   );
   res.json({
     token,
-    data:
-    { id: user.id,
-    nickname: user.nickname,
-    memberId: user.memberId,
-    name: user.name
-    }
+    data: {
+      id: user.id,
+      nickname: user.nickname,
+      memberId: user.memberId,
+      name: user.name,
+    },
   });
 });
 
 // GET endpoint for /api/users
-app.get('/api/users', (req, res) => {
+app.get("/api/users", (req, res) => {
   try {
     const dbData = readDatabase();
     res.json(dbData.users);

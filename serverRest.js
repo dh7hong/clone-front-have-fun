@@ -107,10 +107,21 @@ server.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
   res.jsonp(comments);
 });
 
-server.get("/api/users", (req, res) => {
-  const users = router.db.get("users").value();
-  res.jsonp(users);
+server.get("/api/users/:memberId/diary", (req, res) => {
+  const memberId = req.params.memberId;
+  const db = router.db; // Get lowdb instance
+  const diaryEntries = db.get("diary").filter({ memberId }).value();
+  res.jsonp(diaryEntries);
 });
+
+
+server.post("/api/users/:memberId/diary", (req, res) => {
+  const newDiaryEntry = { ...req.body, memberId: req.params.memberId };
+  router.db.get("diary").push(newDiaryEntry).write();
+  res.status(201).jsonp(newDiaryEntry);
+});
+
+
 
 server.use("/api", router);
 
