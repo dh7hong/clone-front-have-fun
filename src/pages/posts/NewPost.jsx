@@ -5,8 +5,8 @@ import { AddPost } from "../../api/posts";
 import { addPost } from "../../redux/modules/postSlice";
 import * as S from "../../shared/style/NewPostStyle";
 import { Button } from "../../components/button";
-import { generateUniqueId } from '../../util/generateUniqueId';
-import { getDateTime } from '../../util/getDateTime';
+import { get } from "lodash";
+import { getDateTime } from "../../util/getDateTime";
 
 export default function NewPost() {
   const [title, setTitle] = useState("");
@@ -24,6 +24,14 @@ export default function NewPost() {
     setNickname(localStorage.getItem("nickname"));
     setName(localStorage.getItem("name"));
   }, []);
+
+  const generateUniqueId = () => {
+    let now = new Date();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    let milliseconds = now.getMilliseconds();
+    return minutes * 60000 + seconds * 1000 + milliseconds;
+  };
 
   const uniqueId = generateUniqueId();
   const createdAt = getDateTime();

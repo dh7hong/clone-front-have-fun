@@ -14,21 +14,28 @@ export const HomeWrapper = styled.div`
 `;
 
 export const BoardWrapper = styled.div`
-  width: 1028px;
+  width: 100%;
+  height: 10%;
   background-color: rgb(54, 48, 98);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   border: 2px solid black;
+  font-family: "Hi Melody", sans-serif;
 `;
 
-export const BoardTitle = styled.span`
+export const BoardTitle = styled.div`
   width: 100px;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   line-height: 50px;
+  font-family: "Hi Melody", sans-serif;
   font-weight: bolder;
   color: white;
+  font-size: 30px;
 `;
 
 export const BoardTitleStyle = styled.div`
@@ -36,8 +43,10 @@ export const BoardTitleStyle = styled.div`
   height: 50px;
   text-align: center;
   line-height: 50px;
+  font-family: "Hi Melody", sans-serif;
   font-weight: bolder;
   color: white;
+  font-size: 30px;
 `;
 
 export const PostStyle = styled.div`
@@ -45,12 +54,13 @@ export const PostStyle = styled.div`
   height: 600px;
   display: flex;
   flex-direction: column;
+  font-size: 15px;
+  font-family: "Hi Melody", sans-serif;
 `;
 
 export const HeaderWrapper = styled.div`
   display: flex;
-  width: 1028px;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 `;
 

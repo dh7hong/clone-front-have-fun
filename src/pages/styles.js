@@ -1,18 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  background: #c9d6ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #e2e2e2,
-    #c9d6ff
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #e2e2e2,
-    #c9d6ff
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background-image: url("/background.png");
+  background-size: cover; /* fallback for old browsers */ /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +11,7 @@ const Container = styled.div`
 `;
 
 const InputStyle = styled.input`
-  width: 500px;
+  width: 300px;
   height: 40px;
   margin-bottom: 20px;
   display: flex;
@@ -30,13 +20,13 @@ const InputStyle = styled.input`
 
 const BoxStyle = styled.div`
   border: 1px solid black;
-  width: 800px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   padding: 24px;
   position: relative;
   display: flex;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 500px;
   background-color: white;
 `;
 
@@ -58,11 +48,11 @@ const ClickBoxStyle = styled.button`
 `;
 
 const ClickBox = styled.div`
-  margin-top: 100px;
+  margin-top: 30px;
 `;
 
 const IdPwBox = styled.div`
-  margin-top: 80px;
+  margin-top: 50px;
 `;
 
 export { Container, InputStyle, BoxStyle, ClickBoxStyle, ClickBox, IdPwBox };

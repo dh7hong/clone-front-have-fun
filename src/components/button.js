@@ -10,7 +10,7 @@ export const Button = styled.button`
   font-weight: 700;
   &:hover {
     background-color: ${(props) =>
-      props.hoverColor ? props.hoverColor : "rgb(162, 87, 114)"};
+      props.hoverColor ? props.hoverColor : "rgb(192, 192, 192)"};
     color: black;
     font-weight: bolder;
   }

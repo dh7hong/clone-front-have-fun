@@ -11,6 +11,7 @@ import {
   ClickBox,
   IdPwBox,
 } from "../styles";
+import { FlexJustAlignCenter } from "../../shared/style/Base";
 
 function Register() {
   const [id, setId] = useState("");
@@ -34,57 +35,86 @@ function Register() {
     navigate(`/api/login`);
   };
 
+  const homeLink = () => {
+    navigate(`/`);
+  };
+
   return (
-    <Container>
-      <BoxStyle>
-        <div>
-          <form onSubmit={handleRegister}>
-            <h1>Sign Up</h1>
-            <IdPwBox>
-              <p>ID</p>
-              <InputStyle
-                type="text"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-                placeholder="Username"
-              />
-              <p>Password</p>
-              <InputStyle
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-              />
-              <p>Nickname</p>
-              <InputStyle
-                type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="Nickname"
-              />
-              <p>Name</p>
-              <InputStyle
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="name"
-              />
-            </IdPwBox>
-            <ClickBox>
-              <div>
-                <ClickBoxStyle type="submit">Sign Up</ClickBoxStyle>
-                <ClickBoxStyle
-                  type="button"
-                  onClick={handleLoginPageButtonClick}
-                >
-                  Login
-                </ClickBoxStyle>
+    <>
+      <div style={{ position: "absolute", top: "24%", left: "19%" }}>
+        <button
+          onClick={homeLink}
+          style={{
+            color: "black",
+            backgroundColor: "transparent",
+            border: "none",
+            fontSize: "20px",
+          }}
+        >
+          메인페이지로 돌아가기
+        </button>
+      </div>
+      <Container>
+        <BoxStyle>
+          <FlexJustAlignCenter>
+            <form onSubmit={handleRegister}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "10px",
+                  marginBottom: "0px",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Sign Up
               </div>
-            </ClickBox>
-          </form>
-        </div>
-      </BoxStyle>
-    </Container>
+              <IdPwBox>
+                <div>ID</div>
+                <InputStyle
+                  type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  placeholder="Username"
+                />
+                <div>Password</div>
+                <InputStyle
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                />
+                <div>Nickname</div>
+                <InputStyle
+                  type="text"
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                  placeholder="Nickname"
+                />
+                <div>Name</div>
+                <InputStyle
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="name"
+                />
+              </IdPwBox>
+              <ClickBox>
+                <div>
+                  <ClickBoxStyle type="submit">Sign Up</ClickBoxStyle>
+                  <ClickBoxStyle
+                    type="button"
+                    onClick={handleLoginPageButtonClick}
+                  >
+                    Login
+                  </ClickBoxStyle>
+                </div>
+              </ClickBox>
+            </form>
+          </FlexJustAlignCenter>
+        </BoxStyle>
+      </Container>
+    </>
   );
 }
 

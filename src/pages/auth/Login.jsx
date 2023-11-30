@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
-import { setToken, setMemberId, setNickname, logout } from "../../redux/modules/userSlice";
+import {
+  setToken,
+  setMemberId,
+  setNickname,
+  logout,
+} from "../../redux/modules/userSlice";
 import { loginUser } from "../../api/authService";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Container, InputStyle, BoxStyle, ClickBoxStyle, ClickBox, IdPwBox } from "../styles";
+import {
+  Container,
+  InputStyle,
+  BoxStyle,
+  ClickBoxStyle,
+  ClickBox,
+  IdPwBox,
+} from "../styles";
+import { FlexJustAlignCenter } from "../../shared/style/Base";
+import { Button } from "../../shared/style/NewPostStyle";
 
 function Login() {
   const [id, setId] = useState("");
@@ -16,7 +30,13 @@ function Login() {
   const { mutate: login } = useMutation(loginUser, {
     onSuccess: (data) => {
       // Check if data is defined and has the required properties
-      if (data?.token && data?.id && data?.name && data?.nickname && data?.memberId) {
+      if (
+        data?.token &&
+        data?.id &&
+        data?.name &&
+        data?.nickname &&
+        data?.memberId
+      ) {
         const { token, id, nickname, name, memberId } = data;
         // Set axios defaults and localStorage
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -25,11 +45,11 @@ function Login() {
         localStorage.setItem("name", name);
         localStorage.setItem("nickname", nickname);
         localStorage.setItem("memberId", memberId);
-  
+
         // Dispatch Redux actions
         dispatch(setToken(token));
         dispatch(setMemberId(memberId));
-  
+
         // Navigate to the user's posts page
         navigate(`/api/users/${memberId}`);
       } else {
@@ -40,7 +60,7 @@ function Login() {
     // Add onError to handle API errors
     onError: (error) => {
       console.error("Login error:", error);
-    }
+    },
   });
 
   const handleLogin = (event) => {
@@ -50,6 +70,10 @@ function Login() {
 
   const handleRegisterPageLinkClick = () => {
     navigate(`/api/register`);
+  };
+
+  const homeLink = () => {
+    navigate(`/`);
   };
 
   const handleLogout = () => {
@@ -67,46 +91,69 @@ function Login() {
   };
 
   return (
-    <Container>
-      <BoxStyle>
-        <div>
-          <form onSubmit={handleLogin}>
-            <h1>Login</h1>
-            <IdPwBox>
-              <p>ID</p>
-              <InputStyle
-                type="text"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-                placeholder="ID"
-              />
-              <p>Password</p>
-              <InputStyle
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-              />
-            </IdPwBox>
-            <ClickBox>
-              <div>
-                <ClickBoxStyle type="submit">Login</ClickBoxStyle>
+    <>
+      <div style={{ position: "absolute", top: "24%", left: "19%" }}>
+        <button
+          onClick={homeLink}
+          style={{
+            color: "black",
+            backgroundColor: "transparent",
+            border: "none",
+            fontSize: "20px",
+          }}
+        >
+          메인페이지로 돌아가기
+        </button>
+      </div>
+      <Container>
+        <BoxStyle>
+          <FlexJustAlignCenter>
+            <form onSubmit={handleLogin}>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "10px",
+                  marginBottom: "0px",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Login
               </div>
-              <div>
-                <ClickBoxStyle onClick={handleRegisterPageLinkClick}>
-                  Register
-                </ClickBoxStyle>
-              </div>
-              <div>
-                <ClickBoxStyle onClick={handleLogout}>
-                  Logout
-                </ClickBoxStyle>
-              </div>
-            </ClickBox>
-          </form>
-        </div>
-      </BoxStyle>
-    </Container>
+              <IdPwBox>
+                <div>ID</div>
+                <InputStyle
+                  type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  placeholder="ID"
+                />
+                <div>Password</div>
+                <InputStyle
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                />
+              </IdPwBox>
+              <ClickBox>
+                <div>
+                  <ClickBoxStyle type="submit">Login</ClickBoxStyle>
+                </div>
+                <div>
+                  <ClickBoxStyle onClick={handleRegisterPageLinkClick}>
+                    Register
+                  </ClickBoxStyle>
+                </div>
+                <div>
+                  <ClickBoxStyle onClick={handleLogout}>Logout</ClickBoxStyle>
+                </div>
+              </ClickBox>
+            </form>
+          </FlexJustAlignCenter>
+        </BoxStyle>
+      </Container>
+    </>
   );
 }
 

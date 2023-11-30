@@ -9,6 +9,11 @@ import { Button } from "../../components/button";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/modules/userSlice";
+import Base from "../layout/Base";
+import FirstGridArea from "../FirstGridArea";
+import SecondGridArea from "../SecondGridArea";
+import SpringGroup from "../layout/SpringGroup";
+import CategoryGroup5 from "../layout/CategoryGroup5";
 
 export default function PostHome() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,15 +33,14 @@ export default function PostHome() {
   const [page, setPage] = useState(1);
   const limit = 10;
   const offset = (page - 1) * limit;
-  
+
   const onClickSubmitBtn = () => {
     navigate(`/api/users/${memberId}/posts/new`);
   };
 
   const postsData = () => {
     if (data) {
-      let reversedData = [...data].reverse(); // Reverse the entire data array
-      let result = reversedData.slice(offset, offset + limit);
+      let result = data?.slice(offset, offset + limit);
       return result;
     }
   };
@@ -59,30 +63,33 @@ export default function PostHome() {
   console.log("data", data);
 
   return (
-    <S.Wrapper>
-      <S.HomeWrapper>
-        <S.HeaderWrapper>
-          <div>
-            <Button onClick={onClickSubmitBtn}>등록하기</Button>
-            <Button onClick={handleLogout}>로그아웃</Button>
-          </div>
-        </S.HeaderWrapper>
-        <S.BoardWrapper>
-          <S.BoardTitle>번호</S.BoardTitle>
-          <S.BoardTitleStyle>제목</S.BoardTitleStyle>
-          <S.BoardTitle>작성자</S.BoardTitle>
-          <S.BoardTitleStyle>작성날짜</S.BoardTitleStyle>
-          <S.BoardTitle>상세보기</S.BoardTitle>
-        </S.BoardWrapper>
+    <>
+      <Base>
+        <FirstGridArea />
+        <SecondGridArea>
+          <S.HeaderWrapper>
+            <div>
+              <Button onClick={onClickSubmitBtn}>등록하기</Button>
+            </div>
+          </S.HeaderWrapper>
+          <S.BoardWrapper>
+            <S.BoardTitle>번호</S.BoardTitle>
+            <S.BoardTitleStyle>제목</S.BoardTitleStyle>
+            <S.BoardTitle>작성자</S.BoardTitle>
+            <S.BoardTitleStyle>작성날짜</S.BoardTitleStyle>
+            <S.BoardTitle>상세보기</S.BoardTitle>
+          </S.BoardWrapper>
 
-        
           <S.PostStyle>
             {postsData(data)?.map((post) => (
               <PostList key={post.postId} post={post} />
             ))}
           </S.PostStyle>
-        <Pagination page={page} setPage={setPage} data={data} />
-      </S.HomeWrapper>
-    </S.Wrapper>
+          <Pagination page={page} setPage={setPage} data={data} />
+        </SecondGridArea>
+      </Base>
+      <SpringGroup />
+      <CategoryGroup5 />
+    </>
   );
 }

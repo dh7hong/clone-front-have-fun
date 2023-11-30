@@ -10,7 +10,7 @@ import Home from "../pages/Home";
 import NewPost from "../pages/posts/NewPost";
 import DetailedPage from "../pages/posts/DetailedPage";
 import Profile from "../pages/Profile";
-import DiaryHome from "../pages/diary/DiaryHome";
+import Diary from "../pages/Diary";
 import Jukebox from "../pages/Jukebox";
 import Guestbook from "../pages/Guestbook";
 import PostHome from "../pages/posts/PostHome";
@@ -34,7 +34,7 @@ export default function Router() {
             element={<DetailedPage />}
           />
           <Route path="/api/users/:memberId/profile" element={<Profile />} />
-          <Route path="/api/users/:memberId/diary" element={<DiaryHome />} />
+          <Route path="/api/users/:memberId/diary" element={<Diary />} />
           <Route path="/api/users/:memberId/jukebox" element={<Jukebox />} />
           <Route
             path="/api/users/:memberId/guestbook"

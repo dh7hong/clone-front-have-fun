@@ -29,55 +29,26 @@ export default function Header() {
     setIsLoggedIn(false);
     console.log(isLoggedIn);
     navigate("/api/login"); // Navigate to login page on logout
-    window.location.reload();  
+    window.location.reload();
   };
 
   const moveToHome = () => {
-    navigate("/");
+    navigate("/api/users");
   };
   const image = localStorage.getItem("image");
 
   const handleLogin = () => {
     navigate("/api/login");
-    
   };
   return (
     <S.Wrapper>
-      <S.HeaderWrapper>
-        <S.Logo onClick={moveToHome} />
-        <S.TitleStyle>Hanghae Community</S.TitleStyle>
-        <S.MyProfileStyle>
-          {imageArr && (
-            <S.MyProfileImage
-              src={imageArr}
-              alt="엑박"
-            />
-          )}
-          {!imageArr && (
-            <div>
-              {!image && (
-                <S.MyProfile
-                  size={60}
-                  alt="마이페이지"
-                />
-              )}
-              {image && (
-                <S.MyProfileImage
-                  src={image}
-                  size={60}
-                  alt="마이페이지"
-                />
-              )}
-            </div>
-          )}
-          
-            <S.MypageStyle>
-              <Button onClick={handleLogin}>로그인</Button>
-              <Button onClick={handleLogout}>로그아웃</Button>
-            </S.MypageStyle>
-          
-        </S.MyProfileStyle>
-      </S.HeaderWrapper>
+      <S.Logo onClick={moveToHome} />
+      <S.MyProfileStyle>
+        <div>
+          <Button onClick={handleLogin}>로그인</Button>
+          <Button onClick={handleLogout}>로그아웃</Button>
+        </div>
+      </S.MyProfileStyle>
     </S.Wrapper>
   );
 }

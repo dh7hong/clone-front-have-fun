@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCommentsByPostId } from "../../api/comments";
 import { setComments } from "../../redux/modules/commentSlice";
-import generateUniqueId from '../../util/generateUniqueId';
-import getDateTime from '../../util/getDateTime';
+import { getDateTime } from "../../util/getDateTime";
 
 const CommentsList = () => {
   const { postId } = useParams();
@@ -22,12 +21,9 @@ const CommentsList = () => {
   }, [postId, dispatch]);
   console.log("comments", comments);
 
-  // Create a shallow copy of the comments array and reverse it
-  const reversedComments = [...comments].reverse();
-
   return (
     <div>
-      {reversedComments.map((comment) => (
+      {comments.map((comment) => (
         <div key={comment.commentId}>
           <strong>{comment.id}:</strong> {comment.contents} {comment.createdAt}
           

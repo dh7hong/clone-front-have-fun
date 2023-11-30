@@ -2,8 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Login from "../pages/auth/Login";
 import { Outlet, useLocation } from "react-router-dom";
-
-import Navigation from "./Navigation";
+import Base from "../pages/layout/Base";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -14,7 +13,6 @@ export default function Layout() {
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
       <Header />
-      <Navigation />
       <div
         style={{
           flex: 1,

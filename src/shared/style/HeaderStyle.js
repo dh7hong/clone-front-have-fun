@@ -7,23 +7,9 @@ import { IoPersonCircle } from "react-icons/io5";
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background: #355c7d; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 `;
 
 export const HeaderWrapper = styled.div`
@@ -54,11 +40,15 @@ export const ProfileImage = styled.img`
   }
 `;
 
-export const Logo = styled(IoLogoTux)`
-  font-size: 50px;
+export const Logo = styled.img`
+  background-image: url("/cyWorldLogo.jpg");
+  background-size: cover;
+  background-position: bottom;
+  width: 500px;
+  height: 120px;
   box-shadow: 5px 5px 5px 5px gray;
   border-radius: 20px;
-  margin-left: 200px;
+  margin-left: 100px;
   cursor: pointer;
   &:hover {
     background-color: white;
@@ -70,15 +60,10 @@ export const TitleStyle = styled.h1`
   color: white;
 `;
 
-export const MypageStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const MyProfile = styled(IoPersonCircle)``;
 
 export const MyProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 10vw;
+  height: 250px;
+  border-radius: 10px;
 `;
