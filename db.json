@@ -239,6 +239,16 @@
       "contents": "Get that shit",
       "memberId": "77527169",
       "createdAt": "2023-12-03 03:45:37"
+    },
+    {
+      "postId": 1005303,
+      "title": "Hey this is a cool post",
+      "id": "se7entheman",
+      "name": "Se7eN",
+      "nickname": "iamse7en",
+      "contents": "Hey man, isn't this cool?",
+      "memberId": "461719767",
+      "createdAt": "2023-12-03 04:16:45"
     }
   ],
   "comments": [
@@ -371,6 +381,16 @@
       "contents": "Get that shit my man",
       "memberId": "77527169",
       "createdAt": "2023-12-03 03:45:50"
+    },
+    {
+      "commentId": 1016067,
+      "postId": "1005303",
+      "id": "se7entheman",
+      "nickname": "iamse7en",
+      "name": "Se7eN",
+      "contents": "Yes it is indeed",
+      "memberId": "461719767",
+      "createdAt": "2023-12-03 04:16:54"
     }
   ],
   "diary": [
@@ -445,6 +465,15 @@
       "contents": "A lot of problems fixed but there are still a ton ahead...",
       "memberId": "77527169",
       "createdAt": "2023-12-02 23:51:18"
+    },
+    {
+      "diaryId": 872593,
+      "id": "se7entheman",
+      "name": "Se7eN",
+      "nickname": "iamse7en",
+      "contents": "I'm going to get some yogurt",
+      "memberId": "461719767",
+      "createdAt": "2023-12-03 04:14:32"
     }
   ]
 }
