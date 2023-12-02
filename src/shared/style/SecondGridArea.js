@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
 export const Container2 = styled.div`
-  flex: 1;
+  width: 50vw;
+  flex: 2;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
-  height: 770px;
+  margin-right: 15px;
+  justify-content: center;
+  
+  height: 95%;
 `;
 
 export const Item3 = styled.div`
@@ -21,11 +25,11 @@ export const Item3 = styled.div`
 export const Item4 = styled.div`
   flex: 2;
   border: 2px solid #d4d4d4;
-  height: 100px;
-  border-radius: 9px;
+  height: 0px;
+  border-radius: 20px;
   background-color: white;
   margin-right: 15px;
-  overflow-y: auto;
+  overflow: auto;
   position: relative;
   padding-left: 20px;
   padding-right: 20px;
@@ -43,9 +47,16 @@ export const FlexBox = styled.div`
   display: flex;
 `;
 
+export const ImageUploadBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const StatusMessageTextarea = styled.textarea`
   width: 10vw;
-  height: 250px;
+  height: 20vh;
   border-radius: 5px;
   margin-top: 10px;
   display: flex;

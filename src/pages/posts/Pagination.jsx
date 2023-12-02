@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../../components/button";
 
 export default function Pagination({ page, setPage, data }) {
-  const postsPerPage = 10;
+  const postsPerPage = 7;
 
   const pageList = [];
   const postsNum = data?.length;
@@ -30,7 +30,14 @@ export default function Pagination({ page, setPage, data }) {
   }
   console.log("pageList", pageList);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Button onClick={moveToPrevPage}>prev</Button>
       {pageList.map((page, index) => (
         <Button id={index} onClick={onClickPageBtn(page)} key={page}>

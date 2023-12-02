@@ -6,6 +6,13 @@ import { getDiaryEntries } from "../../api/diary";
 import DiaryInput from "./DiaryInput";
 import DiaryList from "./DiaryList";
 import { useParams } from "react-router-dom";
+import * as F from "../../shared/style/FirstGridArea";
+import * as S from "../../shared/style/SecondGridArea";
+import SpringGroup from "../layout/SpringGroup";
+import CategoryGroup3 from "../layout/CategoryGroup3";
+import Base from "../layout/Base";
+import FirstGridArea from "../FirstGridArea";
+import SecondGridArea from "../SecondGridArea";
 
 const DiaryHome = () => {
   const dispatch = useDispatch();
@@ -24,10 +31,16 @@ const DiaryHome = () => {
   }, [dispatch, memberId]);
 
   return (
-    <div>
-      <DiaryInput />
-      <DiaryList />
-    </div>
+    <>
+      <Base>
+        <FirstGridArea />
+        <SecondGridArea>
+          <DiaryInput />
+          <DiaryList />
+        </SecondGridArea>
+      </Base>
+      <CategoryGroup3 />
+    </>
   );
 };
 

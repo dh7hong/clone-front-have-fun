@@ -31,7 +31,7 @@ export default function PostHome() {
 
   //data = 객체형태로 모든 값들 다있음
   const [page, setPage] = useState(1);
-  const limit = 10;
+  const limit = 7;
   const offset = (page - 1) * limit;
 
   const onClickSubmitBtn = () => {
@@ -40,7 +40,8 @@ export default function PostHome() {
 
   const postsData = () => {
     if (data) {
-      let result = data?.slice(offset, offset + limit);
+      let reversedData = [...data].reverse(); // Reverse the entire data array
+      let result = reversedData.slice(offset, offset + limit);
       return result;
     }
   };
@@ -68,27 +69,35 @@ export default function PostHome() {
         <FirstGridArea />
         <SecondGridArea>
           <S.HeaderWrapper>
-            <div>
-              <Button onClick={onClickSubmitBtn}>등록하기</Button>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "10px",
+              }}
+            >
+              <Button onClick={onClickSubmitBtn}>Post</Button>
+              <Button onClick={onClickSubmitBtn}>Other Users</Button>
             </div>
           </S.HeaderWrapper>
           <S.BoardWrapper>
-            <S.BoardTitle>번호</S.BoardTitle>
-            <S.BoardTitleStyle>제목</S.BoardTitleStyle>
-            <S.BoardTitle>작성자</S.BoardTitle>
-            <S.BoardTitleStyle>작성날짜</S.BoardTitleStyle>
-            <S.BoardTitle>상세보기</S.BoardTitle>
+            <S.BoardTitle>ID</S.BoardTitle>
+            <S.BoardTitle>Title</S.BoardTitle>
+            <S.BoardTitle>Posted By</S.BoardTitle>
+            <S.BoardTitle>Posted On</S.BoardTitle>
+            <S.BoardTitle>Details</S.BoardTitle>
           </S.BoardWrapper>
 
           <S.PostStyle>
-            {postsData(data)?.map((post) => (
+            {postsData()?.map((post) => (
               <PostList key={post.postId} post={post} />
             ))}
           </S.PostStyle>
           <Pagination page={page} setPage={setPage} data={data} />
         </SecondGridArea>
       </Base>
-      <SpringGroup />
       <CategoryGroup5 />
     </>
   );

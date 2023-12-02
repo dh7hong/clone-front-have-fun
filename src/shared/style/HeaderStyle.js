@@ -60,10 +60,14 @@ export const TitleStyle = styled.h1`
   color: white;
 `;
 
-export const MyProfile = styled(IoPersonCircle)``;
+export const MyProfile = styled(IoPersonCircle)`
+  width: 10vw;
+  height: 22vh;
+  border-radius: 10px;
+  `;
 
 export const MyProfileImage = styled.img`
   width: 10vw;
-  height: 250px;
+  height: 22vh;
   border-radius: 10px;
 `;

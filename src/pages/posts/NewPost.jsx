@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddPost } from "../../api/posts";
+import { addPost as addPostAPI } from "../../api/posts";
 import { addPost } from "../../redux/modules/postSlice";
 import * as S from "../../shared/style/NewPostStyle";
 import { Button } from "../../components/button";
-import { get } from "lodash";
 import { getDateTime } from "../../util/getDateTime";
 
 export default function NewPost() {
@@ -56,7 +55,7 @@ export default function NewPost() {
         memberId,
         createdAt
       };
-      const response = await AddPost(newPostData, memberId);
+      const response = await addPostAPI(newPostData, memberId);
       dispatch(addPost(response));
       navigate(`/api/users/${memberId}/posts`);
     } catch (error) {

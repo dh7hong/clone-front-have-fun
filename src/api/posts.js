@@ -11,7 +11,7 @@ export const getPost = async (memberId) => {
   }
 };
 
-export const AddPost = async (newPost, memberId) => {
+export const addPost = async (newPost, memberId) => {
   try {
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts`, newPost);
     return response.data;

@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import imageSlice from "../modules/ImageSlice";
+import imageSlice from "../modules/imageSlice";
 import commentSlice from "../modules/commentSlice";
 import userSlice from "../modules/userSlice";
 import postSlice from "../modules/postSlice";
+import diarySlice from "../modules/diarySlice";
+import profileSlice from "../modules/profileSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +12,7 @@ export const store = configureStore({
     comments: commentSlice,
     user: userSlice,
     post: postSlice,
+    diary: diarySlice,
+    profile: profileSlice,
   },
 });

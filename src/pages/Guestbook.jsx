@@ -14,7 +14,6 @@ export default function Guestbook() {
         <FirstGridArea />
         <SecondGridArea></SecondGridArea>
       </Base>
-      <SpringGroup />
       <CategoryGroup6 />
     </>
   );

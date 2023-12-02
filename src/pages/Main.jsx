@@ -23,10 +23,11 @@ export default function Main() {
       const response = await axios.get(
         `${process.env.REACT_APP_AUTH_URL}/api/users`
       );
-
+      console.log("API 응답 구조가 예상과 같습니다:", response.data)
       // API 응답이 예상대로 구조화되었는지 확인
-      if (response.data && Array.isArray(response.data.data)) {
-        setUsers(response.data.data);
+      if (response.data) {
+        console.log("API 응답 구조가 예상과 같습니다:", response.data)
+        setUsers(response.data);
       } else {
         console.error("API 응답 구조가 예상과 다릅니다:", response.data);
       }
@@ -63,7 +64,6 @@ export default function Main() {
           <span style={{ marginLeft: "15px" }}>▶미니미 갯수 [1]</span>
         </SecondGridArea>
       </Base>
-      <SpringGroup />
       <CategoryGroup1 />
     </div>
   );

@@ -76,6 +76,26 @@
       "nickname": "qwer1234",
       "memberId": 287968700,
       "name": "qwer1234"
+    },
+    {
+      "id": "dannytheman",
+      "password": "GDhs0903??",
+      "nickname": "dannyman",
+      "memberId": 807398209,
+      "name": "Danny D. Hong"
+    },
+    {
+      "id": "lovely",
+      "password": "GDhs0903??",
+      "nickname": "love",
+      "memberId": 195809257,
+      "name": "Joe Lee"
+    }
+  ],
+  "profileMessage": [
+    {
+      "memberId": 77527169,
+      "message": "Does it still work?"
     }
   ]
 }

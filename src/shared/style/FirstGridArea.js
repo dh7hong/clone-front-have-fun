@@ -1,9 +1,28 @@
 import styled from "styled-components";
 
+export const BookDot = styled.div`
+  border: 2px dashed white;
+  border-radius: 9px;
+  left: 15px;
+  top: 15px;
+  right: 15px;
+  bottom: 15px;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 25% auto 0;
+  padding: 10px;
+  overflow: hidden;
+`;
+
+
 export const LiName = styled.div`
   background-color: #f1f1f1;
-  border-radius: 9px;
+  border-radius: 20px;
   display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  overflow: auto
+
 `;
 
 export const Container1 = styled.div`
@@ -12,6 +31,7 @@ export const Container1 = styled.div`
   margin-left: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-right: 15px;
   width: 100%;
 `;
 
@@ -29,6 +49,10 @@ export const Item2 = styled.div`
   background-color: white;
   display: flex;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+
 `;
 
 export const FeelingSelectorBox = styled.div`
@@ -49,15 +73,15 @@ export const ProfileImg = styled.div`
   background-size: cover;
   background-position: center;
   width: 10vw;
-  height: 250px;
+  height: 25vh;
   border: 1px solid black;
   border-radius: 5px;
 `;
 
 export const StatusMessage = styled.div`
   width: 10vw;
-  height: 300px;
-  border-radius: 5px;
+  height: 30vh;
+  border: 1px solid black;
   margin-top: 10px;
   display: flex;
   justify-content: center;
@@ -76,6 +100,9 @@ export const HelpLink = styled.a`
 `;
 
 export const FontStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-family: "Hi Melody", sans-serif;
   font-family: "Nanum Pen Script", cursive;
 `;

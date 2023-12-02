@@ -15,7 +15,7 @@ export default function PostList({ post }) {
   return (
     <S.PostStyle>
       <S.RowStyle>
-        <S.Row>{post.postId}</S.Row>
+        <S.RowTitle>{post.postId}</S.RowTitle>
         <S.RowTitle>{post.title}</S.RowTitle>
         <S.RowTitle>{post.nickname}</S.RowTitle>
         <S.RowTitle>{post.createdAt}</S.RowTitle>

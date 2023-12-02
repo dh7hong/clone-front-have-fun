@@ -6,4 +6,5 @@ export const Spring = styled.div`
   height: 10px;
   border: 1px solid black;
   border-radius: 20px;
+  z-index: 100;
 `;

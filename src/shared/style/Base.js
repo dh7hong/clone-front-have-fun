@@ -19,10 +19,11 @@ export const BookCover = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: visible; /* 수정된 부분 */
-`;
+  overflow: hidden;
+  `;
 
 export const BookDot = styled.div`
+  
   border: 2px dashed white;
   border-radius: 9px;
   left: 15px;
@@ -30,10 +31,10 @@ export const BookDot = styled.div`
   right: 15px;
   bottom: 15px;
   position: absolute;
-  display: grid;
-  grid-template-columns: 25% auto 0;
+  display: flex;
+  justify-content: center;
   padding: 10px;
-  overflow: hidden;
+  overflow: auto;
 `;
 
 export const FlexJustAlignCenter = styled.div`

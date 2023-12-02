@@ -12,6 +12,20 @@ app.use(cors());
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
+
+
 const generateUniqueId = () => {
   return Math.floor(Math.random() * 1000000000);
 };
@@ -94,6 +108,37 @@ app.get("/api/users", (req, res) => {
     res.status(500).send("Error fetching users");
   }
 });
+
+app.post("/api/users/:memberId/profile", authenticateToken, (req, res) => {
+  const memberId = parseInt(req.params.memberId); // Parse memberId as integer
+  const { message } = req.body;
+  let db = readDatabase();
+
+  // Check if the user exists
+  const userExists = db.users.some((u) => u.memberId === memberId);
+  if (!userExists) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  if (!db.profileMessage) {
+    db.profileMessage = [];
+  }
+
+  const existingMessageIndex = db.profileMessage.findIndex((m) => m.memberId === memberId);
+  if (existingMessageIndex !== -1) {
+    // Update existing message
+    db.profileMessage[existingMessageIndex].message = message;
+  } else {
+    // Add new message
+    db.profileMessage.push({ memberId, message });
+  }
+
+  writeDatabase(db);
+  console.log("Profile messsage", db.profileMessage);
+  res.json({ message: "Profile message updated successfully", profileMessage: message });
+});
+
+
 
 const PORT = 4002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

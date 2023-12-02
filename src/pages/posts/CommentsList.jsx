@@ -21,9 +21,11 @@ const CommentsList = () => {
   }, [postId, dispatch]);
   console.log("comments", comments);
 
+  const reversedComments = [...comments].reverse();
+
   return (
     <div>
-      {comments.map((comment) => (
+      {reversedComments.map((comment) => (
         <div key={comment.commentId}>
           <strong>{comment.id}:</strong> {comment.contents} {comment.createdAt}
           

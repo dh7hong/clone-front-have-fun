@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceTired, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
+import SpringGroup from "./layout/SpringGroup";
 import {
   Container1,
   FeelingSelectorBox,
@@ -23,7 +24,7 @@ const FirstGridArea = ({ feeling }) => {
     <LiName>
       <Container1>
         <Item1>
-          <div style={{ marginBottom: "14px" }}>
+          <div style={{ marginBottom: "20px" }}>
             Today <span style={{ color: "red" }}>25 </span>
             <span>| TOTAL 777</span>
           </div>
@@ -88,6 +89,7 @@ const FirstGridArea = ({ feeling }) => {
           </FontStyle>
         </Item2>
       </Container1>
+      {/* <SpringGroup /> */}
     </LiName>
   );
 };

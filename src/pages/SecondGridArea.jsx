@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import * as F from "../shared/style/FirstGridArea";
 import * as S from "../shared/style/SecondGridArea";
-
+import axios from "axios";
 const SecondGridArea = ({ children }) => {
   const [nickname, setNickname] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_SERVER_URL}/api/users`
+        const response = await axios.get(
+          `${process.env.REACT_APP_AUTH_URL}/api/users`
         );
-        const data = await response.json();
-
+        const data = response.data;
+        console.log("API 응답 구조가 예상과 같습니다:", data);
         // Assuming there's only one user in the response data array
-        if (data && data.data && data.data.length > 0) {
-          const user = data.data[0];
-          setNickname(user.nickname);
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].memberId == localStorage.getItem("memberId")) {
+            setNickname(data[i].nickname);
+          }
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,11 +42,11 @@ const SecondGridArea = ({ children }) => {
               {nickname ? `${nickname}의 미니홈피` : "Loading..."}
             </span>
             <S.Tab
-              href="https://www.naver.com/"
+              href="https://github.com/dh7hong"
               target="_blank"
-              style={{ marginRight: "15px" }}
+              style={{ marginRight: "10px" }}
             >
-              https://github.com/
+              My Github
             </S.Tab>
           </S.Item3>
           <S.Item4>{children}</S.Item4>
