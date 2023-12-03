@@ -1,6 +1,4 @@
 import React from "react";
-import CategoryGroup6 from "./layout/CategoryGroup6";
-import SpringGroup from "./layout/SpringGroup";
 import Base from "./layout/Base";
 import FirstGridArea from "./FirstGridArea";
 import SecondGridArea from "./SecondGridArea";
@@ -14,7 +12,6 @@ export default function Guestbook() {
         <FirstGridArea />
         <SecondGridArea></SecondGridArea>
       </Base>
-      <CategoryGroup6 />
     </>
   );
 }

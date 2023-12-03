@@ -9,7 +9,8 @@ export const MainStyle = styled.div`
   align-items: center;
   top: 100px;
   left: 100px;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 0;
 `;
 
 export const BookCover = styled.div`
@@ -19,7 +20,8 @@ export const BookCover = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 0;
   `;
 
 export const BookDot = styled.div`
@@ -34,7 +36,8 @@ export const BookDot = styled.div`
   display: flex;
   justify-content: center;
   padding: 10px;
-  overflow: auto;
+  overflow: visible;
+  z-index: 1;
 `;
 
 export const FlexJustAlignCenter = styled.div`

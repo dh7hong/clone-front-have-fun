@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import * as F from "../shared/style/FirstGridArea";
 import * as S from "../shared/style/SecondGridArea";
 import axios from "axios";
 const SecondGridArea = ({ children }) => {
@@ -29,7 +28,7 @@ const SecondGridArea = ({ children }) => {
 
   return (
     <>
-      <F.LiName>
+      <S.LiName>
         <S.Container2>
           <S.Item3>
             <span
@@ -51,7 +50,7 @@ const SecondGridArea = ({ children }) => {
           </S.Item3>
           <S.Item4>{children}</S.Item4>
         </S.Container2>
-      </F.LiName>
+      </S.LiName>
     </>
   );
 };

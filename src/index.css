@@ -11,6 +11,8 @@ body {
   background-image: url("../public/pattern.png");
   /** 고정된 사이즈로 설정 */
   background-size: 100px;
+  overflow: visible;
+  z-index: 1;
 }
 
 code {

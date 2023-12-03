@@ -8,8 +8,6 @@ import DiaryList from "./DiaryList";
 import { useParams } from "react-router-dom";
 import * as F from "../../shared/style/FirstGridArea";
 import * as S from "../../shared/style/SecondGridArea";
-import SpringGroup from "../layout/SpringGroup";
-import CategoryGroup3 from "../layout/CategoryGroup3";
 import Base from "../layout/Base";
 import FirstGridArea from "../FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
@@ -39,7 +37,6 @@ const DiaryHome = () => {
           <DiaryList />
         </SecondGridArea>
       </Base>
-      <CategoryGroup3 />
     </>
   );
 };

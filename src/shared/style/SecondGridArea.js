@@ -73,3 +73,13 @@ export const ModifyButton = styled.button`
   margin: 40px 0 0 10px;
   cursor: pointer;
 `;
+
+export const LiName = styled.div`
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  overflow: auto;
+  z-index: 1;
+`;

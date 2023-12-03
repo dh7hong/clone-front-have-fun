@@ -19,6 +19,8 @@ export default function Layout() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          zIndex: 0,
+          
         }}
       >
         <Outlet />

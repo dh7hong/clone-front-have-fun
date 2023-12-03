@@ -8,7 +8,6 @@ import { Button } from "../../components/button";
 import Base from "../layout/Base";
 import FirstGridArea from "../FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
-import SpringGroup from "../layout/SpringGroup";
 import * as F from "../../shared/style/FirstGridArea";
 import * as S from "../../shared/style/SecondGridArea";
 import {
@@ -23,7 +22,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FlexJustAlignCenter } from "../../shared/style/Base";
-import CategoryGroup2 from "../layout/CategoryGroup2";
 import axios from "axios";
 import { updateProfileMessage } from "../../api/profile";
 import { updateOrCreateStatusMessage } from "../../redux/modules/profileSlice";
@@ -263,7 +261,6 @@ export default function Profile() {
           </S.FlexBox>
         </SecondGridArea>
       </Base>
-      <CategoryGroup2 />
     </>
   );
 }

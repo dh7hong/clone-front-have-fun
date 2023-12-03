@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Base from "../layout/Base";
-import SpringGroup from "../layout/SpringGroup";
-import CategoryGroup4 from "../layout/CategoryGroup4";
 import FirstGridArea from "../FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
 import { YoutubeLinksInput, YoutubePlayer } from "../../shared/style/Jukebox";
@@ -47,7 +45,6 @@ export default function Jukebox() {
           </YoutubePlayer>
         </SecondGridArea>
       </Base>
-      <CategoryGroup4 />
     </>
   );
 }

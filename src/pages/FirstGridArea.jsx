@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceTired, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
-import SpringGroup from "./layout/SpringGroup";
+
 import {
   Container1,
   FeelingSelectorBox,

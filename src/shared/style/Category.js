@@ -37,3 +37,8 @@ export const CategoryDeactivation = styled.button`
   cursor: pointer;
   transition: background-color 0.3s ease; /* Add a smooth transition effect */
 `;
+
+export const RightSideContainer = styled.div`
+  position: relative; // Add relative positioning
+  display: flex;
+`;

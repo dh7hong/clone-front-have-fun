@@ -4,8 +4,6 @@ import axios from "axios";
 import Base from "./layout/Base";
 import FirstGridArea from "./FirstGridArea";
 import SecondGridArea from "./SecondGridArea";
-import SpringGroup from "./layout/SpringGroup";
-import CategoryGroup1 from "./layout/CategoryGroup1";
 import {
   MiniroomImage,
   NewsBox,
@@ -64,7 +62,6 @@ export default function Main() {
           <span style={{ marginLeft: "15px" }}>▶미니미 갯수 [1]</span>
         </SecondGridArea>
       </Base>
-      <CategoryGroup1 />
     </div>
   );
 }

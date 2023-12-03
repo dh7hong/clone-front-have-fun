@@ -12,8 +12,6 @@ import { logout } from "../../redux/modules/userSlice";
 import Base from "../layout/Base";
 import FirstGridArea from "../FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
-import SpringGroup from "../layout/SpringGroup";
-import CategoryGroup5 from "../layout/CategoryGroup5";
 
 export default function PostHome() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -98,7 +96,6 @@ export default function PostHome() {
           <Pagination page={page} setPage={setPage} data={data} />
         </SecondGridArea>
       </Base>
-      <CategoryGroup5 />
     </>
   );
 }
