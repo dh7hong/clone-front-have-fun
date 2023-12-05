@@ -14,7 +14,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = authHeader && authHeader.split(" ")[1];
 
   if (token == null) return res.sendStatus(401);
 
@@ -24,7 +24,6 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
 
 const generateUniqueId = () => {
   return Math.floor(Math.random() * 1000000000);
@@ -124,7 +123,9 @@ app.post("/api/users/:memberId/profile", authenticateToken, (req, res) => {
     db.profileMessage = [];
   }
 
-  const existingMessageIndex = db.profileMessage.findIndex((m) => m.memberId === memberId);
+  const existingMessageIndex = db.profileMessage.findIndex(
+    (m) => m.memberId === memberId
+  );
   if (existingMessageIndex !== -1) {
     // Update existing message
     db.profileMessage[existingMessageIndex].message = message;
@@ -135,10 +136,64 @@ app.post("/api/users/:memberId/profile", authenticateToken, (req, res) => {
 
   writeDatabase(db);
   console.log("Profile messsage", db.profileMessage);
-  res.json({ message: "Profile message updated successfully", profileMessage: message });
+  res.json({
+    message: "Profile message updated successfully",
+    memberId: memberId,
+    profileMessage: message,
+  });
+});
+
+// GET endpoint for reading user profileMessage
+app.get("/api/users/:memberId/profile", (req, res) => {
+  const memberId = parseInt(req.params.memberId);
+  const db = readDatabase();
+
+  const user = db.profileMessage.find((u) => u.memberId === memberId);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  res.json({ memberId: user.memberId, message: user.message });
 });
 
 
+// Express server
+// POST endpoint for updating user feeling
+app.post("/api/users/:memberId/feeling", (req, res) => {
+  const memberId = parseInt(req.params.memberId);
+  const { feeling } = req.body;
+  let db = readDatabase();
+
+  const userIndex = db.users.findIndex(u => u.memberId === memberId);
+  if (userIndex === -1) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  // Check if feeling entry exists, if not create it
+  const feelingIndex = db.feeling.findIndex(f => f.memberId === memberId);
+  if (feelingIndex === -1) {
+    db.feeling.push({ memberId, feeling });
+  } else {
+    db.feeling[feelingIndex].feeling = feeling;
+  }
+
+  writeDatabase(db);
+  res.json({ message: "Feeling updated successfully", memberId, feeling });
+});
+
+
+// GET endpoint for reading user feeling
+app.get("/api/users/:memberId/feeling", (req, res) => {
+  const memberId = parseInt(req.params.memberId);
+  const db = readDatabase();
+
+  const user = db.feeling.find((u) => u.memberId === memberId);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  res.json({ memberId: user.memberId, feeling: user.feeling });
+});
 
 const PORT = 4002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

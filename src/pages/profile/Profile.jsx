@@ -8,6 +8,7 @@ import { Button } from "../../components/button";
 import Base from "../layout/Base";
 import FirstGridArea from "../FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
+import ProfileFeeling from "./ProfileFeeling";
 import * as F from "../../shared/style/FirstGridArea";
 import * as S from "../../shared/style/SecondGridArea";
 import {
@@ -25,6 +26,7 @@ import { FlexJustAlignCenter } from "../../shared/style/Base";
 import axios from "axios";
 import { updateProfileMessage } from "../../api/profile";
 import { updateOrCreateStatusMessage } from "../../redux/modules/profileSlice";
+import { setStatusMessage } from "../../redux/modules/profileSlice";
 
 export default function Profile() {
   const [isActive, setIsActive] = useState(false);
@@ -32,64 +34,12 @@ export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const ref = useRef(null);
-  const [selectedFeeling, setSelectedFeeling] = useState("");
   const [profileMessage, setProfileMessage] = useState("");
+  const [selectedFeeling, setSelectedFeeling] = useState("");
   const { memberId } = useParams();
 
   const modifySelfIntroduction = () => {
     // 여기에 수정 로직 작성
-  };
-
-  const handleFeelingChange = (event) => {
-    const selectedValue = event.target.value;
-    setSelectedFeeling(selectedValue);
-  };
-
-  const feeling = () => {
-    switch (selectedFeeling) {
-      case "즐거움":
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceLaughBeam} bounce /> 즐거움
-          </>
-        );
-      case "우울함":
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceFrown} fade /> 우울함
-          </>
-        );
-      case "피곤함":
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceTired} fade /> 피곤함
-          </>
-        );
-      case "화남":
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceAngry} shake /> 화남
-          </>
-        );
-      case "기쁨":
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceGrinSquint} bounce /> 기쁨
-          </>
-        );
-      case "슬픔":
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceSadTear} fade /> 슬픔
-          </>
-        );
-      default:
-        return (
-          <>
-            <FontAwesomeIcon icon={faFaceMeh} fade /> 그냥 그래
-          </>
-        );
-    }
   };
 
   const onChangeImage = (event) => {
@@ -132,6 +82,13 @@ export default function Profile() {
       })
     );
 
+    dispatch(
+      setStatusMessage({
+        memberId,
+        message: profileMessage,
+      })
+    );
+
     const profileData = { memberId, profileMessage };
     console.log("profileData", profileData);
     await updateProfileMessage(profileMessage, memberId);
@@ -142,7 +99,7 @@ export default function Profile() {
   return (
     <>
       <Base>
-        <FirstGridArea feeling={feeling} />
+        <FirstGridArea />
         <SecondGridArea>
           <S.FlexBox>
             <div>
@@ -194,26 +151,8 @@ export default function Profile() {
                   type="file"
                 />
               </div>
-              <F.FeelingSelectorBox style={{ marginLeft: "20px" }}>
-                <span style={{ color: "#2aacd3" }}>TODAY IS.. &nbsp;</span>
-                <span>
-                  <select
-                    id="feelingSelect"
-                    name="feeling"
-                    value={selectedFeeling}
-                    onChange={handleFeelingChange}
-                  >
-                    <option value="">그냥 그래</option>
-                    <option value="즐거움">즐거움</option>
-                    <option value="우울함">우울함</option>
-                    <option value="피곤함">피곤함</option>
-                    <option value="화남">화남</option>
-                    <option value="기쁨">기쁨</option>
-                    <option value="슬픔">슬픔</option>
-                  </select>
-                  {/* ↑ 경로를 수정해야할 곳 */}
-                </span>
-              </F.FeelingSelectorBox>
+              <ProfileFeeling/>
+
               <form onSubmit={handleStatusChangeSubmit}>
                 <S.StatusMessageTextarea
                   value={profileMessage}

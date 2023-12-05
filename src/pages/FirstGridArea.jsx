@@ -1,8 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceTired, faVenus } from "@fortawesome/free-solid-svg-icons";
-import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
-
+import { faVenus } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon as ReactFontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { setFeeling } from "../redux/modules/feelingSlice";
+import { getProfileFeeling } from "../api/profile";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   Container1,
   FeelingSelectorBox,
@@ -14,12 +19,53 @@ import {
   ProfileImg,
   StatusMessage,
 } from "../shared/style/FirstGridArea";
-import { useSelector } from "react-redux";
 import { MyProfile, MyProfileImage } from "../shared/style/HeaderStyle";
+import ProfileFeelingIcon from "./profile/ProfileFeelingIcon"
+import { current } from "@reduxjs/toolkit";
+import { getProfileMessage } from "../api/profile";
+import { updateProfileMessage } from "../api/profile";
+import { updateOrCreateStatusMessage } from "../redux/modules/profileSlice";
+import { setStatusMessage } from "../redux/modules/profileSlice";
 
-const FirstGridArea = ({ feeling }) => {
+const FirstGridArea = () => {
   const imageArr = useSelector((state) => state.image.imageArr);
+  const currentFeeling = useSelector((state) => state.feeling.selectedFeeling);
+  const profileStatus = useSelector((state) => state.profile.messages);
+  const memberId = localStorage.getItem("memberId");
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    // Fetching and setting status message
+    const fetchStatusMessage = async () => {
+      try {
+        const fetchedMessage = await getProfileMessage(memberId);
+        dispatch(setStatusMessage({ memberId, message: fetchedMessage.message }));
+      } catch (error) {
+        console.error("Error fetching profile message", error);
+      }
+    };
+
+    fetchStatusMessage();
+  }, [memberId, dispatch]);
+
+  useEffect(() => {
+    const fetchFeelings = async () => {
+      const fetchedFeeling = await getProfileFeeling(memberId);
+      dispatch(setFeeling({memberId, feeling: fetchedFeeling.feeling}));
+    };
+    fetchFeelings();
+  }, [memberId, dispatch]);
+
+  // const state = useSelector((state) => state);
+  // console.log(state); // Check the entire Redux state structure
+
+  console.log("fetched Feeling: ", currentFeeling);
   const image = localStorage.getItem("image");
+
+  
+  const currentStatusMessage = profileStatus[memberId] || "Loading status...";
+  
   return (
     <LiName>
       <Container1>
@@ -44,15 +90,12 @@ const FirstGridArea = ({ feeling }) => {
             <FeelingSelectorBox style={{ fontSize: "16px" }}>
               <span style={{ color: "#2aacd3" }}>TODAY IS.. &nbsp;</span>
               <span>
-                <FontAwesomeIcon icon={faFaceTired} fade /> 피곤함
-                {/* {feeling()} */}
-                {/* <FontAwesomeIcon icon={faFaceTired} fade /> 피곤함 */}
-                {/* ↑ 경로를 수정해야할 곳 */}
+                {ProfileFeelingIcon(currentFeeling)}
               </span>
             </FeelingSelectorBox>
             <div>
               <StatusMessage style={{ color: "#2aacd3", fontSize: "25px" }}>
-                {/* ↑ 경로를 수정해야할 곳 */}
+                {currentStatusMessage}
               </StatusMessage>
             </div>
             <div
@@ -67,7 +110,7 @@ const FirstGridArea = ({ feeling }) => {
               <div
                 style={{
                   marginLeft: "5px",
-                  border: "1px solid black",
+                  border: "0px solid black",
                   borderRadius: "5px",
                   color: "#E8B793",
                   width: "20px",

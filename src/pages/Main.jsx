@@ -11,21 +11,21 @@ import {
   UpdateNewsContent,
   UpdatedNews,
 } from "../shared/style/Main";
+import { userList } from "../api/userService";
 
 export default function Main() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  const fetchData = async () => {
+  const getUsersData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_AUTH_URL}/api/users`
-      );
-      console.log("API 응답 구조가 예상과 같습니다:", response.data)
+      const response = await userList();
+      const data = response;
+      console.log("API 응답 구조가 예상과 같습니다:", data)
       // API 응답이 예상대로 구조화되었는지 확인
-      if (response.data) {
-        console.log("API 응답 구조가 예상과 같습니다:", response.data)
-        setUsers(response.data);
+      if (data) {
+        console.log("API 응답 구조가 예상과 같습니다:", data)
+        setUsers(response);
       } else {
         console.error("API 응답 구조가 예상과 다릅니다:", response.data);
       }
@@ -35,7 +35,7 @@ export default function Main() {
   };
 
   useEffect(() => {
-    fetchData();
+    getUsersData();
   }, []);
 
   return (

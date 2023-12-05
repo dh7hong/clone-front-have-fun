@@ -5,6 +5,7 @@ import userSlice from "../modules/userSlice";
 import postSlice from "../modules/postSlice";
 import diarySlice from "../modules/diarySlice";
 import profileSlice from "../modules/profileSlice";
+import feelingSlice from "../modules/feelingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     post: postSlice,
     diary: diarySlice,
     profile: profileSlice,
+    feeling: feelingSlice,
   },
 });

@@ -9,3 +9,4 @@ export const postDiaryEntry = async (memberId, newEntry) => {
   const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/diary`, newEntry);
   return response.data;
 };
+

@@ -95,7 +95,7 @@
   "profileMessage": [
     {
       "memberId": 77527169,
-      "message": "Does it still work?"
+      "message": "This is all part of life.... I worked so hard but in the end...."
     },
     {
       "memberId": 461719767,
@@ -104,6 +104,16 @@
     {
       "memberId": 195809257,
       "message": "So damn buff"
+    }
+  ],
+  "feeling": [
+    {
+      "memberId": 77527169,
+      "feeling": "우울함"
+    },
+    {
+      "memberId": 461719767,
+      "feeling": "우울함"
     }
   ]
 }
