@@ -5,19 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #355c7d; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background-color: #a3a3a3;
+  /** body에 배경이미지 적용 */
+  background-image: url("../public/pattern.png");
+  /** 고정된 사이즈로 설정 */
+  background-size: 100px;
+  overflow: visible;
+  z-index: 1;
 }
 
 code {

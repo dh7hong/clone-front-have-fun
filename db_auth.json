@@ -1,0 +1,119 @@
+{
+  "users": [
+    {
+      "id": "dh7hong",
+      "password": "GDhs0903??",
+      "nickname": "Luffy777",
+      "memberId": 77527169,
+      "name": "Monkey D. Luffy"
+    },
+    {
+      "id": "se7entheman",
+      "password": "GDhs0903??",
+      "nickname": "iamse7en",
+      "memberId": 461719767,
+      "name": "Se7eN"
+    },
+    {
+      "id": "laznise7en",
+      "password": "GDhs0903??",
+      "nickname": "lazni",
+      "memberId": 576218739,
+      "name": "Monkey D. Garp"
+    },
+    {
+      "id": "aescientists",
+      "password": "GDhs0903??",
+      "nickname": "scientist",
+      "memberId": 709643529,
+      "name": "Kobi"
+    },
+    {
+      "id": "dukyong77",
+      "password": "GDhs0903??",
+      "nickname": "Han D. Dragon",
+      "memberId": 757257961,
+      "name": "한덕용"
+    },
+    {
+      "id": "gdragon",
+      "password": "GDhs0903??",
+      "nickname": "GD",
+      "memberId": 179513143,
+      "name": "권지용"
+    },
+    {
+      "id": "andrewli",
+      "password": "GDhs0903??",
+      "nickname": "andrew54",
+      "memberId": 260033894,
+      "name": "Andrew Li"
+    },
+    {
+      "id": "newid",
+      "password": "GDhs0903??",
+      "nickname": "newnickname",
+      "memberId": 667943118,
+      "name": "Nick Kennitz"
+    },
+    {
+      "id": "se7enwork",
+      "password": "GDhs0903??",
+      "nickname": "worker",
+      "memberId": 590410557,
+      "name": "Daniel Hong"
+    },
+    {
+      "id": "dh7hongdh7hong",
+      "password": "GDhs0903??",
+      "nickname": "daaaaaaanny",
+      "memberId": 936959547,
+      "name": "Daniel D. Hong"
+    },
+    {
+      "id": "qwer1234",
+      "password": "qwer1234",
+      "nickname": "qwer1234",
+      "memberId": 287968700,
+      "name": "qwer1234"
+    },
+    {
+      "id": "dannytheman",
+      "password": "GDhs0903??",
+      "nickname": "dannyman",
+      "memberId": 807398209,
+      "name": "Danny D. Hong"
+    },
+    {
+      "id": "lovely",
+      "password": "GDhs0903??",
+      "nickname": "love",
+      "memberId": 195809257,
+      "name": "Joe Lee"
+    }
+  ],
+  "profileMessage": [
+    {
+      "memberId": 77527169,
+      "message": "This is all part of life.... I worked so hard but in the end...."
+    },
+    {
+      "memberId": 461719767,
+      "message": "very tired...."
+    },
+    {
+      "memberId": 195809257,
+      "message": "So damn buff"
+    }
+  ],
+  "feeling": [
+    {
+      "memberId": 77527169,
+      "feeling": "우울함"
+    },
+    {
+      "memberId": 461719767,
+      "feeling": "우울함"
+    }
+  ]
+}
