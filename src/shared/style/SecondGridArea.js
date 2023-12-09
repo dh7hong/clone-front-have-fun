@@ -55,8 +55,8 @@ export const ImageUploadBox = styled.div`
 `;
 
 export const StatusMessageTextarea = styled.textarea`
-  width: 10vw;
-  height: 20vh;
+  width: 13vw;
+  height: 10vh;
   border-radius: 5px;
   margin-top: 10px;
   display: flex;

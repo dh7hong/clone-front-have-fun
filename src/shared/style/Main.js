@@ -17,8 +17,8 @@ export const MiniroomImage = styled.div`
   background-image: url("/miniroom.gif");
   background-size: cover;
   margin-left: 15px;
-  width: 868px;
-  height: 434px;
+  width: 850px;
+  height: 350px;
 `;
 
 export const UpdateImage = styled.span`

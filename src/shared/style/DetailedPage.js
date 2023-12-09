@@ -12,13 +12,13 @@ export const DetailedPageWrapper = styled.div`
 `;
 
 export const NewBoardWrapper = styled.div`
-  width: 100%;
-  height: 500px;
+  width: 10vw;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
-  border: 3px solid black;
+  border: 3px solid white;
   border-radius: 20px;
   justify-content: center;
 `;
@@ -61,14 +61,8 @@ export const ThumbsUpStyle = styled(FaRegThumbsUp)`
 
 export const ButtonWrapper = styled.button`
   display: flex;
-  background: #355c7d; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #c06c84, #6c5b7b, #355c7d);
-
+  justify-content: center;
+  align-items: center;
   margin: 10px 0px;
+  border: 1px solid white;
 `;

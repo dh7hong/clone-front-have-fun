@@ -16,6 +16,11 @@ import { getDateTime } from "../../util/getDateTime";
 import CommentForm from "./CommentForm";
 import CommentsList from "./CommentsList";
 import { Button } from "../../components/button";
+import Base from "../layout/Base";
+import FirstGridArea from "../FirstGridArea";
+import SecondGridArea from "../SecondGridArea";
+import * as F from "../../shared/style/FirstGridArea";
+import * as K from "../../shared/style/SecondGridArea";
 
 export default function DetailedPage() {
   const navigate = useNavigate();
@@ -32,7 +37,7 @@ export default function DetailedPage() {
   );
 
   console.log("detailedInfo", detailedInfo);
-  
+
   const deleteMutation = useMutation(() => deletePost(postId, memberId), {
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
@@ -57,7 +62,7 @@ export default function DetailedPage() {
       nickname: localStorage.getItem("nickname"),
       name: localStorage.getItem("name"),
       createdAt,
-      memberId
+      memberId,
       // Include other fields if necessary
     };
 
@@ -85,51 +90,61 @@ export default function DetailedPage() {
   };
 
   return (
-    <S.DetailedPageWrapper>
-      <h2 style={{ color: "white" }}>게시물 등록</h2>
-      {isEditing ? (
-        <T.ContentsBody>
-          <T.TitleWrapper>
-            <h3>제목</h3>
-            <T.TitleInput
-              maxLength={30}
-              value={editedTitle}
-              onChange={(e) => setEditedTitle(e.target.value)}
-            />
-          </T.TitleWrapper>
-          <T.ContentsWrapper>
-            <h3>내용</h3>
-            <T.ContentsInput
-              value={editedContents}
-              onChange={(e) => setEditedContents(e.target.value)}
-            />
-          </T.ContentsWrapper>
-          <S.ButtonWrapper>
-            <Button onClick={submitEdit}>저장하기</Button>
-            <Button onClick={() => setIsEditing(false)}>취소하기</Button>
-          </S.ButtonWrapper>
-        </T.ContentsBody>
-      ) : (
-        <T.ContentsBody>
-          <S.NewBoardWrapper>
-            <h2>제목</h2>
-            <S.TitleStyle>{detailedInfo?.title}</S.TitleStyle>
-            <h2>내용</h2>
-            <S.ContentsStyle> {detailedInfo?.contents}</S.ContentsStyle>
-          </S.NewBoardWrapper>
+    <>
+      <Base>
+        <FirstGridArea />
+        <SecondGridArea>
+          {isEditing ? (
+            
+            <T.InputWrapper>
+              <S.NewBoardWrapper>
+              <h3>Title</h3>
+              <input               
+                value={editedTitle}
+                onChange={(e) => setEditedTitle(e.target.value)}
+                />
 
-          <S.ButtonWrapper>
-            <Button onClick={moveToList}>목록으로</Button>
-            <Button onClick={enterEditMode}>수정하기</Button>
-            <Button onClick={deleteBtn}>삭제하기</Button>
-          </S.ButtonWrapper>
-        </T.ContentsBody>
-      )}
-      <div>
-        <h2 style={{ color: "white" }}>댓글</h2>
-      </div>
-      <CommentForm />
-      <CommentsList />
-    </S.DetailedPageWrapper>
+
+              <h3>Contents</h3>
+              <textarea
+                value={editedContents}
+                onChange={(e) => setEditedContents(e.target.value)}
+              />
+              
+              <S.ButtonWrapper>
+                <Button onClick={submitEdit}>Save</Button>
+                <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+              </S.ButtonWrapper>
+              </S.NewBoardWrapper>
+            </T.InputWrapper>
+            
+          ) : (
+            
+            <T.InputWrapper>
+              <S.NewBoardWrapper>
+                <h2>Title</h2>
+                <S.TitleStyle>{detailedInfo?.title}</S.TitleStyle>
+                <h2>Contents</h2>
+                <S.ContentsStyle> {detailedInfo?.contents}</S.ContentsStyle>
+              
+
+              <S.ButtonWrapper>
+                <Button onClick={moveToList}>Go Back</Button>
+                <Button onClick={enterEditMode}>Edit</Button>
+                <Button onClick={deleteBtn}>Delete</Button>
+              </S.ButtonWrapper>
+              </S.NewBoardWrapper>
+              <div>
+            <h2>Comments</h2>
+          </div>
+          <CommentForm />
+          <CommentsList />
+            </T.InputWrapper>
+            
+          )}
+          
+          </SecondGridArea>
+      </Base>
+    </>
   );
 }

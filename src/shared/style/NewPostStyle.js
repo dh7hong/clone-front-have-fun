@@ -9,9 +9,10 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 500px;
-  width: 1900px;
+  height: 40vh;
+  width: 40vw;
 `;
+
 export const TitleBox = styled.div`
   width: 1400px;
   height: 50px;
@@ -52,25 +53,31 @@ export const ContentsWrapper = styled.div`
 `;
 
 export const TitleInput = styled.input`
-  width: 200px;
-  height: 40px;
-  border-radius: 20px;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 20vw;
+  height: 2vh;
 `;
 
 export const ContentsInput = styled.textarea`
-  width: 200px;
-  height: 100px;
-  border-radius: 10px;
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 20vw;
+  height: 20vh;
 `;
 
 export const ContentsBody = styled.div`
-  width: 500px;
-  height: 500px;
+  width: 50vw;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  border: 3px solid black;
+  border: 3px solid white;
   border-radius: 20px;
   justify-content: center;
 `;

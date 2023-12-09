@@ -14,7 +14,7 @@ export const updateProfileMessage = async (profileMessage, memberId) => {
     console.log(`response from updateProfileMessage ${response}`);
     return response.data;
   } catch (error) {
-    console.error("Error adding post:", error);
+    console.error("Error adding post:");
   }
 };
 
@@ -26,7 +26,7 @@ export const getProfileMessage = async (memberId) => {
     console.log(`response from getProfileMessage ${response.data.message}`);
     return response.data;
   } catch (error) {
-    console.error("Error getting profile message", error);
+    console.error("Error getting profile message");
   }
 }
 
@@ -37,7 +37,7 @@ export const getProfileFeeling = async (memberId) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error getting feeling", error);
+    console.error("Error getting feeling");
   }
 };
 
@@ -50,6 +50,6 @@ export const updateProfileFeeling = async (feeling, memberId) => {
     console.log(`response from updateProfileFeeling ${response.data}`);
     return response.data;
   } catch (error) {
-    console.error("Error updating feeling:", error);
+    console.error("Error updating feeling:");
   }
 };

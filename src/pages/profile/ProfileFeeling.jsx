@@ -27,28 +27,40 @@ export default function ProfileFeeling() {
     e.preventDefault();
     dispatch(setFeeling({ memberId, feeling: currentFeeling }));
 
-    
-      // await axios.post(
-      //   `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/feeling`,
-      //   { feeling: currentFeeling }
-      // );
-      
-      await updateProfileFeeling(currentFeeling, memberId);
+    // await axios.post(
+    //   `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/feeling`,
+    //   { feeling: currentFeeling }
+    // );
 
-      console.log("feeling stored: ", currentFeeling);
+    await updateProfileFeeling(currentFeeling, memberId);
 
+    console.log("feeling stored: ", currentFeeling);
   };
 
   return (
-    <div>
-      <F.FeelingSelectorBox style={{ marginLeft: "20px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center", // Center children vertically
+        alignItems: "center", // Center children horizontally
+        height: "10vh", // Optional: Adjust as needed to control the vertical size
+      }}
+    >
+      <F.FeelingSelectorBox style={{
+      display: "flex",
+      justifyContent: "center", // Center content inside FeelingSelectorBox
+      alignItems: "center",
+      width: "80%",
+      marginTop: "20px" // Adjust as necessary
+    }}>
         <span style={{ color: "#2aacd3" }}>TODAY IS.. &nbsp;</span>
         <span>
           <select
             id="feelingSelect"
             name="feeling"
             value={currentFeeling}
-            onChange={(handleFeelingChange)}
+            onChange={handleFeelingChange}
           >
             <option value="그냥 그래">그냥 그래</option>
             <option value="즐거움">즐거움</option>
@@ -60,10 +72,10 @@ export default function ProfileFeeling() {
           </select>
         </span>
       </F.FeelingSelectorBox>
-      <br />
       <div
         style={{
           display: "flex",
+          marginTop: "10px",
           justifyContent: "center",
           alignItems: "center",
         }}

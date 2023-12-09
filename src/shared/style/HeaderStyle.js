@@ -31,7 +31,7 @@ export const MyProfileStyle = styled.div`
   width: 250px;
 `;
 
-export const ProfileImage = styled.img`
+export const ProfileImageStyle = styled.img`
   box-shadow: 5px 5px 5px 5px gray;
   border-radius: 25px;
 
@@ -67,7 +67,7 @@ export const MyProfile = styled(IoPersonCircle)`
   `;
 
 export const MyProfileImage = styled.img`
-  width: 10vw;
+  width: 8vw;
   height: 22vh;
   border-radius: 10px;
 `;

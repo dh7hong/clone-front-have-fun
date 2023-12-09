@@ -14,7 +14,7 @@ const SecondGridArea = ({ children }) => {
         // Assuming there's only one user in the response data array
         for (let i = 0; i < data.length; i++) {
           if (data[i].memberId == localStorage.getItem("memberId")) {
-            setNickname(data[i].nickname);
+            setNickname(data[i].name);
           }
         }
       } catch (error) {

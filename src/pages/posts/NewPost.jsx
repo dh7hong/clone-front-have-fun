@@ -7,6 +7,12 @@ import * as S from "../../shared/style/NewPostStyle";
 import { Button } from "../../components/button";
 import { getDateTime } from "../../util/getDateTime";
 import {generateUniqueId} from "../../util/generateUniqueId";
+import Base from "../layout/Base";
+import FirstGridArea from "../FirstGridArea";
+import SecondGridArea from "../SecondGridArea";
+import * as F from "../../shared/style/FirstGridArea";
+import * as K from "../../shared/style/SecondGridArea";
+
 
 export default function NewPost() {
   const [title, setTitle] = useState("");
@@ -50,6 +56,7 @@ export default function NewPost() {
       };
       const response = await addPostAPI(newPostData, memberId);
       dispatch(addPost(response));
+      console.log("response from addPost", response);
       navigate(`/api/users/${memberId}/posts`);
     } catch (error) {
       console.error("Error adding new post:", error);
@@ -58,30 +65,32 @@ export default function NewPost() {
   };
 
   return (
-    <S.NewPostWrapper>
+        <>
+        
+            
+            
+  <Base>
+  <FirstGridArea />
+  <SecondGridArea>
       <S.InputWrapper>
-        <S.TitleBox>
-          <S.Title>New Post</S.Title>
-        </S.TitleBox>
-        <S.ContentsBody>
-          <S.TitleWrapper>
-            <h3>제목</h3>
+        
+            <h3>Title</h3>
             <S.TitleInput
-              placeholder="제목을 입력하세요"
+              placeholder="Enter title"
               maxLength={30}
               value={title}
               onChange={onChangeTitle}
             />
-          </S.TitleWrapper>
-          <S.ContentsWrapper>
-            <h3>내용</h3>
+          
+          
+            <h3>Contents</h3>
             <S.ContentsInput
-              placeholder="내용을 입력하세요"
+              placeholder="Enter contents"
               value={contents}
               onChange={onChangeContents}
             />
-          </S.ContentsWrapper>
-        </S.ContentsBody>
+          
+       
         <S.ButtonWrapper>
           <Button onClick={onSubmit} disabled={!title || !contents}>
             등록하기
@@ -91,6 +100,8 @@ export default function NewPost() {
           </Button>
         </S.ButtonWrapper>
       </S.InputWrapper>
-    </S.NewPostWrapper>
+      </SecondGridArea>
+      </Base>
+      </>
   );
 }

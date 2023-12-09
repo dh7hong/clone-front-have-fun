@@ -13,6 +13,7 @@ import DiaryHome from "../pages/diary/DiaryHome";
 import Jukebox from "../pages/jukebox/Jukebox";
 import Guestbook from "../pages/Guestbook";
 import PostHome from "../pages/posts/PostHome";
+import Album from "../pages/album/Album";
 import Main from "../pages/Main";
 
 export default function Router() {
@@ -40,6 +41,7 @@ export default function Router() {
             path="/api/users/:memberId/guestbook"
             element={<Guestbook />}
           />
+          <Route path="/api/users/:memberId/album" element={<Album />} />
           <Route path="/api/users" element={<Main />} />
         </Route>
       </Routes>

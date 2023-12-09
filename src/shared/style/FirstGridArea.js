@@ -14,15 +14,13 @@ export const BookDot = styled.div`
   overflow: hidden;
 `;
 
-
 export const LiName = styled.div`
   background-color: #f1f1f1;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-  overflow: auto
-
+  overflow: auto;
 `;
 
 export const Container1 = styled.div`
@@ -52,31 +50,47 @@ export const Item2 = styled.div`
   align-items: center;
   text-align: center;
   padding: 20px;
-
 `;
 
 export const FeelingSelectorBox = styled.div`
-  border: 1px solid black;
-  margin: 10px 10px 0 0;
-  width: 10vw;
-  height: 30px;
   display: flex;
+  border: 1px solid black;
+  width: 10vw;
+  height: 4vh;
   justify-content: center;
   align-items: center;
   font-size: 16px;
 `;
 
 export const ProfileImg = styled.div`
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
+  width: 7vw;
+  height: 15vh;
+  border: 1px solid black;
+  border-radius: 5px;
+`;
+
+/* export const ProfileImg = styled.div`
   margin-top: 40px;
   background-image: ${(props) =>
     `url("${process.env.PUBLIC_URL}/${props.imageUrl}")`};
   background-size: cover;
   background-position: center;
-  width: 10vw;
-  height: 25vh;
+  width: 7vw;
+  height: 15vh;
   border: 1px solid black;
   border-radius: 5px;
-`;
+`; */
+/* 
+export const ProfileImg = styled.img`
+  width: 7vw; // adjust as needed
+  height: 15vh; // adjust as needed
+  border: 1px solid black;
+  border-radius: 5px;
+  object-fit: cover; // ensures the image covers the element bounds
+`; */
 
 export const StatusMessage = styled.div`
   width: 10vw;

@@ -20,29 +20,30 @@ import {
   StatusMessage,
 } from "../shared/style/FirstGridArea";
 import { MyProfile, MyProfileImage } from "../shared/style/HeaderStyle";
-import ProfileFeelingIcon from "./profile/ProfileFeelingIcon"
+import ProfileFeelingIcon from "./profile/ProfileFeelingIcon";
 import { current } from "@reduxjs/toolkit";
 import { getProfileMessage } from "../api/profile";
 import { updateProfileMessage } from "../api/profile";
 import { updateOrCreateStatusMessage } from "../redux/modules/profileSlice";
 import { setStatusMessage } from "../redux/modules/profileSlice";
+import { addImage } from "../redux/modules/imageSlice";
 
 const FirstGridArea = () => {
-  const imageArr = useSelector((state) => state.image.imageArr);
   const currentFeeling = useSelector((state) => state.feeling.selectedFeeling);
   const profileStatus = useSelector((state) => state.profile.messages);
   const memberId = localStorage.getItem("memberId");
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     // Fetching and setting status message
     const fetchStatusMessage = async () => {
       try {
         const fetchedMessage = await getProfileMessage(memberId);
-        dispatch(setStatusMessage({ memberId, message: fetchedMessage.message }));
+        dispatch(
+          setStatusMessage({ memberId, message: fetchedMessage.message })
+        );
       } catch (error) {
-        console.error("Error fetching profile message", error);
+        console.error("Profile message doesn't exist!");
       }
     };
 
@@ -51,21 +52,48 @@ const FirstGridArea = () => {
 
   useEffect(() => {
     const fetchFeelings = async () => {
-      const fetchedFeeling = await getProfileFeeling(memberId);
-      dispatch(setFeeling({memberId, feeling: fetchedFeeling.feeling}));
+      try {
+        const fetchedFeeling = await getProfileFeeling(memberId);
+        dispatch(setFeeling({ memberId, feeling: fetchedFeeling.feeling }));
+      } catch (error) {
+        console.error("Profile feeling doesn't exist!");
+      }
     };
     fetchFeelings();
   }, [memberId, dispatch]);
 
-  // const state = useSelector((state) => state);
-  // console.log(state); // Check the entire Redux state structure
+  useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/profileImage`
+        );
+        if (response.data.imageUrl) {
+          // Dispatch action with memberId and imageUrl
+          console.log("response.data.imageUrl: ", response.data.imageUrl);
+          dispatch(addImage({ memberId, imageUrl: response.data.imageUrl }));
+        }
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+      }
+    };
+
+    fetchProfileImage();
+  }, [memberId, dispatch]);
 
   console.log("fetched Feeling: ", currentFeeling);
   const image = localStorage.getItem("image");
+  const selectedImage = useSelector((state) => state.image.images[memberId]);
+  console.log("fetched image: ", image);
+  console.log("selectedImage: ", selectedImage);
+  console.log("full path: ", `${selectedImage}`);
+  // dispatch(addImage(image));
 
-  
+  const state = useSelector((state) => state);
+  console.log(state); // Check the entire Redux state structure
+
   const currentStatusMessage = profileStatus[memberId] || "Loading status...";
-  
+
   return (
     <LiName>
       <Container1>
@@ -78,20 +106,19 @@ const FirstGridArea = () => {
         <Item2>
           <FontStyle>
             <div style={{ marginTop: "10px" }}>
-              {imageArr && <ProfileImg src={imageArr} alt="엑박" />}
-              {!imageArr && (
+              {/* {selectedImage && <ProfileImg src={selectedImage} alt="Profile" />}
+              {!selectedImage && (
                 <div>
-                  {!image && <MyProfile alt="마이페이지" />}
-                  {image && <MyProfileImage src={image} alt="마이페이지" />}
+                  {!image && <MyProfile alt="Profile" />}
+                  {image && <MyProfileImage src={selectedImage} alt="Profile" />}
                 </div>
-              )}
+              )} */}
+              <MyProfileImage src={selectedImage} alt="Profile" />
             </div>
             {/* ↑ 경로를 수정해야할 곳 */}
             <FeelingSelectorBox style={{ fontSize: "16px" }}>
               <span style={{ color: "#2aacd3" }}>TODAY IS.. &nbsp;</span>
-              <span>
-                {ProfileFeelingIcon(currentFeeling)}
-              </span>
+              <span>{ProfileFeelingIcon(currentFeeling)}</span>
             </FeelingSelectorBox>
             <div>
               <StatusMessage style={{ color: "#2aacd3", fontSize: "25px" }}>

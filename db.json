@@ -249,6 +249,46 @@
       "contents": "Hey man, isn't this cool?",
       "memberId": "461719767",
       "createdAt": "2023-12-03 04:16:45"
+    },
+    {
+      "postId": 1777876,
+      "title": "Does this reflect addPost?",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy777",
+      "contents": "I am just wondering",
+      "memberId": "77527169",
+      "createdAt": "2023-12-07 07:29:37"
+    },
+    {
+      "postId": 2439193,
+      "title": "This is a new idea",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy777",
+      "contents": "What a great idea!",
+      "memberId": "77527169",
+      "createdAt": "2023-12-09 18:40:39"
+    },
+    {
+      "postId": 2741794,
+      "title": "This is a cool post",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy777",
+      "contents": "Ain't it?",
+      "memberId": "77527169",
+      "createdAt": "2023-12-09 18:45:41"
+    },
+    {
+      "postId": 2761859,
+      "title": "Wow",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy777",
+      "contents": "Wowow is this working? THIS IS AWESOME!!! WOO HOO!!!",
+      "memberId": "77527169",
+      "createdAt": "2023-12-09 19:28:25"
     }
   ],
   "comments": [
@@ -391,6 +431,26 @@
       "contents": "Yes it is indeed",
       "memberId": "461719767",
       "createdAt": "2023-12-03 04:16:54"
+    },
+    {
+      "commentId": 3025380,
+      "postId": "2761859",
+      "id": "dh7hong",
+      "nickname": "Luffy777",
+      "name": "Monkey D. Luffy",
+      "contents": "This is the first comment!",
+      "memberId": "77527169",
+      "createdAt": "2023-12-09 18:50:24"
+    },
+    {
+      "commentId": 1729014,
+      "postId": "2761859",
+      "id": "dh7hong",
+      "nickname": "Luffy777",
+      "name": "Monkey D. Luffy",
+      "contents": "This is the second comment!",
+      "memberId": "77527169",
+      "createdAt": "2023-12-09 19:28:47"
     }
   ],
   "diary": [

@@ -38,7 +38,7 @@ const Base = ({ children }) => {
         style={{
           position: "absolute",
           top: `${top}px`,
-          right: "-30px",
+          right: "-17px",
           zIndex: "1000",
         }}
         onClick={() => handleButtonClick(path)}
@@ -71,6 +71,9 @@ const Base = ({ children }) => {
             </CustomButton>
             <CustomButton path={`/api/users/${memberId}/guestbook`} top={450}>
               Visitors
+            </CustomButton>
+            <CustomButton path={`/api/users/${memberId}/album`} top={500}>
+              Album
             </CustomButton>
           </BookCover>
         </MainStyle>

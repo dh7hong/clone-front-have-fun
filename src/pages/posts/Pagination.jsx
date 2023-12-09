@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../../components/button";
 
 export default function Pagination({ page, setPage, data }) {
-  const postsPerPage = 7;
+  const postsPerPage = 6;
 
   const pageList = [];
   const postsNum = data?.length;

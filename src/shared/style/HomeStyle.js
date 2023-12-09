@@ -86,7 +86,7 @@ export const BoardTitleStyle = styled(BoardTitle)`
 
 export const PostStyle = styled.div`
   /* width: 50vw; */
-  height: 500px;
+  height: 430px;
   display: flex;
   flex-direction: column;
   font-size: 15px;

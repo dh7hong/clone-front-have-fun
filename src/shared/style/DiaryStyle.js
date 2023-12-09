@@ -19,7 +19,7 @@ export const DiaryInputField = styled.input`
 
 export const DiaryButton = styled.button`
   padding: 10px 20px;
-  background-color: #007bff; /* Bootstrap primary blue */
+  background-color: #359dc2; /* Bootstrap primary blue */
   color: white;
   border: none;
   border-radius: 4px;

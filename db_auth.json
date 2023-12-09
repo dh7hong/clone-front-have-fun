@@ -95,7 +95,7 @@
   "profileMessage": [
     {
       "memberId": 77527169,
-      "message": "This is all part of life.... I worked so hard but in the end...."
+      "message": "This is a cool status"
     },
     {
       "memberId": 461719767,
@@ -109,11 +109,87 @@
   "feeling": [
     {
       "memberId": 77527169,
-      "feeling": "우울함"
+      "feeling": "즐거움"
     },
     {
       "memberId": 461719767,
       "feeling": "우울함"
+    },
+    {
+      "memberId": 576218739,
+      "feeling": "우울함"
+    }
+  ],
+  "profileIntro": [
+    {
+      "memberId": 77527169,
+      "intro": "{\"blocks\":[{\"key\":\"3s4ca\",\"text\":\"This is a test.\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":5,\"style\":\"BOLD\"},{\"offset\":10,\"length\":4,\"style\":\"BOLD\"},{\"offset\":5,\"length\":3,\"style\":\"ITALIC\"},{\"offset\":10,\"length\":4,\"style\":\"ITALIC\"},{\"offset\":8,\"length\":1,\"style\":\"UNDERLINE\"},{\"offset\":10,\"length\":4,\"style\":\"UNDERLINE\"}],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}"
+    }
+  ],
+  "jukeLinks": {
+    "77527169": [
+      {
+        "url": "https://www.youtube.com/watch?v=CSO0yFrQyT8",
+        "volume": 0.3
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=34uqcqCeqng",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=1arz9Q9qBas",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Uttmep49bg0",
+        "volume": 0.5
+      }
+    ],
+    "461719767": [
+      {
+        "url": "https://www.youtube.com/watch?v=CSO0yFrQyT8",
+        "volume": 1
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3GXUsA0FYRU",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=ERlfIaNgK2w",
+        "volume": 0.4
+      }
+    ],
+    "576218739": [
+      {
+        "url": "https://www.youtube.com/watch?v=CSO0yFrQyT8",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=34uqcqCeqng",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=-qO8MnAesHU",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=xFdfTN-Wffo",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=1arz9Q9qBas",
+        "volume": 0.5
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=OefOq742TzQ",
+        "volume": 0.5
+      }
+    ]
+  },
+  "profileImages": [
+    {
+      "memberId": 77527169,
+      "profileImage": "/images/profileImage-1702108281211.jpg"
     }
   ]
 }
