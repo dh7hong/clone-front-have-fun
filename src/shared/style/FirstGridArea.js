@@ -43,13 +43,13 @@ export const Item1 = styled.div`
 export const Item2 = styled.div`
   flex: 2;
   border: 2px solid #d4d4d4;
-  border-radius: 9px;
+  border-radius: 20px;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px;
+  margin-bottom: 10px;
 `;
 
 export const FeelingSelectorBox = styled.div`
@@ -94,7 +94,7 @@ export const ProfileImg = styled.img`
 
 export const StatusMessage = styled.div`
   width: 10vw;
-  height: 30vh;
+  height: 10vh;
   border: 1px solid black;
   margin-top: 10px;
   display: flex;

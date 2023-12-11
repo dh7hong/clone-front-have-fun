@@ -38,7 +38,7 @@ const Base = ({ children }) => {
         style={{
           position: "absolute",
           top: `${top}px`,
-          right: "-17px",
+          right: "5px",
           zIndex: "1000",
         }}
         onClick={() => handleButtonClick(path)}

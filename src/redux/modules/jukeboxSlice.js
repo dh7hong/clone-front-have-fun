@@ -10,7 +10,7 @@ const jukeboxSlice = createSlice({
   initialState,
   reducers: {
     setVideos: (state, action) => {
-      const { memberId, videos } = action.payload;
+      const { memberId, videos, videoId, createdAt } = action.payload;
       state.videosByMemberId[memberId] = videos;
     },
     addVideo: (state, action) => {
@@ -18,15 +18,19 @@ const jukeboxSlice = createSlice({
       if (!state.videosByMemberId[memberId]) {
         state.videosByMemberId[memberId] = [];
       }
-      state.videosByMemberId[memberId].push(video);
+      // Add video along with the createdAt property
+      state.videosByMemberId[memberId].push({
+        ...video,
+        createdAt: action.payload.createdAt, // Ensure this line is included
+      });
     },
     deleteVideo: (state, action) => {
-      const { memberId, index } = action.payload;
-      state.videosByMemberId[memberId].splice(index, 1);
+      const { memberId, videoId } = action.payload;
+      state.videosByMemberId[memberId].splice(videoId, 1);
     },
     updateVolume: (state, action) => {
-      const { memberId, index, volume } = action.payload;
-      state.videosByMemberId[memberId][index].volume = volume;
+      const { memberId, videoId, volume } = action.payload;
+      state.videosByMemberId[memberId][videoId].volume = volume;
     }
   }
 });

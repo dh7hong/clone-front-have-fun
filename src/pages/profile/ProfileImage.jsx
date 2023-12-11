@@ -67,6 +67,7 @@ export default function ProfileImage() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          marginTop: "10vh"
         }}
       >
         <F.ProfileImg

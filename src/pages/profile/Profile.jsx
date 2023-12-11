@@ -34,7 +34,9 @@ export default function Profile() {
               <ProfileFeeling />
               <ProfileMessage />
             </div>
+            <div style={{display: "flex", marginTop: "10vh", marginLeft: "10vw"}}>
             <ProfileIntro />
+            </div>
           </S.FlexBox>
         </SecondGridArea>
       </Base>

@@ -62,7 +62,7 @@ const CommentForm = () => {
         />
 
         <br />
-        <Button type="submit">Add Comment</Button>
+        <Button type="submit">Comment</Button>
       </S.CommentWrapper>
     </form>
   );

@@ -51,7 +51,7 @@ export default function Main() {
                 onClick={() => navigate(`/api/users/${user.memberId}/posts`)}
               >
                 <NewsBox>news</NewsBox>
-                {user.name}'s 미니홈피
+                {user.name}'s Wall
                 <UpdateImage />
               </UpdateNewsContent>
             ))}

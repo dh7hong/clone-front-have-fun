@@ -90,12 +90,19 @@
       "nickname": "love",
       "memberId": 195809257,
       "name": "Joe Lee"
+    },
+    {
+      "id": "Rocky",
+      "password": "GDhs0903??",
+      "nickname": "Rock",
+      "memberId": 1913949331021378,
+      "name": "Rocky Balboa"
     }
   ],
   "profileMessage": [
     {
       "memberId": 77527169,
-      "message": "This is a cool status"
+      "message": "This is taking a while...."
     },
     {
       "memberId": 461719767,
@@ -109,7 +116,7 @@
   "feeling": [
     {
       "memberId": 77527169,
-      "feeling": "즐거움"
+      "feeling": "피곤함"
     },
     {
       "memberId": 461719767,
@@ -129,67 +136,69 @@
   "jukeLinks": {
     "77527169": [
       {
+        "url": "https://www.youtube.com/watch?v=18-PDHY4JNQ",
+        "volume": 0.5,
+        "videoId": 1913949359986789,
+        "createdAt": "2023-12-11 15:59:46"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=6JX8j3vwrIA",
+        "volume": 0.5,
+        "videoId": 1913949336165190,
+        "createdAt": "2023-12-11 09:22:45"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=-T5I__Jdl3w",
+        "volume": 0.5,
+        "videoId": 1913949335687998,
+        "createdAt": "2023-12-11 09:14:47"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=sKeCuJ60UC0",
+        "volume": 0.5,
+        "videoId": 1913949335555942,
+        "createdAt": "2023-12-11 09:12:35"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=UDApZhXTpH8",
+        "volume": 0.5,
+        "videoId": 1913949335263278,
+        "createdAt": "2023-12-11 09:07:43"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=82lB-gI-uuQ",
+        "volume": 0.5,
+        "videoId": 1913949335206815,
+        "createdAt": "2023-12-11 09:06:46"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=0AqnCSdkjQ0",
+        "volume": 0.5,
+        "videoId": 1913949335180410,
+        "createdAt": "2023-12-11 09:06:20"
+      },
+      {
         "url": "https://www.youtube.com/watch?v=CSO0yFrQyT8",
-        "volume": 0.3
+        "volume": 0.5,
+        "videoId": 1913949335160957,
+        "createdAt": "2023-12-11 09:06:00"
       },
       {
-        "url": "https://www.youtube.com/watch?v=34uqcqCeqng",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=1arz9Q9qBas",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=Uttmep49bg0",
-        "volume": 0.5
-      }
-    ],
-    "461719767": [
-      {
-        "url": "https://www.youtube.com/watch?v=CSO0yFrQyT8",
-        "volume": 1
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=3GXUsA0FYRU",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=ERlfIaNgK2w",
-        "volume": 0.4
-      }
-    ],
-    "576218739": [
-      {
-        "url": "https://www.youtube.com/watch?v=CSO0yFrQyT8",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=34uqcqCeqng",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=-qO8MnAesHU",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=xFdfTN-Wffo",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=1arz9Q9qBas",
-        "volume": 0.5
-      },
-      {
-        "url": "https://www.youtube.com/watch?v=OefOq742TzQ",
-        "volume": 0.5
+        "url": "https://www.youtube.com/watch?v=lcmDvh-bt2c",
+        "volume": 0.5,
+        "videoId": 1913949361120530,
+        "createdAt": "2023-12-11 16:18:40"
       }
     ]
   },
   "profileImages": [
     {
       "memberId": 77527169,
-      "profileImage": "/images/profileImage-1702108281211.jpg"
+      "profileImage": "/images/profileImage-1702285518655.jpg"
+    },
+    {
+      "memberId": 461719767,
+      "profileImage": "/images/profileImage-1702217460626.jpg"
     }
   ]
 }

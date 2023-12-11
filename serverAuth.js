@@ -18,19 +18,6 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// const authenticateToken = (req, res, next) => {
-//   const authHeader = req.headers.authorization;
-//   const token = authHeader && authHeader.split(" ")[1];
-
-//   if (token == null) return res.sendStatus(401);
-
-//   jwt.verify(token, JWT_SECRET, (err, user) => {
-//     if (err) return res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   });
-// };
-
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -51,13 +38,27 @@ const authenticateToken = (req, res, next) => {
 };
 
 const generateUniqueId = () => {
-  return Math.floor(Math.random() * 1000000000);
+  let date = new Date();
+  let milliseconds = date.getFullYear() * 365 * 30 * 24 * 60 * 60 * 1000 +
+  date.getMonth() * 30 * 24 * 60 * 60 * 1000 +
+  date.getDate() * 24 * 60 * 60 * 1000 +
+  date.getHours() * 60 * 60 * 1000 +
+  date.getMinutes() * 60 * 1000 +
+  date.getSeconds() * 1000 +
+  date.getMilliseconds()
+  console.log(milliseconds);
+  return (
+    milliseconds
+  );
 };
 
 const readDatabase = () => {
   try {
     const db = JSON.parse(fs.readFileSync("db_auth.json", "utf8"));
     // Ensure profileImages is always initialized
+    if (!db.users) {
+      db.users = [];
+    }
     if (!db.profileMessage) {
       db.profileMessage = [];
     }
@@ -323,13 +324,14 @@ app.patch("/api/users/:memberId/intro", authenticateToken, async (req, res) => {
 
 app.post("/api/users/:memberId/jukebox", async (req, res) => {
   const memberId = req.params.memberId;
-  const { videos } = req.body;
+  const { videos } = req.body; // Get videos array from the request body
   const db = readDatabase();
 
   if (!db.jukeLinks) {
     db.jukeLinks = {};
   }
 
+  // Assuming you want to save the entire array sent in the request
   db.jukeLinks[memberId] = videos;
   writeDatabase(db);
 
@@ -350,50 +352,10 @@ app.get("/api/users/:memberId/jukebox", async (req, res) => {
     res.status(404).json({ message: "User videos not found" });
   } else {
     const videos = db.jukeLinks[memberId];
+    console.log("Videos response", videos);
     res.json({ message: "Video Retrieval Success!", videos: videos });
   }
 });
-
-// POST route to save profile image
-// app.post("/api/users/:memberId/profileImage", async (req, res) => {
-//   const memberId = parseInt(req.params.memberId);
-//   const { image } = req.body;
-//   let db = readDatabase();
-
-//   // Create profileImages array if it doesn't exist
-//   if (!db.profileImages) {
-//     db.profileImages = [];
-//   }
-
-//   const existingImageIndex = db.profileImages.findIndex(
-//     (p) => p.memberId === memberId
-//   );
-//   if (existingImageIndex >= 0) {
-//     // Update existing image
-//     db.profileImages[existingImageIndex].profileImage = image;
-//   } else {
-//     // Add new image
-//     db.profileImages.push({ memberId, profileImage: image });
-//   }
-
-//   writeDatabase(db);
-//   res.json({ message: "Profile image updated successfully" });
-// });
-
-// // GET route to retrieve profile image
-// app.get("/api/users/:memberId/profileImage", async (req, res) => {
-//   const memberId = parseInt(req.params.memberId);
-//   const db = readDatabase();
-
-//   const profileImageEntry = db.profileImages.find(
-//     (p) => p.memberId === memberId
-//   );
-//   if (profileImageEntry) {
-//     res.json(profileImageEntry);
-//   } else {
-//     res.status(404).json({ message: "Profile image not found" });
-//   }
-// });
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -441,16 +403,18 @@ app.post(
 );
 
 // GET route for retrieving an image
-app.get('/api/users/:memberId/profileImage', async (req, res) => {
+app.get("/api/users/:memberId/profileImage", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   const db = readDatabase();
 
-  const profileImage = db.profileImages.find(img => img.memberId === memberId);
+  const profileImage = db.profileImages.find(
+    (img) => img.memberId === memberId
+  );
   if (profileImage) {
     // Send back the URL of the image
     res.json({ memberId: memberId, imageUrl: profileImage.profileImage });
   } else {
-    res.status(404).json({ message: 'Image not found' });
+    res.status(404).json({ message: "Image not found" });
   }
 });
 

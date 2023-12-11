@@ -16,56 +16,13 @@ import {
   updateVolume,
 } from "../../redux/modules/jukeboxSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { passiveSupport } from 'passive-events-support/src/utils'
+import { passiveSupport } from "passive-events-support/src/utils";
+import { generateUniqueId } from "../../util/generateUniqueId";
+import { getDateTime } from "../../util/getDateTime";
+import moment from "moment";
 
 export default function Jukebox() {
-
-  
-  // Place the override code at the beginning of the component
-  const originalConsoleError = console.error;
-  console.error = (...args) => {
-    if (args.some(arg => {
-      if (typeof arg === 'string') {
-        return arg.includes("Failed to execute");
-      } else if (arg instanceof Error && arg.message) {
-        return arg.message.includes("Failed to execute");
-      } else {
-        return arg.toString().includes("Failed to execute");
-      }
-    })) {
-      return;
-    }
-    originalConsoleError(...args);
-  };
-  
-  useEffect(() => {
-    // Store the original console.warn function
-    const originalConsoleWarn = console.warn;
-
-    // Override console.warn
-    console.warn = (...args) => {
-      if (args.some(arg => {
-        // Your conditions to check for specific warnings
-        if (typeof arg === 'string') {
-          return arg.includes('non-passive event listener') || arg.includes("Added non-passive event listener to a scroll-blocking 'touchstart' event");
-        } else if (arg instanceof Error && arg.message) {
-          return arg.message.includes('non-passive event listener') || arg.message.includes("Added non-passive event listener to a scroll-blocking 'touchstart' event");
-        } else {
-          return arg.toString().includes('non-passive event listener') || arg.toString().includes("Added non-passive event listener to a scroll-blocking 'touchstart' event");
-        }
-      })) {
-        return;
-      }
-      originalConsoleWarn(...args);
-    };
-
-    // Reset console.warn when the component unmounts
-    return () => {
-      console.warn = originalConsoleWarn;
-    };
-  }, []);
-
-  passiveSupport({ events: ['touchstart', 'touchmove'] })
+  passiveSupport({ events: ["touchstart", "touchmove"] });
 
   const [errorMessage, setErrorMessage] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
@@ -75,10 +32,22 @@ export default function Jukebox() {
     (state) => state.jukebox.videosByMemberId[memberId] || []
   );
 
+  // Refactor the sorting logic into a function
+  const sortVideos = (videos) => {
+    return videos.sort((a, b) => {
+      // Parse the dates using the specified format
+      const dateA = moment(a.createdAt, "YYYY-MM-DD HH:mm:ss");
+      const dateB = moment(b.createdAt, "YYYY-MM-DD HH:mm:ss");
+      // Subtract the dates to get a value that sort can use to order the videos
+      return dateB.diff(dateA); // For descending order, more recent dates first
+    });
+  };
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/jukebox`)
       .then((response) => {
+        const sortedVideos = sortVideos(response.data.videos);
         dispatch(setVideos({ memberId, videos: response.data.videos }));
         setErrorMessage(""); // Clear any previous error messages
       })
@@ -94,34 +63,54 @@ export default function Jukebox() {
   const handleInputChange = (e) => setVideoUrl(e.target.value);
 
   const handleInputSubmit = () => {
-    const newVideo = { url: videoUrl, volume: 0.5 };
-    dispatch(addVideo({ memberId, video: newVideo }));
-    setVideoUrl("");
-  };
+    const videoId = generateUniqueId(); // Generate a unique ID for the video
+    const createdAt = getDateTime(); // Get the current ISO date-time string
+    const newVideo = { url: videoUrl, volume: 0.5, videoId, createdAt };
 
-  const handleDeleteVideo = (index) => {
-    const updatedVideos = videos.filter((_, i) => i !== index);
-    dispatch(deleteVideo({ memberId, index }));
-    axios.post(
-      `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/jukebox`,
-      { videos: updatedVideos }
-    );
-  };
+    // Here you need to add and then sort the videos
+    const newVideosList = sortVideos([...videos, newVideo]);
 
-  const handleVolumeChange = (index, newVolume) => {
-    const updatedVideos = videos.map((video, i) =>
-      i === index ? { ...video, volume: newVolume } : video
-    );
-    dispatch(updateVolume({ memberId, index, volume: newVolume }));
-  };
-
-  const handleSaveVideos = () => {
+    dispatch(setVideos({ memberId, videos: newVideosList }));
     axios
       .post(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/jukebox`, {
-        videos,
+        videos: [...videos, newVideo], // Spread the existing videos and add the new video
       })
-      .then((response) => console.log("Videos saved:", response.data))
-      .catch((error) => console.error("Error saving videos", error));
+      .then((response) => {
+        console.log("Videos saved:", response.data);
+        setVideoUrl(""); // Reset the video URL
+      })
+      .catch((error) => {
+        console.error("Error saving videos", error);
+      });
+  };
+
+  const handleDeleteVideo = (videoIdToDelete) => {
+    const updatedVideos = videos.filter(
+      (video) => video.videoId !== videoIdToDelete
+    );
+
+    dispatch(setVideos({ memberId, videos: updatedVideos }));
+    axios
+      .post(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/jukebox`, {
+        videos: updatedVideos,
+      })
+      .then((response) => {
+        console.log("Video deleted and list updated on server:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating videos on server", error);
+      });
+  };
+
+  const handleVolumeChange = (videoIdToChange, newVolume) => {
+    const updatedVideos = videos.map((video) =>
+      video.videoId === videoIdToChange
+        ? { ...video, volume: newVolume }
+        : video
+    );
+    dispatch(
+      updateVolume({ memberId, videoId: videoIdToChange, volume: newVolume })
+    );
   };
 
   return (
@@ -138,30 +127,31 @@ export default function Jukebox() {
             <YoutubeLinksButton onClick={handleInputSubmit}>
               Add Video
             </YoutubeLinksButton>
-            <YoutubeLinksButton onClick={handleSaveVideos}>
+            {/* <YoutubeLinksButton onClick={handleSaveVideos}>
               Save Videos
-            </YoutubeLinksButton>
+            </YoutubeLinksButton> */}
           </YoutubePlayer>
 
           {/* Grid of Videos */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
               gap: "20px",
               marginTop: "20px",
             }}
           >
             {videos.map((video, index) => (
-              <div key={index} style={{ marginBottom: "20px" }}>
+              <div key={video.videoId} style={{ marginBottom: "20px" }}>
                 <ReactPlayer
                   url={video.url}
-                  width="300px"
-                  height="160px"
+                  width="200px"
+                  height="100px"
                   playing={false}
                   muted={false}
                   controls={true}
                   volume={video.volume}
+                  sandbox="allow-scripts allow-same-origin"
                 />
                 <input
                   type="range"
@@ -172,11 +162,11 @@ export default function Jukebox() {
                   onChange={(e) =>
                     handleVolumeChange(index, parseFloat(e.target.value))
                   }
-                  style={{ width: "300px" }}
+                  style={{ width: "200px" }}
                 />
                 <br />
                 <button
-                  onClick={() => handleDeleteVideo(index)}
+                  onClick={() => handleDeleteVideo(video.videoId)}
                   style={{ marginTop: "10px" }}
                 >
                   Delete

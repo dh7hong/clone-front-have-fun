@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
-import {
-  setToken,
-  setMemberId,
-  setNickname,
-  logout,
-} from "../../redux/modules/userSlice";
+
 import { loginUser } from "../../api/authService";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +15,14 @@ import {
 } from "../styles";
 import { FlexJustAlignCenter } from "../../shared/style/Base";
 import { Button } from "../../shared/style/NewPostStyle";
+import {
+  setToken,
+  setId as setUserId,
+  logout,
+  setNickname,
+  setName,
+  setMemberId,
+} from "../../redux/modules/userSlice";
 
 function Login() {
   const [id, setId] = useState("");
@@ -48,8 +51,10 @@ function Login() {
 
         // Dispatch Redux actions
         dispatch(setToken(token));
+        dispatch(setUserId(id));
+        dispatch(setNickname(nickname));
+        dispatch(setName(name));
         dispatch(setMemberId(memberId));
-
         // Navigate to the user's posts page
         navigate(`/api/users`);
       } else {

@@ -19,7 +19,15 @@ export const Item3 = styled.div`
   border: none;
   padding: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
+`;
+
+export const Item3_1 = styled.div`
+  flex: 0.1;
+  border: none;
+  padding: 5px;
+  display: flex;
+  justify-content: right;
 `;
 
 export const Item4 = styled.div`
@@ -36,10 +44,8 @@ export const Item4 = styled.div`
 `;
 
 export const Tab = styled.a`
-  margin-left: 70px;
   display: flex;
   justify-content: flex-end;
-  margin-left: 300px;
   color: #4682b4;
 `;
 
@@ -82,4 +88,39 @@ export const LiName = styled.div`
   margin-bottom: 10px;
   overflow: auto;
   z-index: 1;
+`;
+
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px; // Or any other padding you prefer
+  background: #f0f0f0; // Example background color
+  // Add other styles like border, etc.
+`;
+
+export const Title = styled.div`
+  font-size: 24px; // Example font size
+  font-weight: bold;
+  // Add other styles for the title
+`;
+
+export const Navigation = styled.div`
+  display: flex;
+  gap: 10px;
+  // Add other styles for navigation buttons/links
+`;
+
+export const Button = styled.button`
+  // Style your button
+`;
+
+export const Link = styled.a`
+  // Style your link
+  text-decoration: none;
+  color: blue;
+  &:hover {
+    color: darkblue;
+  }
 `;

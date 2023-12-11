@@ -1,7 +1,14 @@
 export const generateUniqueId = () => {
-  let now = new Date();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  let milliseconds = now.getMilliseconds();
-  return minutes * 60000 + seconds * 1000 + milliseconds;
+  let date = new Date();
+  let milliseconds = date.getFullYear() * 365 * 30 * 24 * 60 * 60 * 1000 +
+  date.getMonth() * 30 * 24 * 60 * 60 * 1000 +
+  date.getDate() * 24 * 60 * 60 * 1000 +
+  date.getHours() * 60 * 60 * 1000 +
+  date.getMinutes() * 60 * 1000 +
+  date.getSeconds() * 1000 +
+  date.getMilliseconds()
+  console.log(milliseconds);
+  return (
+    milliseconds
+  );
 };

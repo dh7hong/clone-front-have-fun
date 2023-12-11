@@ -13,7 +13,6 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const imageArr = useSelector((state) => state.image.imageArr);
   const queryClient = useQueryClient();
 
   const handleLogout = () => {
@@ -42,7 +41,7 @@ export default function Header() {
   };
   return (
     <S.Wrapper>
-      <S.Logo onClick={moveToHome} />
+      {/* <S.Logo onClick={moveToHome} /> */}
       <S.MyProfileStyle>
         <div>
           <Button onClick={handleLogin}>로그인</Button>
