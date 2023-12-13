@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Base from "../layout/Base";
-import FirstGridArea from "../FirstGridArea";
+import FirstGridArea from "../layout/FirstGridArea";
+import * as S from "../../shared/style/SecondGridArea";
 import SecondGridArea from "../SecondGridArea";
-import {
-  YoutubeLinksInput,
-  YoutubePlayer,
-  YoutubeLinksButton,
-} from "../../shared/style/Jukebox";
+import * as J from "./JukeboxStyle";
 import ReactPlayer from "react-player";
 import axios from "axios";
 import {
@@ -48,7 +45,7 @@ export default function Jukebox() {
       .get(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/jukebox`)
       .then((response) => {
         const sortedVideos = sortVideos(response.data.videos);
-        dispatch(setVideos({ memberId, videos: response.data.videos }));
+        dispatch(setVideos({ memberId, videos: sortedVideos }));
         setErrorMessage(""); // Clear any previous error messages
       })
       .catch((error) => {
@@ -114,44 +111,34 @@ export default function Jukebox() {
   };
 
   return (
-    <div>
-      <Base>
-        <FirstGridArea />
-        <SecondGridArea>
-          <YoutubePlayer>
-            <YoutubeLinksInput
-              value={videoUrl}
-              onChange={handleInputChange}
-              placeholder="Enter YouTube URL"
-            />
-            <YoutubeLinksButton onClick={handleInputSubmit}>
-              Add Video
-            </YoutubeLinksButton>
-            {/* <YoutubeLinksButton onClick={handleSaveVideos}>
-              Save Videos
-            </YoutubeLinksButton> */}
-          </YoutubePlayer>
+    <>
+      
+      <SecondGridArea>
+        <J.YoutubePlayer>
+          <J.YoutubeLinksInput
+            value={videoUrl}
+            onChange={handleInputChange}
+            placeholder="Enter YouTube URL"
+          />
+          <J.YoutubeLinksButton onClick={handleInputSubmit}>
+            Add Video
+          </J.YoutubeLinksButton>
+ 
+        </J.YoutubePlayer>
+        <J.VideoContainer>
 
-          {/* Grid of Videos */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-              gap: "20px",
-              marginTop: "20px",
-            }}
-          >
+          
+            <J.RowStyle>
             {videos.map((video, index) => (
-              <div key={video.videoId} style={{ marginBottom: "20px" }}>
+              <div key={video.videoId} style={{ marginBottom: "0px" }}>
                 <ReactPlayer
                   url={video.url}
-                  width="200px"
-                  height="100px"
+                  width="10vw"
+                  height="10vh"
                   playing={false}
                   muted={false}
                   controls={true}
                   volume={video.volume}
-                  sandbox="allow-scripts allow-same-origin"
                 />
                 <input
                   type="range"
@@ -162,7 +149,7 @@ export default function Jukebox() {
                   onChange={(e) =>
                     handleVolumeChange(index, parseFloat(e.target.value))
                   }
-                  style={{ width: "200px" }}
+                  style={{ width: "86%" }}
                 />
                 <br />
                 <button
@@ -173,9 +160,10 @@ export default function Jukebox() {
                 </button>
               </div>
             ))}
-          </div>
-        </SecondGridArea>
-      </Base>
-    </div>
+          </J.RowStyle>
+        </J.VideoContainer>
+      </SecondGridArea>
+
+    </>
   );
 }

@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const MyProfileImage = styled.img`
+  width: 2vw;
+  border-radius: 10px;
+`;
+
 export const PostStyle = styled.div`
   /* width: 50vw; */
   display: flex;
@@ -10,7 +15,7 @@ export const PostStyle = styled.div`
 export const RowStyle = styled.div`
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; // Must be identical to BoardWrapper
+  grid-template-columns: 1fr 1fr 1fr 1fr 3fr 1fr; // Must be identical to BoardWrapper
   gap: 10px; // Adjust the gap to your preference
   width: 100%;
   align-items: center;

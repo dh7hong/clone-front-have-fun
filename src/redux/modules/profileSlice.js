@@ -20,6 +20,10 @@ const profileSlice = createSlice({
       const { memberId, message } = action.payload;
       state.messages[memberId] = message;
     },
+    getStatusMessage: (state, action) => {
+      const { memberId } = action.payload;
+      return state.messages[memberId];
+    },
   },
 });
 

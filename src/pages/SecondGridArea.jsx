@@ -72,7 +72,7 @@ const SecondGridArea = ({ children }) => {
                 color: "#4682B4",
                 fontSize: "25px",
                 marginBottom: "10px",
-                padding: "3px",
+                padding: "2px",
               }}
             >
               {name ? `${name}'s space` : "Loading..."}

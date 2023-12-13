@@ -3,100 +3,114 @@
     {
       "id": "dh7hong",
       "password": "GDhs0903??",
-      "nickname": "Luffy777",
+      "nickname": "Luffy",
       "memberId": 77527169,
-      "name": "Monkey D. Luffy"
+      "name": "Monkey D. Luffy",
+      "friends": []
     },
     {
       "id": "se7entheman",
       "password": "GDhs0903??",
       "nickname": "iamse7en",
       "memberId": 461719767,
-      "name": "Se7eN"
+      "name": "Seven T. Man",
+      "friends": []
     },
     {
       "id": "laznise7en",
       "password": "GDhs0903??",
       "nickname": "lazni",
       "memberId": 576218739,
-      "name": "Monkey D. Garp"
+      "name": "Monkey D. Garp",
+      "friends": []
     },
     {
       "id": "aescientists",
       "password": "GDhs0903??",
       "nickname": "scientist",
       "memberId": 709643529,
-      "name": "Kobi"
+      "name": "Kobi D. Ace",
+      "friends": []
     },
     {
       "id": "dukyong77",
       "password": "GDhs0903??",
-      "nickname": "Han D. Dragon",
+      "nickname": "Han",
       "memberId": 757257961,
-      "name": "한덕용"
+      "name": "Han D. Dragon",
+      "friends": []
     },
     {
       "id": "gdragon",
       "password": "GDhs0903??",
       "nickname": "GD",
       "memberId": 179513143,
-      "name": "권지용"
+      "name": "Kwon Ji Yong",
+      "friends": []
     },
     {
       "id": "andrewli",
       "password": "GDhs0903??",
       "nickname": "andrew54",
       "memberId": 260033894,
-      "name": "Andrew Li"
+      "name": "Andrew Li",
+      "friends": []
     },
     {
-      "id": "newid",
+      "id": "kennitz",
       "password": "GDhs0903??",
-      "nickname": "newnickname",
+      "nickname": "newnick",
       "memberId": 667943118,
-      "name": "Nick Kennitz"
+      "name": "Nick Kennitz",
+      "friends": []
     },
     {
       "id": "se7enwork",
       "password": "GDhs0903??",
       "nickname": "worker",
       "memberId": 590410557,
-      "name": "Daniel Hong"
+      "name": "Daniel Hong",
+      "friends": []
     },
     {
-      "id": "dh7hongdh7hong",
+      "id": "daaaaaaanny",
       "password": "GDhs0903??",
       "nickname": "daaaaaaanny",
       "memberId": 936959547,
-      "name": "Daniel D. Hong"
-    },
-    {
-      "id": "qwer1234",
-      "password": "qwer1234",
-      "nickname": "qwer1234",
-      "memberId": 287968700,
-      "name": "qwer1234"
+      "name": "Daniel D. Hong",
+      "friends": []
     },
     {
       "id": "dannytheman",
       "password": "GDhs0903??",
       "nickname": "dannyman",
       "memberId": 807398209,
-      "name": "Danny D. Hong"
+      "name": "Danny D. Hong",
+      "friends": []
     },
     {
       "id": "lovely",
       "password": "GDhs0903??",
       "nickname": "love",
       "memberId": 195809257,
-      "name": "Joe Lee"
+      "name": "Love Lee",
+      "friends": []
     },
     {
       "id": "Rocky",
       "password": "GDhs0903??",
       "nickname": "Rock",
       "memberId": 1913949331021378,
-      "name": "Rocky Balboa"
+      "name": "Rocky Balboa",
+      "friends": []
+    },
+    {
+      "id": "Georgia",
+      "password": "GDhs0903??",
+      "nickname": "George",
+      "memberId": 1913949558245988,
+      "name": "St. George Pierre",
+      "friends": []
     }
   ],
   "profileMessage": [
@@ -110,7 +124,51 @@
     },
     {
       "memberId": 195809257,
-      "message": "So damn buff"
+      "message": "I used to be buff ㅠㅠ..."
+    },
+    {
+      "memberId": 576218739,
+      "message": "I am Monkey D. Garp!"
+    },
+    {
+      "memberId": 709643529,
+      "message": "I am Kobi D. Ace!"
+    },
+    {
+      "memberId": 757257961,
+      "message": "I am Han D. Dragon!"
+    },
+    {
+      "memberId": 179513143,
+      "message": "My name is Kwon Ji Yong!"
+    },
+    {
+      "memberId": 260033894,
+      "message": "My name is Andrew Li!"
+    },
+    {
+      "memberId": 667943118,
+      "message": "My name is Nick Kennitz!"
+    },
+    {
+      "memberId": 590410557,
+      "message": "Daniel Hong's Status!"
+    },
+    {
+      "memberId": 936959547,
+      "message": "Daniel D. Hong's status!"
+    },
+    {
+      "memberId": 807398209,
+      "message": "Danny D. Hong's status!!!"
+    },
+    {
+      "memberId": 1913949331021378,
+      "message": "The UNSTOPPABLE ROCKY BALBOA!"
+    },
+    {
+      "memberId": 1913949558245988,
+      "message": "Feeling like I want to fight!"
     }
   ],
   "feeling": [
@@ -120,11 +178,15 @@
     },
     {
       "memberId": 461719767,
-      "feeling": "우울함"
+      "feeling": "기쁨"
     },
     {
       "memberId": 576218739,
-      "feeling": "우울함"
+      "feeling": "즐거움"
+    },
+    {
+      "memberId": 709643529,
+      "feeling": "기쁨"
     }
   ],
   "profileIntro": [
@@ -135,6 +197,30 @@
   ],
   "jukeLinks": {
     "77527169": [
+      {
+        "url": "https://www.youtube.com/watch?v=ezR6qwYtd4A",
+        "volume": 0.5,
+        "videoId": 1913949563703638,
+        "createdAt": "2023-12-14 00:35:03"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=ETrXfJgDYxw",
+        "volume": 0.5,
+        "videoId": 1913949563604595,
+        "createdAt": "2023-12-14 00:33:24"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=czV3vKDZuow",
+        "volume": 0.5,
+        "videoId": 1913949563535093,
+        "createdAt": "2023-12-14 00:32:15"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=lcmDvh-bt2c",
+        "volume": 0.5,
+        "videoId": 1913949361120530,
+        "createdAt": "2023-12-11 16:18:40"
+      },
       {
         "url": "https://www.youtube.com/watch?v=18-PDHY4JNQ",
         "volume": 0.5,
@@ -160,12 +246,6 @@
         "createdAt": "2023-12-11 09:12:35"
       },
       {
-        "url": "https://www.youtube.com/watch?v=UDApZhXTpH8",
-        "volume": 0.5,
-        "videoId": 1913949335263278,
-        "createdAt": "2023-12-11 09:07:43"
-      },
-      {
         "url": "https://www.youtube.com/watch?v=82lB-gI-uuQ",
         "volume": 0.5,
         "videoId": 1913949335206815,
@@ -182,23 +262,71 @@
         "volume": 0.5,
         "videoId": 1913949335160957,
         "createdAt": "2023-12-11 09:06:00"
+      }
+    ],
+    "461719767": [
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949569840913,
+        "createdAt": "2023-12-14 02:17:20"
       },
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949569790292,
+        "createdAt": "2023-12-14 02:16:30"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949569788982,
+        "createdAt": "2023-12-14 02:16:28"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949569787686,
+        "createdAt": "2023-12-14 02:16:27"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949569784915,
+        "createdAt": "2023-12-14 02:16:24"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949569844787,
+        "createdAt": "2023-12-14 02:17:24"
+      }
+    ],
+    "1913949331021378": [
       {
         "url": "https://www.youtube.com/watch?v=lcmDvh-bt2c",
         "volume": 0.5,
-        "videoId": 1913949361120530,
-        "createdAt": "2023-12-11 16:18:40"
+        "videoId": 1913949543114432,
+        "createdAt": "2023-12-13 18:51:54"
+      }
+    ],
+    "1913949558245988": [
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949564061764,
+        "createdAt": "2023-12-14 00:41:01"
       }
     ]
   },
   "profileImages": [
     {
       "memberId": 77527169,
-      "profileImage": "/images/profileImage-1702285518655.jpg"
+      "profileImage": "/images/profileImage-1702468964733.jpg"
     },
     {
       "memberId": 461719767,
-      "profileImage": "/images/profileImage-1702217460626.jpg"
+      "profileImage": "/images/profileImage-1702470428950.jpg"
     }
   ]
 }

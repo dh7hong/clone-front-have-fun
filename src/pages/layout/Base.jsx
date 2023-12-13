@@ -69,7 +69,7 @@ const Base = ({ children }) => {
             <CustomButton path={`/api/users/${memberId}/posts`} top={400}>
               Board
             </CustomButton>
-            <CustomButton path={`/api/users/${memberId}/guestbook`} top={450}>
+            <CustomButton path={`/api/users/${memberId}/guesthome`} top={450}>
               Visitors
             </CustomButton>
             <CustomButton path={`/api/users/${memberId}/album`} top={500}>

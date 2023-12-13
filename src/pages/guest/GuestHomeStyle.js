@@ -16,7 +16,7 @@ export const HomeWrapper = styled.div`
 export const BoardWrapper = styled.div`
 box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; // 5 columns with equal width
+  grid-template-columns: 1fr 1fr 1fr 1fr 3fr 1fr; // 5 columns with equal width
   gap: 10px; // Adjust the gap to your preference
   width: 100%;
   min-height: 7%;

@@ -13,7 +13,7 @@ export const UpdatedNews = styled.div`
   padding-bottom: 5px;
 `;
 
-export const MiniroomImage = styled.div`
+export const MiniroomImage = styled.img`
   background-image: url("/miniroom.gif");
   background-size: cover;
   margin-left: 15px;
@@ -38,6 +38,17 @@ export const UpdateNewsContent = styled.div`
   margin-left: 15px;
   margin-bottom: 5px;
   text-decoration: underline;
+  cursor: pointer;
+`;
+
+export const UpdateNews = styled.div`
+  flex: 0.3;
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 export const NewsBox = styled.span`

@@ -17,7 +17,7 @@ import CommentForm from "./CommentForm";
 import CommentsList from "./CommentsList";
 import { Button } from "../../components/button";
 import Base from "../layout/Base";
-import FirstGridArea from "../FirstGridArea";
+import FirstGridArea from "../layout/FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
 import * as F from "../../shared/style/FirstGridArea";
 import * as K from "../../shared/style/SecondGridArea";
@@ -91,60 +91,53 @@ export default function DetailedPage() {
 
   return (
     <>
-      <Base>
-        <FirstGridArea />
+      {/* <Base>
+        <FirstGridArea /> */}
         <SecondGridArea>
           {isEditing ? (
-            
             <T.InputWrapper>
               <S.NewBoardWrapper>
-              <h3>Title</h3>
-              <input               
-                value={editedTitle}
-                onChange={(e) => setEditedTitle(e.target.value)}
+                <h3>Title</h3>
+                <input
+                  value={editedTitle}
+                  onChange={(e) => setEditedTitle(e.target.value)}
                 />
 
+                <h3>Contents</h3>
+                <textarea
+                  value={editedContents}
+                  onChange={(e) => setEditedContents(e.target.value)}
+                />
 
-              <h3>Contents</h3>
-              <textarea
-                value={editedContents}
-                onChange={(e) => setEditedContents(e.target.value)}
-              />
-              
-              <S.ButtonWrapper>
-                <Button onClick={submitEdit}>Save</Button>
-                <Button onClick={() => setIsEditing(false)}>Cancel</Button>
-              </S.ButtonWrapper>
+                <S.ButtonWrapper>
+                  <Button onClick={submitEdit}>Save</Button>
+                  <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+                </S.ButtonWrapper>
               </S.NewBoardWrapper>
             </T.InputWrapper>
-            
           ) : (
-            
             <T.InputWrapper>
               <S.NewBoardWrapper>
                 <h2>Title</h2>
                 <S.TitleStyle>{detailedInfo?.title}</S.TitleStyle>
                 <h2>Contents</h2>
                 <S.ContentsStyle> {detailedInfo?.contents}</S.ContentsStyle>
-              
 
-              <S.ButtonWrapper>
-                <Button onClick={moveToList}>Go Back</Button>
-                <Button onClick={enterEditMode}>Edit</Button>
-                <Button onClick={deleteBtn}>Delete</Button>
-              </S.ButtonWrapper>
+                <S.ButtonWrapper>
+                  <Button onClick={moveToList}>Go Back</Button>
+                  <Button onClick={enterEditMode}>Edit</Button>
+                  <Button onClick={deleteBtn}>Delete</Button>
+                </S.ButtonWrapper>
               </S.NewBoardWrapper>
               <div>
-            <h2>Comments</h2>
-          </div>
-          <CommentForm />
-          <CommentsList />
+                <h2>Comments</h2>
+              </div>
+              <CommentForm />
+              <CommentsList />
             </T.InputWrapper>
-            
           )}
-          
-          </SecondGridArea>
-      </Base>
+        </SecondGridArea>
+      {/* </Base> */}
     </>
   );
 }

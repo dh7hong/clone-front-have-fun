@@ -41,19 +41,6 @@ function Register() {
 
   return (
     <>
-      <div style={{ position: "absolute", top: "24%", left: "19%" }}>
-        <button
-          onClick={homeLink}
-          style={{
-            color: "black",
-            backgroundColor: "transparent",
-            border: "none",
-            fontSize: "20px",
-          }}
-        >
-          메인페이지로 돌아가기
-        </button>
-      </div>
       <Container>
         <BoxStyle>
           <FlexJustAlignCenter>

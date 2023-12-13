@@ -5,7 +5,7 @@ import { FlexJustAlignCenter } from "../../shared/style/Base";
 import * as F from "../../shared/style/FirstGridArea";
 import * as S from "../../shared/style/SecondGridArea";
 import Base from "../layout/Base";
-import FirstGridArea from "../FirstGridArea";
+import FirstGridArea from "../layout/FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
 import feelingIcon from "./ProfileFeelingIcon";
 import { setFeeling } from "../../redux/modules/feelingSlice";
@@ -47,13 +47,15 @@ export default function ProfileFeeling() {
         height: "10vh", // Optional: Adjust as needed to control the vertical size
       }}
     >
-      <F.FeelingSelectorBox style={{
-      display: "flex",
-      justifyContent: "center", // Center content inside FeelingSelectorBox
-      alignItems: "center",
-      width: "80%",
-      marginTop: "20px" // Adjust as necessary
-    }}>
+      <F.FeelingSelectorBox
+        style={{
+          display: "flex",
+          justifyContent: "center", // Center content inside FeelingSelectorBox
+          alignItems: "center",
+          width: "80%",
+          marginTop: "20px", // Adjust as necessary
+        }}
+      >
         <span style={{ color: "#2aacd3" }}>TODAY IS.. &nbsp;</span>
         <span>
           <select

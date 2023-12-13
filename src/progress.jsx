@@ -1,3 +1,225 @@
+
+// GuestHome.jsx
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Base from "../layout/Base";
+import FirstGridArea from "../layout/FirstGridArea";
+import SecondGridArea from "../SecondGridArea";
+import * as S from "./GuestHomeStyle";
+import {
+  MiniroomImage,
+  NewsBox,
+  UpdateImage,
+  UpdateNewsContent,
+  UpdatedNews,
+  UpdateNews,
+} from "../../shared/style/Main";
+import { userList } from "../../api/userService";
+import GuestList from "./GuestList";
+
+export default function GuestHome() {
+  const [users, setUsers] = useState([]);
+  const [profileData, setProfileData] = useState({});
+  const navigate = useNavigate();
+  const [currentUserFriends, setCurrentUserFriends] = useState([]);
+
+  const getUsersData = async () => {
+    try {
+      const response = await userList();
+      const data = response;
+      console.log("API 응답 구조가 예상과 같습니다:", data);
+      // API 응답이 예상대로 구조화되었는지 확인
+      if (data) {
+        console.log("API 응답 구조가 예상과 같습니다:", data);
+        setUsers(response);
+      } else {
+        console.error("API 응답 구조가 예상과 다릅니다:", response.data);
+      }
+    } catch (error) {
+      console.error("데이터를 가져오는 중 오류 발생:", error);
+    }
+  };
+
+  const fetchProfileData = async (memberId) => {
+    try {
+      const [messageResponse, imageResponse] = await Promise.all([
+        axios.get(
+          `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/profile`
+        ),
+        axios.get(
+          `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/profileImage`
+        ),
+      ]);
+
+      setProfileData((prevData) => ({
+        ...prevData,
+        [memberId]: {
+          message: messageResponse.data.message,
+          imageUrl: imageResponse.data.imageUrl,
+        },
+      }));
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    }
+  };
+
+  const memberId = localStorage.getItem("memberId")
+
+  const fetchCurrentUserFriends = async () => {
+    try {
+      const response = await axios.get(`/api/users/${memberId}/friends`);
+      setCurrentUserFriends(response.data.friends);
+    } catch (error) {
+      console.error("Error fetching friends:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUsersData();
+    fetchCurrentUserFriends();
+  }, []);
+
+  useEffect(() => {
+    users.forEach((user) => {
+      fetchProfileData(user.memberId);
+    });
+  }, [users]);
+
+
+  return (
+    <>
+      
+        <SecondGridArea>
+          <S.BoardWrapper>
+            <S.BoardTitle>Profile Image</S.BoardTitle>
+            <S.BoardTitle>ID</S.BoardTitle>
+            <S.BoardTitle>Nickname</S.BoardTitle>
+            <S.BoardTitle>Name</S.BoardTitle>
+            <S.BoardTitle>Message</S.BoardTitle>
+            <S.BoardTitle>Friends</S.BoardTitle>
+          </S.BoardWrapper>
+
+          <S.PostStyle>
+            {users.map((user) => (
+              <GuestList
+                key={user.memberId}
+                user={user}
+                profileData={profileData}
+                currentUserFriends={currentUserFriends}
+              />
+            ))}
+          </S.PostStyle>
+        </SecondGridArea>
+      
+    </>
+  );
+}
+
+// GuestList.jsx
+import React, { useState, useEffect } from "react";
+import * as S from "./GuestListStyle";
+import { getDateTime } from "../../util/getDateTime";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "../../components/button";
+
+
+export default function GuestList({ user, profileData, currentUserFriends }) {
+  const navigate = useNavigate();
+
+  const isFriend = currentUserFriends.includes(user.memberId);
+  const buttonLabel = isFriend ? "Friends" : "Add Friend";
+  const currentUserId = localStorage.getItem("memberId");
+
+  const imageUrl = profileData[user.memberId]?.imageUrl || "/images/default.png";
+
+  const addFriend = (memberId) => {
+    // Dispatch an action to add a friend request
+    dispatch(addFriendRequest({ memberId, name: user.name }));
+    
+    // You might want to call an API to send the friend request to the server
+    // Then based on the response, you can update the status
+  };
+
+  const handleButtonClick = () => {
+    if (isFriend) {
+      navigate(`/api/users/${user.memberId}/posts`);
+    } else {
+      addFriend(user.memberId);
+    }
+  };
+
+  updateFriendRequestStatus(memberId: memberId, status: ?) // how do I add the status here?
+
+  return (
+    <S.PostStyle>
+      <S.RowStyle>
+        <S.RowTitle>
+          <S.MyProfileImage src={imageUrl} alt="Profile" />
+        </S.RowTitle>
+        <S.RowTitle>{user.id}</S.RowTitle>
+        <S.RowTitle>{user.nickname}</S.RowTitle>
+        <S.RowTitle>{user.name}</S.RowTitle>
+        <S.RowTitle>{profileData[user.memberId]?.message}</S.RowTitle>
+        <S.RowTitle>
+          <Button onClick={handleButtonClick}>{buttonLabel}</Button>
+        </S.RowTitle>
+      </S.RowStyle>
+    </S.PostStyle>
+  );
+}
+
+
+
+// friendshipSlice.js
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  friends: {},
+  friendRequests: {}, // memberId -> { status: 'pending' | 'accepted' | 'denied', name: string }
+};
+
+const friendshipSlice = createSlice({
+  name: "friendship",
+  initialState,
+  reducers: {
+    addFriendRequest(state, action) {
+      const { memberId, name } = action.payload;
+      state.friendRequests[memberId] = { status: "pending", name };
+    },
+    updateFriendRequestStatus(state, action) {
+      const { memberId, status } = action.payload;
+      if (state.friendRequests[memberId]) {
+        state.friendRequests[memberId].status = status;
+      }
+    },
+  },
+});
+
+export const { addFriendRequest, updateFriendRequestStatus } = friendshipSlice.actions;
+export default friendshipSlice.reducer;
+
+
+
+
+please code the following in full detail. first, code where if you are not friends with another user.memberId, the button shows "Add Friend". However if you are already friends with the user.memberId, then the button shows "Friends" and the button goes to http://localhost:3003/api/users/user.memberId/posts
+
+
+Next, code the following in full detail. When you add a friend, there should be two objects created: one object for the memberId that made the friend request and another object for the memberId that received the friend request. 
+
+Next, code the following in full detail. There should be an alarm message with a button that shows on the received friend request memberId's Main.jsx page that shows incoming friend request. Please note that the incoming friend request should be shown with the incoming friend request member's name not by memberId.
+
+Next, code the following in full detail. Use redux to manage the friend requests. DO NOT USE thunks. and DO NOT USE SWITCH CASE. After the friend request has been made the friend request status should be "pending" or "accepted" or "denied"
+
+
+
+export const { your reducers here } = friendshipSlice.actions;
+export default friendshipSlice.reducer;
+
+Finally, code the following in full detail. Add the function in express required for all the previous client side actions that adds another memberId to a friends list. The express code right now is as follows:
+
+
+// serverAuth.json
 const express = require("express");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
@@ -135,7 +357,6 @@ app.post("/api/login", async (req, res) => {
   });
 });
 
-// GET endpoint for /api/users
 app.get("/api/users", async (req, res) => {
   try {
     let db = readDatabase();
@@ -184,7 +405,6 @@ app.post(
   }
 );
 
-// GET endpoint for reading user profileMessage
 app.get("/api/users/:memberId/profile", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   const db = readDatabase();
@@ -197,8 +417,6 @@ app.get("/api/users/:memberId/profile", async (req, res) => {
   res.json({ memberId: user.memberId, message: user.message });
 });
 
-// Express server
-// POST endpoint for updating user feeling
 app.post("/api/users/:memberId/feeling", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   const { feeling } = req.body;
@@ -209,7 +427,6 @@ app.post("/api/users/:memberId/feeling", async (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
 
-  // Check if feeling entry exists, if not create it
   const feelingIndex = db.feeling.findIndex((f) => f.memberId === memberId);
   if (feelingIndex === -1) {
     db.feeling.push({ memberId, feeling });
@@ -221,7 +438,6 @@ app.post("/api/users/:memberId/feeling", async (req, res) => {
   res.json({ message: "Feeling updated successfully", memberId, feeling });
 });
 
-// GET endpoint for reading user feeling
 app.get("/api/users/:memberId/feeling", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   const db = readDatabase();
@@ -269,7 +485,6 @@ app.post("/api/users/:memberId/intro", authenticateToken, async (req, res) => {
   });
 });
 
-// GET endpoint for reading user profileIntro
 app.get("/api/users/:memberId/intro", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   const db = readDatabase();
@@ -326,7 +541,6 @@ app.post("/api/users/:memberId/jukebox", async (req, res) => {
     db.jukeLinks = {};
   }
 
-  // Assuming you want to save the entire array sent in the request
   db.jukeLinks[memberId] = videos;
   writeDatabase(db);
 
@@ -342,7 +556,6 @@ app.get("/api/users/:memberId/jukebox", async (req, res) => {
     db.jukeLinks = {};
   }
 
-  // Check if the memberId exists in jukeLinks
   if (!db.jukeLinks[memberId]) {
     res.status(404).json({ message: "User videos not found" });
   } else {
@@ -397,7 +610,6 @@ app.post(
   }
 );
 
-// GET route for retrieving an image
 app.get("/api/users/:memberId/profileImage", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   const db = readDatabase();
@@ -412,7 +624,6 @@ app.get("/api/users/:memberId/profileImage", async (req, res) => {
   res.json({ memberId: memberId, imageUrl: imageUrl });
 });
 
-// Static route to serve images
 app.use("/images", express.static("images"));
 
 app.use((req, res, next) => {

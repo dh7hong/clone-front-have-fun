@@ -9,7 +9,7 @@ export default function PostList({ post }) {
   const { memberId } = useParams();
   const moveToDetailedPage = (postId) => () => {
     navigate(`/api/users/${memberId}/posts/${postId}`);
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

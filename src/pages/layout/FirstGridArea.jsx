@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setFeeling } from "../redux/modules/feelingSlice";
-import { getProfileFeeling } from "../api/profile";
+import { setFeeling } from "../../redux/modules/feelingSlice";
+import { getProfileFeeling } from "../../api/profile";
 import axios from "axios";
 import {
   Container1,
@@ -12,15 +12,15 @@ import {
   Item2,
   LiName,
   StatusMessage,
-} from "../shared/style/FirstGridArea";
-import { MyProfile, MyProfileImage } from "../shared/style/HeaderStyle";
-import ProfileFeelingIcon from "./profile/ProfileFeelingIcon";
-import { getProfileMessage } from "../api/profile";
-import { setStatusMessage } from "../redux/modules/profileSlice";
-import { addImage } from "../redux/modules/imageSlice";
+} from "../../shared/style/FirstGridArea";
+import { MyProfile, MyProfileImage } from "../../shared/style/HeaderStyle";
+import ProfileFeelingIcon from "../profile/ProfileFeelingIcon";
+import { getProfileMessage } from "../../api/profile";
+import { setStatusMessage } from "../../redux/modules/profileSlice";
+import { addImage } from "../../redux/modules/imageSlice";
 import ReactPlayer from "react-player";
-import { setVideos } from "../redux/modules/jukeboxSlice";
-import { Button } from "../components/smallButton";
+import { setVideos } from "../../redux/modules/jukeboxSlice";
+import { Button } from "../../components/smallButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 
@@ -112,6 +112,12 @@ const FirstGridArea = () => {
     fetchProfileImage();
   }, [memberId, dispatch, videos.length]);
 
+  useEffect(() => {
+    if (currentVideoIndex >= videos.length) {
+      setCurrentVideoIndex(videos.length > 0 ? videos.length - 1 : 0);
+    }
+  }, [videos.length, currentVideoIndex]);
+
   const currentVideo = videos[currentVideoIndex];
   const currentStatusMessage =
     useSelector((state) => state.profile.messages[memberId]) ||
@@ -125,8 +131,8 @@ const FirstGridArea = () => {
     setCurrentVideoIndex(
       (prevIndex) => (prevIndex - 1 + videos.length) % videos.length
     );
-  const state = useSelector((state) => state);
-  console.log(state); // Check the entire Redux state structure
+  // const state = useSelector((state) => state);
+  // console.log(state); // Check the entire Redux state structure
 
   return (
     <LiName>
@@ -140,12 +146,10 @@ const FirstGridArea = () => {
         <Item2>
           <FontStyle>
             <div style={{ marginTop: "10px" }}>
-              {!selectedImage && !image && (
-                <div>
-                  <MyProfile alt="Profile" />
-                </div>
-              )}
-              <MyProfileImage src={selectedImage} alt="Profile" />
+              <MyProfileImage
+                src={selectedImage || image || "/images/default.png"}
+                alt="Profile"
+              />
             </div>
             <FeelingSelectorBox style={{ fontSize: "16px" }}>
               <span style={{ color: "#2aacd3" }}>TODAY IS.. &nbsp;</span>
@@ -168,12 +172,21 @@ const FirstGridArea = () => {
             >
               {currentVideo && (
                 <div>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      margin: "10px",
+                      padding: "10px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <ReactPlayer
                       ref={playerRef}
                       url={currentVideo?.url}
-                      width="200px"
-                      height="100px"
+                      width="8vw"
+                      height="7vh"
                       playing={isPlaying}
                       controls={true}
                       volume={volume}
@@ -205,14 +218,54 @@ const FirstGridArea = () => {
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
-                      textAlign: "center",
+                      alignItems: "center",
                     }}
                   >
-                    <Button onClick={playPreviousVideo}>{"<<"}</Button>
-                    <Button style={{ margin: "5" }} onClick={togglePlayPause}>
-                      <FontAwesomeIcon icon={playPauseIcon} />
-                    </Button>
-                    <Button onClick={playNextVideo}>{">>"}</Button>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignItems: "center",
+                        width: "10vw",
+                        height: "3vh",
+                      }}
+                    >
+                      <Button
+                        style={{
+                          width: "2vw",
+                          height: "2vh",
+                          textAlign: "center",
+                          fontSize: "15px",
+                        }}
+                        onClick={playPreviousVideo}
+                      >
+                        {"<<"}
+                      </Button>
+                      <Button
+                        style={{
+                          width: "2vw",
+                          height: "2vh",
+                          textAlign: "center",
+                          fontSize: "15px",
+                        }}
+                        onClick={togglePlayPause}
+                      >
+                        <FontAwesomeIcon icon={playPauseIcon} />
+                      </Button>
+                      <Button
+                        style={{
+                          width: "2vw",
+                          height: "2vh",
+                          textAlign: "center",
+                          fontSize: "15px",
+                        }}
+                        onClick={playNextVideo}
+                      >
+                        {">>"}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               )}

@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import * as F from "../../shared/style/FirstGridArea";
 import * as S from "../../shared/style/SecondGridArea";
 import Base from "../layout/Base";
-import FirstGridArea from "../FirstGridArea";
+import FirstGridArea from "../layout/FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
 
 const DiaryHome = () => {
@@ -30,13 +30,13 @@ const DiaryHome = () => {
 
   return (
     <>
-      <Base>
-        <FirstGridArea />
+      {/* <Base>
+        <FirstGridArea /> */}
         <SecondGridArea>
           <DiaryInput />
           <DiaryList />
         </SecondGridArea>
-      </Base>
+      {/* </Base> */}
     </>
   );
 };

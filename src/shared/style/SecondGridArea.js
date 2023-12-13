@@ -37,8 +37,8 @@ export const Item4 = styled.div`
   border-radius: 20px;
   background-color: white;
   margin-right: 15px;
+  margin-bottom: 8px;
   overflow: auto;
-  position: relative;
   padding-left: 20px;
   padding-right: 20px;
 `;
@@ -86,8 +86,6 @@ export const LiName = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-  overflow: auto;
-  z-index: 1;
 `;
 
 

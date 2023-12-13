@@ -10,7 +10,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/modules/userSlice";
 import Base from "../layout/Base";
-import FirstGridArea from "../FirstGridArea";
+import FirstGridArea from "../layout/FirstGridArea";
 import SecondGridArea from "../SecondGridArea";
 
 export default function PostHome() {
@@ -63,8 +63,8 @@ export default function PostHome() {
 
   return (
     <>
-      <Base>
-        <FirstGridArea />
+      {/* <Base> */}
+        {/* <FirstGridArea /> */}
         <SecondGridArea>
           <S.HeaderWrapper>
             <div
@@ -95,7 +95,7 @@ export default function PostHome() {
           </S.PostStyle>
           <Pagination page={page} setPage={setPage} data={data} />
         </SecondGridArea>
-      </Base>
+      {/* </Base> */}
     </>
   );
 }
