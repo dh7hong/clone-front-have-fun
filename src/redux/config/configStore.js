@@ -7,7 +7,7 @@ import diarySlice from "../modules/diarySlice";
 import profileSlice from "../modules/profileSlice";
 import feelingSlice from "../modules/feelingSlice";
 import jukeboxSlice from "../modules/jukeboxSlice";
-
+import friendshipSlice from "../modules/friendshipSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,5 +19,6 @@ export const store = configureStore({
     profile: profileSlice,
     feeling: feelingSlice,
     jukebox: jukeboxSlice,
+    friendship: friendshipSlice,
   },
 });

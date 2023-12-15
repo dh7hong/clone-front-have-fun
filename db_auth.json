@@ -6,7 +6,10 @@
       "nickname": "Luffy",
       "memberId": 77527169,
       "name": "Monkey D. Luffy",
-      "friends": []
+      "friends": [
+        461719767,
+        576218739
+      ]
     },
     {
       "id": "se7entheman",
@@ -14,7 +17,10 @@
       "nickname": "iamse7en",
       "memberId": 461719767,
       "name": "Seven T. Man",
-      "friends": []
+      "friends": [
+        77527169,
+        576218739
+      ]
     },
     {
       "id": "laznise7en",
@@ -22,7 +28,10 @@
       "nickname": "lazni",
       "memberId": 576218739,
       "name": "Monkey D. Garp",
-      "friends": []
+      "friends": [
+        77527169,
+        461719767
+      ]
     },
     {
       "id": "aescientists",
@@ -302,6 +311,14 @@
         "createdAt": "2023-12-14 02:17:24"
       }
     ],
+    "576218739": [
+      {
+        "url": "https://www.youtube.com/watch?v=Yy_dzjijAk0",
+        "volume": 0.5,
+        "videoId": 1913949736949796,
+        "createdAt": "2023-12-16 00:42:29"
+      }
+    ],
     "1913949331021378": [
       {
         "url": "https://www.youtube.com/watch?v=lcmDvh-bt2c",
@@ -327,6 +344,23 @@
     {
       "memberId": 461719767,
       "profileImage": "/images/profileImage-1702470428950.jpg"
+    }
+  ],
+  "friendRequests": [
+    {
+      "senderId": 77527169,
+      "receiverId": 461719767,
+      "status": "accepted"
+    },
+    {
+      "senderId": 576218739,
+      "receiverId": 77527169,
+      "status": "accepted"
+    },
+    {
+      "senderId": 461719767,
+      "receiverId": 576218739,
+      "status": "accepted"
     }
   ]
 }

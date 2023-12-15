@@ -22,15 +22,17 @@ export default function NewPost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { memberId } = useParams();
-
+  const [uniqueId, setUniqueId] = useState(null);
   useEffect(() => {
-    // Update state if localStorage changes
+    // Set initial values from localStorage
     setId(localStorage.getItem("id"));
     setNickname(localStorage.getItem("nickname"));
     setName(localStorage.getItem("name"));
+
+    // Generate uniqueId when the component mounts
+    setUniqueId(generateRandomId());
   }, []);
 
-  const uniqueId = generateRandomId();
   const createdAt = getDateTime();
 
   const onChangeTitle = (event) => setTitle(event.target.value);
