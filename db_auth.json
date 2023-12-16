@@ -8,7 +8,8 @@
       "name": "Monkey D. Luffy",
       "friends": [
         461719767,
-        576218739
+        576218739,
+        709643529
       ]
     },
     {
@@ -19,7 +20,8 @@
       "name": "Seven T. Man",
       "friends": [
         77527169,
-        576218739
+        576218739,
+        709643529
       ]
     },
     {
@@ -39,7 +41,10 @@
       "nickname": "scientist",
       "memberId": 709643529,
       "name": "Kobi D. Ace",
-      "friends": []
+      "friends": [
+        461719767,
+        77527169
+      ]
     },
     {
       "id": "dukyong77",
@@ -196,6 +201,10 @@
     {
       "memberId": 709643529,
       "feeling": "기쁨"
+    },
+    {
+      "memberId": 757257961,
+      "feeling": "즐거움"
     }
   ],
   "profileIntro": [
@@ -344,6 +353,10 @@
     {
       "memberId": 461719767,
       "profileImage": "/images/profileImage-1702470428950.jpg"
+    },
+    {
+      "memberId": 757257961,
+      "profileImage": "/images/profileImage-1702685329429.jpg"
     }
   ],
   "friendRequests": [
@@ -360,6 +373,16 @@
     {
       "senderId": 461719767,
       "receiverId": 576218739,
+      "status": "accepted"
+    },
+    {
+      "senderId": 461719767,
+      "receiverId": 709643529,
+      "status": "accepted"
+    },
+    {
+      "senderId": 709643529,
+      "receiverId": 77527169,
       "status": "accepted"
     }
   ]

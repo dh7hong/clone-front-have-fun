@@ -71,7 +71,7 @@ export const SearchInput = styled.input`
 `;
 
 export const AllPostBtn = styled.button`
-  width: 100px;
+  width: 70px;
   height: 30px;
   margin-right: 10px;
 `;

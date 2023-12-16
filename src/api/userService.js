@@ -36,3 +36,15 @@ export const respondToFriendRequest = async (memberId, senderId, accept) => {
     throw error;
   }
 };
+
+export const fetchIncomingFriendRequests = async (memberId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/incomingFriendRequests`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching incoming friend requests:", error);
+    return []; // Return an empty array or handle the error as appropriate
+  }
+};

@@ -17,13 +17,11 @@ export default function GuestList({
   profileData,
   currentUserFriends,
   incomingFriendRequests,
+  keyWord
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const moveToDetailedPage = () => () => {
-    navigate(`/api/users/${user.memberId}/posts`);
-    // window.location.reload();
-  };
+  
   const incomingRequest = incomingFriendRequests.find(
     (request) => request.senderId == user.memberId
   );
@@ -108,7 +106,19 @@ export default function GuestList({
         </S.RowTitle>
         <S.RowTitle>{user.id}</S.RowTitle>
         <S.RowTitle>{user.nickname}</S.RowTitle>
-        <S.RowTitle>{user.name}</S.RowTitle>
+        <S.RowTitle>
+        {user.name
+            .replaceAll(keyWord, `!@#${keyWord}!@#`)
+            .split("!@#")
+            .map((el) => (
+              <span
+                key={user.memberId}
+                style={{ color: el === keyWord ? "blue" : "black" }}
+              >
+                {el}
+              </span>
+            ))}
+        </S.RowTitle>
         <S.RowTitle>{profileData[user.memberId]?.message}</S.RowTitle>
         <S.RowTitle>{buttonComponent}</S.RowTitle>
       </S.RowStyle>

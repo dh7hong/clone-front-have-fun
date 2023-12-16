@@ -237,7 +237,7 @@ const FirstGridArea = () => {
                           width: "2vw",
                           height: "2vh",
                           textAlign: "center",
-                          fontSize: "15px",
+                          fontSize: "8px",
                         }}
                         onClick={playPreviousVideo}
                       >
@@ -248,7 +248,7 @@ const FirstGridArea = () => {
                           width: "2vw",
                           height: "2vh",
                           textAlign: "center",
-                          fontSize: "15px",
+                          fontSize: "8px",
                         }}
                         onClick={togglePlayPause}
                       >
@@ -259,7 +259,7 @@ const FirstGridArea = () => {
                           width: "2vw",
                           height: "2vh",
                           textAlign: "center",
-                          fontSize: "15px",
+                          fontSize: "8px",
                         }}
                         onClick={playNextVideo}
                       >

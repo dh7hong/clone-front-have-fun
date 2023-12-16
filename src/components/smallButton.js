@@ -8,7 +8,7 @@ export const Button = styled.button`
   color: ${(props) => (props.color ? props.color : "deepgray")};
 
   font-weight: 700;
-  font-size: 20px;
+  font-size: 3px;
   font-family: "Hi Melody", sans-serif;
 
   &:hover {

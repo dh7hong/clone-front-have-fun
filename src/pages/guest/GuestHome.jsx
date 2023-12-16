@@ -24,6 +24,10 @@ export default function GuestHome() {
   const [currentUserFriends, setCurrentUserFriends] = useState([]);
   const [incomingFriendRequests, setIncomingFriendRequests] = useState([]);
 
+  const [isActive, setIsActive] = useState(false);
+  const [keyWord, setKeyWord] = useState("");
+  const [searchPost, setSearchPost] = useState([]);
+
   const loggedInMemberId = localStorage.getItem("memberId");
 
   const getUsersData = async () => {
@@ -85,13 +89,13 @@ export default function GuestHome() {
         `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/incomingFriendRequests`,
         {}
       );
-      console.log("incoming friend requests:", response.data);
+      
       setIncomingFriendRequests(response.data);
     } catch (error) {
       console.error("Error fetching incoming friend requests:", error);
     }
   };
-
+  
   useEffect(() => {
     getUsersData();
     fetchCurrentUserFriends();
@@ -104,6 +108,19 @@ export default function GuestHome() {
     });
   }, [users]);
 
+  const onChangeKeyWord = (event) => {
+    setKeyWord(event.target.value);
+  };
+
+  const onClickSearchBtn = () => {
+    setSearchPost(users.filter((user) => user.name.includes(keyWord)));
+    setIsActive(true);
+  };
+
+  const onClickAllPost = () => {
+    setIsActive(false);
+  };
+
   return (
     <>
       <SecondGridArea>
@@ -115,8 +132,20 @@ export default function GuestHome() {
           <S.BoardTitle>Message</S.BoardTitle>
           <S.BoardTitle>Friends</S.BoardTitle>
         </S.BoardWrapper> */}
-
-        <S.PostStyle>
+        <S.HeaderWrapper>
+          {/* <h2>Free World's Users</h2> */}
+          <br />
+          <div style={{marginTop: "20px"}}>
+            <S.SearchInput
+              value={keyWord}
+              onChange={onChangeKeyWord}
+              placeholder="Search name..."
+            />
+            <S.AllPostBtn onClick={onClickSearchBtn}>Search</S.AllPostBtn>
+            <S.AllPostBtn onClick={onClickAllPost}>All users</S.AllPostBtn>
+          </div>
+        </S.HeaderWrapper>
+        {!isActive && ( <S.PostStyle>
           {users
             .filter(
               (user) => parseInt(user.memberId) !== parseInt(loggedInMemberId)
@@ -130,7 +159,23 @@ export default function GuestHome() {
                 incomingFriendRequests={incomingFriendRequests}
               />
             ))}
-        </S.PostStyle>
+        </S.PostStyle> )}
+        {isActive && ( <S.PostStyle>
+          {searchPost
+            .filter(
+              (user) => parseInt(user.memberId) !== parseInt(loggedInMemberId)
+            ) // Filter out the logged-in user
+            .map((user) => (
+              <GuestList
+                key={user.memberId}
+                user={user}
+                profileData={profileData}
+                currentUserFriends={currentUserFriends}
+                incomingFriendRequests={incomingFriendRequests}
+                keyWord={keyWord}
+              />
+            ))}
+        </S.PostStyle> )}
       </SecondGridArea>
     </>
   );

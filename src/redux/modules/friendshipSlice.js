@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   friends: {},
   friendRequests: {}, // memberId -> { status: 'pending' | 'accepted' | 'denied', name: string }
+  incomingFriendRequests: [], // Array of memberId
 };
 
 const friendshipSlice = createSlice({
@@ -10,13 +11,14 @@ const friendshipSlice = createSlice({
   initialState,
   reducers: {
     addFriendRequest: (state, action) => {
-      const { receiverId, receiverName, status, senderId, senderName} = action.payload;
-      state.friendRequests[receiverId] = { status, receiverName };
+      const { receiverId, receiverName, status, senderId, senderName } = action.payload;
+      // Update the request with both sender and receiver information
+      state.friendRequests[senderId] = { status, name: senderName, receiverId, receiverName };
     },
     updateFriendRequestStatus: (state, action) => {
-      const { memberId, status } = action.payload;
-      if (state.friendRequests[memberId]) {
-        state.friendRequests[memberId].status = status;
+      const { receiverId, status } = action.payload;
+      if (state.friendRequests[receiverId]) {
+        state.friendRequests[receiverId].status = status;
       }
     },
     updateFriendsList(state, action) {
@@ -28,8 +30,11 @@ const friendshipSlice = createSlice({
       state.friends[memberId] = state.friends[memberId] || [];
       state.friends[memberId].push(friendId);
     },
+    setIncomingRequests: (state, action) => {
+      state.incomingFriendRequests = action.payload;
+    },
   },
 });
 
-export const { addFriendRequest, updateFriendRequestStatus, addFriend } = friendshipSlice.actions;
+export const { addFriendRequest, updateFriendRequestStatus, addFriend, setIncomingRequests } = friendshipSlice.actions;
 export default friendshipSlice.reducer;
