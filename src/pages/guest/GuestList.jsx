@@ -100,9 +100,6 @@ export default function GuestList({
           )?.status
         );
 
-        console.log("outgoingStatus:", outgoingStatus);
-
-        console.log("incomingStatus:", incomingStatus);
         // outgoingSender = sent.map((e) => e.senderId).includes(memberId);
       } catch (error) {
         console.error("Error fetching friend requests:", error);

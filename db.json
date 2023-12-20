@@ -6,7 +6,10 @@
       "nickname": "Luffy",
       "memberId": 77527169,
       "name": "Monkey D. Luffy",
-      "friends": []
+      "friends": [
+        461719767,
+        576218739
+      ]
     },
     {
       "id": "se7entheman",
@@ -14,7 +17,9 @@
       "nickname": "iamse7en",
       "memberId": 461719767,
       "name": "Seven T. Man",
-      "friends": []
+      "friends": [
+        77527169
+      ]
     },
     {
       "id": "laznise7en",
@@ -22,7 +27,9 @@
       "nickname": "lazni",
       "memberId": 576218739,
       "name": "Monkey D. Garp",
-      "friends": []
+      "friends": [
+        77527169
+      ]
     },
     {
       "id": "aescientists",
@@ -888,7 +895,13 @@
       "id": 13584752,
       "senderId": 77527169,
       "receiverId": 461719767,
-      "status": "pending"
+      "status": "accepted"
+    },
+    {
+      "id": 15987570,
+      "senderId": 576218739,
+      "receiverId": 77527169,
+      "status": "accepted"
     }
   ]
 }
