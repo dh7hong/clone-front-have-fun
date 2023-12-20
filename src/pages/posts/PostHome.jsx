@@ -29,7 +29,7 @@ export default function PostHome() {
 
   //data = 객체형태로 모든 값들 다있음
   const [page, setPage] = useState(1);
-  const limit = 6;
+  const limit = 7;
   const offset = (page - 1) * limit;
 
   const onClickSubmitBtn = () => {

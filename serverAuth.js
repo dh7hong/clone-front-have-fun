@@ -1,4 +1,6 @@
 const express = require("express");
+const http = require("http");
+const WebSocket = require("ws");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -32,12 +34,6 @@ const authenticateToken = (req, res, next) => {
       return res.sendStatus(403); // Invalid token
     }
 
-    // Check if the user ID in the token matches the user ID in the request
-    // if (parseInt(user.memberId) !== parseInt(req.params.memberId)) {
-    //   console.log("User IDs don't match")
-    //   return res.sendStatus(403); // User IDs don't match
-    // }
-
     req.user = user; // Add user information to request
     next(); // Proceed to the next middleware
   });
@@ -46,6 +42,7 @@ const authenticateToken = (req, res, next) => {
 const generateUniqueId = () => {
   let date = new Date();
   let milliseconds =
+    date.getHours() * 60 * 60 * 1000 +
     date.getMinutes() * 60 * 1000 +
     date.getSeconds() * 1000 +
     date.getMilliseconds();
@@ -55,8 +52,18 @@ const generateUniqueId = () => {
 
 const readDatabase = () => {
   try {
-    const db = JSON.parse(fs.readFileSync("db_auth.json", "utf8"));
+    const db = JSON.parse(fs.readFileSync("db.json", "utf8"));
     // Ensure profileImages is always initialized
+
+    if (!db.posts) {
+      db.posts = [];
+    }
+    if (!db.comments) {
+      db.comments = [];
+    }
+    if (!db.diary) {
+      db.diary = [];
+    }
     if (!db.users) {
       db.users = [];
     }
@@ -86,7 +93,7 @@ const readDatabase = () => {
 };
 const writeDatabase = (db) => {
   try {
-    fs.writeFileSync("db_auth.json", JSON.stringify(db, null, 2)); // Pretty print the JSON
+    fs.writeFileSync("db.json", JSON.stringify(db, null, 2)); // Pretty print the JSON
   } catch (err) {
     console.error("Error writing to database", err);
     throw new Error("Error writing to database");
@@ -142,6 +149,97 @@ app.post("/api/login", async (req, res) => {
       name: user.name,
     },
   });
+});
+
+app.get("/api/users/:memberId/posts", (req, res) => {
+  const memberId = req.params.memberId;
+  const db = readDatabase();
+  const posts = db.posts.filter((post) => post.memberId == memberId);
+  res.json(posts);
+});
+
+app.post("/api/users/:memberId/posts", (req, res) => {
+  const memberId = req.params.memberId;
+  const newPost = { ...req.body, memberId };
+  const db = readDatabase();
+  db.posts.push(newPost);
+  writeDatabase(db);
+  res.status(201).json(newPost);
+});
+
+app.get("/api/users/:memberId/posts/:postId", (req, res) => {
+  const { memberId, postId } = req.params;
+  const db = readDatabase();
+  const post = db.posts.find(
+    (p) => p.postId == parseInt(postId) && p.memberId == memberId
+  );
+  if (post) {
+    res.json(post);
+  } else {
+    res.status(404).send("Post not found");
+  }
+});
+
+app.delete("/api/users/:memberId/posts/:postId", (req, res) => {
+  const { memberId, postId } = req.params;
+  const db = readDatabase();
+  const postIndex = db.posts.findIndex(
+    (p) => p.postId == postId && p.memberId == memberId
+  );
+  if (postIndex > -1) {
+    db.posts.splice(postIndex, 1);
+    writeDatabase(db);
+    res.status(200).send(`Post with postId ${postId} deleted`);
+  } else {
+    res.status(404).send("Post not found");
+  }
+});
+
+app.patch("/api/users/:memberId/posts/:postId", (req, res) => {
+  const { memberId, postId } = req.params;
+  const db = readDatabase();
+  const post = db.posts.find(
+    (p) => p.postId.toString() == postId && p.memberId == memberId
+  );
+  if (post) {
+    Object.assign(post, req.body);
+    writeDatabase(db);
+    res.json(post);
+  } else {
+    res.status(404).send("Post not found");
+  }
+});
+
+app.post("/api/users/:memberId/posts/:postId/comments", (req, res) => {
+  const { postId } = req.params;
+  const newComment = { ...req.body, postId };
+  const db = readDatabase();
+  db.comments.push(newComment);
+  writeDatabase(db);
+  res.status(201).json(newComment);
+});
+
+app.get("/api/users/:memberId/posts/:postId/comments", (req, res) => {
+  const { postId } = req.params;
+  const db = readDatabase();
+  const comments = db.comments.filter((comment) => comment.postId == postId);
+  res.json(comments);
+});
+
+app.get("/api/users/:memberId/diary", (req, res) => {
+  const memberId = req.params.memberId;
+  const db = readDatabase();
+  const diaryEntries = db.diary.filter((entry) => entry.memberId == memberId);
+  res.json(diaryEntries);
+});
+
+app.post("/api/users/:memberId/diary", (req, res) => {
+  const memberId = req.params.memberId;
+  const newDiaryEntry = { ...req.body, memberId };
+  const db = readDatabase();
+  db.diary.push(newDiaryEntry);
+  writeDatabase(db);
+  res.status(201).json(newDiaryEntry);
 });
 
 // GET endpoint for /api/users
@@ -428,7 +526,9 @@ app.get("/api/users/:memberId/friends", async (req, res) => {
   const memberId = parseInt(req.params.memberId);
   let db = readDatabase();
 
-  const user = db.users.find((u) => parseInt(u.memberId) === parseInt(memberId));
+  const user = db.users.find(
+    (u) => parseInt(u.memberId) === parseInt(memberId)
+  );
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
@@ -465,10 +565,9 @@ app.post("/api/users/:receiverId/sendFriendRequest", async (req, res) => {
   }
 
   // Add the friend request
-  if (!db.friendRequests) {
-    db.friendRequests = [];
-  }
+  const id = generateUniqueId();
   db.friendRequests.push({
+    id: id,
     senderId: parseInt(senderId),
     receiverId: parseInt(receiverId),
     status: "pending",
@@ -516,9 +615,22 @@ app.patch("/api/users/:memberId/respondToFriendRequest", async (req, res) => {
     sender.friends.push(parseInt(memberId));
     receiver.friends.push(parseInt(senderId));
   }
+  if (!accept) {
+    db.friendRequests.splice(requestIndex, 1);
+  }
 
   writeDatabase(db);
   res.json({ message: `Friend request ${accept ? "accepted" : "rejected"}` });
+});
+
+app.get("/api/users/friendRequests", async (req, res) => {
+  try {
+    const db = readDatabase();
+    res.json(db.friendRequests);
+  } catch (err) {
+    console.error("Failed to fetch friend requests:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 app.use(router);

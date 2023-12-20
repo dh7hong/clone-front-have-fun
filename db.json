@@ -1,4 +1,223 @@
 {
+  "users": [
+    {
+      "id": "dh7hong",
+      "password": "GDhs0903??",
+      "nickname": "Luffy",
+      "memberId": 77527169,
+      "name": "Monkey D. Luffy",
+      "friends": []
+    },
+    {
+      "id": "se7entheman",
+      "password": "GDhs0903??",
+      "nickname": "iamse7en",
+      "memberId": 461719767,
+      "name": "Seven T. Man",
+      "friends": []
+    },
+    {
+      "id": "laznise7en",
+      "password": "GDhs0903??",
+      "nickname": "lazni",
+      "memberId": 576218739,
+      "name": "Monkey D. Garp",
+      "friends": []
+    },
+    {
+      "id": "aescientists",
+      "password": "GDhs0903??",
+      "nickname": "scientist",
+      "memberId": 709643529,
+      "name": "Kobi D. Ace",
+      "friends": []
+    },
+    {
+      "id": "dukyong77",
+      "password": "GDhs0903??",
+      "nickname": "Han",
+      "memberId": 757257961,
+      "name": "Han D. Dragon",
+      "friends": []
+    },
+    {
+      "id": "gdragon",
+      "password": "GDhs0903??",
+      "nickname": "GD",
+      "memberId": 179513143,
+      "name": "Kwon Ji Yong",
+      "friends": []
+    },
+    {
+      "id": "andrewli",
+      "password": "GDhs0903??",
+      "nickname": "andrew54",
+      "memberId": 260033894,
+      "name": "Andrew Li",
+      "friends": []
+    },
+    {
+      "id": "kennitz",
+      "password": "GDhs0903??",
+      "nickname": "newnick",
+      "memberId": 667943118,
+      "name": "Nick Kennitz",
+      "friends": []
+    },
+    {
+      "id": "se7enwork",
+      "password": "GDhs0903??",
+      "nickname": "worker",
+      "memberId": 590410557,
+      "name": "Daniel Hong",
+      "friends": []
+    },
+    {
+      "id": "daaaaaaanny",
+      "password": "GDhs0903??",
+      "nickname": "daaaaaaanny",
+      "memberId": 936959547,
+      "name": "Daniel D. Hong",
+      "friends": []
+    },
+    {
+      "id": "dannytheman",
+      "password": "GDhs0903??",
+      "nickname": "dannyman",
+      "memberId": 807398209,
+      "name": "Danny D. Hong",
+      "friends": []
+    },
+    {
+      "id": "lovely",
+      "password": "GDhs0903??",
+      "nickname": "love",
+      "memberId": 195809257,
+      "name": "Love Lee",
+      "friends": []
+    }
+  ],
+  "profileMessage": [
+    {
+      "memberId": 77527169,
+      "message": "This is taking a while...."
+    },
+    {
+      "memberId": 461719767,
+      "message": "very tired...."
+    },
+    {
+      "memberId": 195809257,
+      "message": "I used to be buff ㅠㅠ..."
+    },
+    {
+      "memberId": 576218739,
+      "message": "I am Monkey D. Garp!"
+    },
+    {
+      "memberId": 709643529,
+      "message": "I am Kobi D. Ace!"
+    },
+    {
+      "memberId": 757257961,
+      "message": "I am Han D. Dragon!"
+    },
+    {
+      "memberId": 179513143,
+      "message": "My name is Kwon Ji Yong!"
+    },
+    {
+      "memberId": 260033894,
+      "message": "My name is Andrew Li!"
+    },
+    {
+      "memberId": 667943118,
+      "message": "My name is Nick Kennitz!"
+    },
+    {
+      "memberId": 590410557,
+      "message": "Daniel Hong's Status!"
+    },
+    {
+      "memberId": 936959547,
+      "message": "Daniel D. Hong's status!"
+    },
+    {
+      "memberId": 807398209,
+      "message": "Danny D. Hong's status!!!"
+    }
+  ],
+  "feeling": [
+    {
+      "memberId": 77527169,
+      "feeling": "피곤함"
+    },
+    {
+      "memberId": 461719767,
+      "feeling": "기쁨"
+    },
+    {
+      "memberId": 576218739,
+      "feeling": "기쁨"
+    },
+    {
+      "memberId": 709643529,
+      "feeling": "기쁨"
+    },
+    {
+      "memberId": 757257961,
+      "feeling": "즐거움"
+    },
+    {
+      "memberId": 179513143,
+      "feeling": "슬픔"
+    }
+  ],
+  "profileIntro": [
+    {
+      "memberId": 77527169,
+      "intro": "{\"blocks\":[{\"key\":\"3s4ca\",\"text\":\"This is a test.\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":5,\"style\":\"BOLD\"},{\"offset\":10,\"length\":4,\"style\":\"BOLD\"},{\"offset\":5,\"length\":3,\"style\":\"ITALIC\"},{\"offset\":10,\"length\":4,\"style\":\"ITALIC\"},{\"offset\":8,\"length\":1,\"style\":\"UNDERLINE\"},{\"offset\":10,\"length\":4,\"style\":\"UNDERLINE\"}],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}"
+    },
+    {
+      "memberId": 576218739,
+      "intro": "{\"blocks\":[{\"key\":\"99shc\",\"text\":\"This is a very cool introduction. My name is Money D. Garp!\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":10,\"length\":9,\"style\":\"BOLD\"},{\"offset\":34,\"length\":7,\"style\":\"UNDERLINE\"},{\"offset\":45,\"length\":14,\"style\":\"ITALIC\"}],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}"
+    }
+  ],
+  "jukeLinks": {},
+  "profileImages": [
+    {
+      "memberId": 77527169,
+      "profileImage": "/images/profileImage-1702468964733.jpg"
+    },
+    {
+      "memberId": 461719767,
+      "profileImage": "/images/profileImage-1702470428950.jpg"
+    },
+    {
+      "memberId": 757257961,
+      "profileImage": "/images/profileImage-1702685329429.jpg"
+    },
+    {
+      "memberId": 576218739,
+      "profileImage": "/images/profileImage-1702803174562.jpg"
+    },
+    {
+      "memberId": 709643529,
+      "profileImage": "/images/profileImage-1702803327200.jpg"
+    },
+    {
+      "memberId": 179513143,
+      "profileImage": "/images/profileImage-1702807649814.jpg"
+    },
+    {
+      "memberId": 260033894,
+      "profileImage": "/images/profileImage-1702807814610.jpg"
+    },
+    {
+      "memberId": 667943118,
+      "profileImage": "/images/profileImage-1702809121467.jpg"
+    }
+  ],
   "posts": [
     {
       "postId": 1512695,
@@ -281,16 +500,6 @@
       "createdAt": "2023-12-09 19:28:25"
     },
     {
-      "postId": 1913949549262542,
-      "title": "First Post",
-      "id": "Rocky",
-      "name": "Rocky Balboa",
-      "nickname": "Rock",
-      "contents": "This is Rocky's first post.",
-      "memberId": "1913949331021378",
-      "createdAt": "2023-12-13 20:34:22"
-    },
-    {
       "postId": 842622,
       "title": "How is it now?",
       "id": "dh7hong",
@@ -339,6 +548,46 @@
       "contents": "Now I like how it's not generating random numbers every time I type.",
       "memberId": "77527169",
       "createdAt": "2023-12-16 00:40:14"
+    },
+    {
+      "postId": 1279881,
+      "title": "There! Is it working now?",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy",
+      "contents": "Working now?",
+      "memberId": "77527169",
+      "createdAt": "2023-12-17 18:21:31"
+    },
+    {
+      "postId": 1311882,
+      "title": "This is the illest",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy",
+      "contents": "illest...",
+      "memberId": "461719767",
+      "createdAt": "2023-12-17 18:22:02"
+    },
+    {
+      "postId": 328510,
+      "title": "you look lonely",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy",
+      "contents": "hella lonely son",
+      "memberId": "757257961",
+      "createdAt": "2023-12-17 19:05:36"
+    },
+    {
+      "postId": 884643,
+      "title": "Another day another code",
+      "id": "dh7hong",
+      "name": "Monkey D. Luffy",
+      "nickname": "Luffy",
+      "contents": "Another day another code\nAnother day another code\nAnother day another code",
+      "memberId": "709643529",
+      "createdAt": "2023-12-18 01:14:54"
     }
   ],
   "comments": [
@@ -503,34 +752,34 @@
       "createdAt": "2023-12-09 19:28:47"
     },
     {
-      "commentId": 1913949354921622,
-      "postId": "329",
+      "commentId": 1301374,
+      "postId": "1279881",
       "id": "dh7hong",
       "nickname": "Luffy",
       "name": "Monkey D. Luffy",
-      "contents": "This is a cool comment",
+      "contents": "Here's one for ya",
       "memberId": "77527169",
-      "createdAt": "2023-12-11 14:35:20"
+      "createdAt": "2023-12-17 18:21:40"
     },
     {
-      "commentId": 1913949354931695,
-      "postId": "329",
+      "commentId": 1333445,
+      "postId": "1311882",
       "id": "dh7hong",
       "nickname": "Luffy",
       "name": "Monkey D. Luffy",
-      "contents": "This is a cooler one.",
-      "memberId": "77527169",
-      "createdAt": "2023-12-11 14:35:30"
+      "contents": "Illest comment",
+      "memberId": "461719767",
+      "createdAt": "2023-12-17 18:22:11"
     },
     {
-      "commentId": 1913949723727908,
-      "postId": "111702",
-      "id": "se7entheman",
-      "nickname": "iamse7en",
-      "name": "Seven T. Man",
-      "contents": "Here's a comment for you",
-      "memberId": "77527169",
-      "createdAt": "2023-12-15 21:02:06"
+      "commentId": 900956,
+      "postId": "884643",
+      "id": "dh7hong",
+      "nickname": "Luffy",
+      "name": "Monkey D. Luffy",
+      "contents": "Another day another code",
+      "memberId": "709643529",
+      "createdAt": "2023-12-18 01:15:00"
     }
   ],
   "diary": [
@@ -625,31 +874,21 @@
       "createdAt": "2023-12-03 06:14:03"
     },
     {
-      "diaryId": 1913949365442806,
+      "diaryId": 3489824,
       "id": "dh7hong",
       "name": "Monkey D. Luffy",
       "nickname": "Luffy",
-      "contents": "I really have to start the facebook project",
+      "contents": "Such a beautiful relief,,,",
       "memberId": "77527169",
-      "createdAt": "2023-12-11 17:30:42"
-    },
+      "createdAt": "2023-12-17 17:58:09"
+    }
+  ],
+  "friendRequests": [
     {
-      "diaryId": 1913949559105640,
-      "id": "dh7hong",
-      "name": "Monkey D. Luffy",
-      "nickname": "Luffy",
-      "contents": "A lot is on my mind..",
-      "memberId": "77527169",
-      "createdAt": "2023-12-13 23:18:25"
-    },
-    {
-      "diaryId": 1913949560378731,
-      "id": "dh7hong",
-      "name": "Monkey D. Luffy",
-      "nickname": "Luffy",
-      "contents": "A shitload is on my mind.",
-      "memberId": "77527169",
-      "createdAt": "2023-12-13 23:39:38"
+      "id": 13584752,
+      "senderId": 77527169,
+      "receiverId": 461719767,
+      "status": "pending"
     }
   ]
 }

@@ -14,7 +14,7 @@ import {
 } from "../../redux/modules/jukeboxSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { passiveSupport } from "passive-events-support/src/utils";
-import { generateUniqueId } from "../../util/generateUniqueId";
+import { generateRandomId } from "../../util/generateUniqueId";
 import { getDateTime } from "../../util/getDateTime";
 import moment from "moment";
 
@@ -60,7 +60,7 @@ export default function Jukebox() {
   const handleInputChange = (e) => setVideoUrl(e.target.value);
 
   const handleInputSubmit = () => {
-    const videoId = generateUniqueId(); // Generate a unique ID for the video
+    const videoId = generateRandomId(); // Generate a unique ID for the video
     const createdAt = getDateTime(); // Get the current ISO date-time string
     const newVideo = { url: videoUrl, volume: 0.5, videoId, createdAt };
 

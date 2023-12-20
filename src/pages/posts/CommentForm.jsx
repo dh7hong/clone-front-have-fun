@@ -6,7 +6,7 @@ import { addNewComment } from "../../api/comments";
 import * as S from "../../shared/style/CommentStyle";
 import { Button } from "../../components/button";
 import { getDateTime } from "../../util/getDateTime";
-import {generateUniqueId} from "../../util/generateUniqueId";
+import {generateRandomId} from "../../util/generateUniqueId";
 
 const CommentForm = () => {
   const [contents, setContents] = useState("");
@@ -17,7 +17,7 @@ const CommentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const uniqueId = generateUniqueId();
+    const uniqueId = generateRandomId();
     const id = localStorage.getItem("id");
     const nickname = localStorage.getItem("nickname");
     const name = localStorage.getItem("name");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import * as S from "./GuestListStyle";
 import { getDateTime } from "../../util/getDateTime";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,41 +6,42 @@ import { Button } from "../../components/button";
 import {
   sendFriendRequest,
   respondToFriendRequest,
+  fetchFriendRequests,
 } from "../../api/userService";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addFriendRequest,
-  updateFriendRequestStatus,
-} from "../../redux/modules/friendshipSlice";
+import { addFriend, receiveFriend } from "../../redux/modules/friendshipSlice";
+import { generateRandomId } from "../../util/generateUniqueId";
+
 export default function GuestList({
   user,
   profileData,
   currentUserFriends,
   incomingFriendRequests,
-  keyWord
+  keyWord,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const [outgoingStatus, setOutgoingStatus] = useState(null);
+  const [incomingStatus, setIncomingStatus] = useState(null);
   const incomingRequest = incomingFriendRequests.find(
     (request) => request.senderId == user.memberId
   );
-  const hasPendingRequest = incomingFriendRequests.some(
-    (request) => request.senderId == user.memberId
-  );
-  const isFriend = currentUserFriends.includes(user.memberId);
-  const friendRequests = useSelector(
-    (state) => state.friendship.friendRequests
-  );
 
-  const senderId = localStorage.getItem("memberId");
-  const requestStatus = friendRequests[user.memberId]?.status;
+  const isFriend = currentUserFriends.includes(user.memberId);
 
   const handleAddFriendClick = async () => {
+    const currentUserId = localStorage.getItem("memberId");
     try {
-      const status = await sendFriendRequest(senderId, user.memberId);
+      await sendFriendRequest(currentUserId, user.memberId);
+      console.log("senderId:", currentUserId);
+      console.log("receiverId:", user.memberId);
+
       dispatch(
-        addFriendRequest({ memberId: user.memberId, name: user.name, status })
+        addFriend({
+          senderId: currentUserId,
+          receiverId: user.memberId,
+          status: "pending",
+        })
       );
     } catch (error) {
       console.error("Error handling add friend:", error);
@@ -49,31 +50,28 @@ export default function GuestList({
 
   const handleRespondToRequest = async (accept) => {
     const currentUserId = localStorage.getItem("memberId");
-
     if (incomingRequest) {
       try {
-        await respondToFriendRequest(
-          currentUserId,
-          incomingRequest.senderId,
-          accept
-        );
+        await respondToFriendRequest(currentUserId, user.memberId, accept);
         console.log(`Friend request ${accept ? "accepted" : "rejected"}`);
-        // Update UI or state as needed
+        if (accept) {
+          console.log("receiverId:", currentUserId);
+          console.log("senderId:", user.memberId);
+          dispatch(
+            receiveFriend({
+              receiverId: currentUserId,
+              senderId: user.memberId,
+              status: accept ? "accepted" : "rejected",
+            })
+          );
+        }
       } catch (error) {
         console.error("Failed to respond to friend request:", error);
         // Handle error
       }
     }
-    dispatch(
-      updateFriendRequestStatus({
-        memberId: user.memberId,
-        status: accept ? "accepted" : "rejected",
-      })
-    );
   };
-  useEffect(() => {
-    console.log("Friend Requests State: ", friendRequests);
-  }, [friendRequests]);
+
   const handleButtonClick = () => {
     if (isFriend) {
       navigate(`/api/users/${user.memberId}/posts`);
@@ -83,21 +81,56 @@ export default function GuestList({
   const imageUrl =
     profileData[user.memberId]?.imageUrl || "/images/default.png";
 
+  // let outgoingStatus;
+  // let incomingStatus;
+  useEffect(() => {
+    const friendRequests = async () => {
+      try {
+        const memberId = localStorage.getItem("memberId");
+        const sent = await fetchFriendRequests();
+        // outgoingReceiver = sent.map((e) => e.receiverId).includes(user.memberId);
+        setOutgoingStatus(
+          sent.find(
+            (e) => e.receiverId == user.memberId && e.senderId == memberId
+          )?.status
+        );
+        setIncomingStatus(
+          sent.find(
+            (e) => e.senderId == user.memberId && e.receiverId == memberId
+          )?.status
+        );
+
+        console.log("outgoingStatus:", outgoingStatus);
+
+        console.log("incomingStatus:", incomingStatus);
+        // outgoingSender = sent.map((e) => e.senderId).includes(memberId);
+      } catch (error) {
+        console.error("Error fetching friend requests:", error);
+      }
+    };
+    friendRequests();
+  }, []);
   let buttonComponent;
-  if (hasPendingRequest || requestStatus === "pending") {
+
+  if (outgoingStatus === "pending") {
+    buttonComponent = <Button disabled>Pending</Button>;
+  } else if (incomingStatus === "pending") {
     buttonComponent = (
       <>
         <Button onClick={() => handleRespondToRequest(true)}>Accept</Button>
         <Button onClick={() => handleRespondToRequest(false)}>Reject</Button>
       </>
     );
-  } else if (requestStatus === "accepted" || isFriend) {
+  } else if (isFriend) {
+    // Already friends
     buttonComponent = <Button onClick={handleButtonClick}>Friends</Button>;
   } else {
+    // No existing request
     buttonComponent = (
       <Button onClick={handleAddFriendClick}>Add Friend</Button>
     );
   }
+
   return (
     <S.PostStyle>
       <S.RowStyle>
@@ -107,15 +140,15 @@ export default function GuestList({
         <S.RowTitle>{user.id}</S.RowTitle>
         <S.RowTitle>{user.nickname}</S.RowTitle>
         <S.RowTitle>
-        {user.name
+          {user.name
             .replaceAll(keyWord, `!@#${keyWord}!@#`)
             .split("!@#")
-            .map((el) => (
+            .map((e) => (
               <span
                 key={user.memberId}
-                style={{ color: el === keyWord ? "blue" : "black" }}
+                style={{ color: e === keyWord ? "blue" : "black" }}
               >
-                {el}
+                {e}
               </span>
             ))}
         </S.RowTitle>

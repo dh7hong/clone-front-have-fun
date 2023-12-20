@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const getPost = async (memberId) => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts`);
+    const response = await axios.get(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/posts`);
     return response.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -13,7 +13,7 @@ export const getPost = async (memberId) => {
 
 export const addPost = async (newPost, memberId) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts`, newPost);
+    const response = await axios.post(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/posts`, newPost);
     return response.data;
   } catch (error) {
     console.error("Error adding post:", error);
@@ -22,7 +22,7 @@ export const addPost = async (newPost, memberId) => {
 
 export const getOnePost = async (postId, memberId) => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts/${postId}`);
+    const response = await axios.get(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/posts/${postId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching one post:", error);
@@ -32,7 +32,7 @@ export const getOnePost = async (postId, memberId) => {
 export const deletePost = async (postId, memberId) => {
   try {
     const response = await axios.delete(
-      `${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts/${postId}`
+      `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/posts/${postId}`
     );
 
     return response;
@@ -41,7 +41,7 @@ export const deletePost = async (postId, memberId) => {
 
 export const editPost = async (postId, updatedPostData, memberId) => {
   try {
-    const response = await axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/users/${memberId}/posts/${postId}`, updatedPostData);
+    const response = await axios.patch(`${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/posts/${postId}`, updatedPostData);
     return response.data;
   } catch (error) {
     console.error("Error updating post:", error);

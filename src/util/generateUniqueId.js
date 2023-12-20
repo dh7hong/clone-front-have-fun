@@ -15,6 +15,7 @@ export const generateUniqueId = () => {
 export const generateRandomId = () => {
   let date = new Date();
   let milliseconds =
+    date.getHours() * 60 * 60 * 1000 +
     date.getMinutes() * 60 * 1000 +
     date.getSeconds() * 1000 +
     date.getMilliseconds();

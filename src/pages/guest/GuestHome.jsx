@@ -16,6 +16,7 @@ import {
 } from "../../shared/style/Main";
 import { userList } from "../../api/userService";
 import GuestList from "./GuestList";
+import { set } from "lodash";
 
 export default function GuestHome() {
   const [users, setUsers] = useState([]);
@@ -34,13 +35,13 @@ export default function GuestHome() {
     try {
       const response = await userList();
       const data = response;
-      console.log("API's response.data looks like:", data);
+      console.log("Get users data:", data);
 
       if (data) {
-        console.log("API's response.data looks like:", data);
+        console.log("Get users data", data);
         setUsers(response);
       } else {
-        console.error("API's response.data looks like:", response.data);
+        console.error("error:", response.data);
       }
     } catch (error) {
       console.error("Error retrieving Data:", error);
@@ -77,6 +78,7 @@ export default function GuestHome() {
       const response = await axios.get(
         `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/friends`
       );
+      console.log("Set current user's friends:", response.data.friends);
       setCurrentUserFriends(response.data.friends);
     } catch (error) {
       console.error("Error fetching friends:", error);
@@ -89,13 +91,15 @@ export default function GuestHome() {
         `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/incomingFriendRequests`,
         {}
       );
-      
+      console.log("Set incoming friend requests:", response.data);
       setIncomingFriendRequests(response.data);
+      console.log("Incoming friend requests:", response.data);
     } catch (error) {
       console.error("Error fetching incoming friend requests:", error);
     }
   };
-  
+
+
   useEffect(() => {
     getUsersData();
     fetchCurrentUserFriends();
@@ -124,16 +128,7 @@ export default function GuestHome() {
   return (
     <>
       <SecondGridArea>
-        {/* <S.BoardWrapper>
-          <S.BoardTitle>Profile Image</S.BoardTitle>
-          <S.BoardTitle>ID</S.BoardTitle>
-          <S.BoardTitle>Nickname</S.BoardTitle>
-          <S.BoardTitle>Name</S.BoardTitle>
-          <S.BoardTitle>Message</S.BoardTitle>
-          <S.BoardTitle>Friends</S.BoardTitle>
-        </S.BoardWrapper> */}
         <S.HeaderWrapper>
-          {/* <h2>Free World's Users</h2> */}
           <br />
           <div style={{marginTop: "20px"}}>
             <S.SearchInput

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEntry } from '../../redux/modules/diarySlice';
 import { postDiaryEntry } from '../../api/diary';
-import { generateUniqueId } from '../../util/generateUniqueId';
+import { generateRandomId } from '../../util/generateUniqueId';
 import { getDateTime } from '../../util/getDateTime';
 import { Button } from "../../components/button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function DiaryInput() {
   const handleSubmit = async () => {
     if (contents.trim()) {
       const newEntry = {
-        diaryId: generateUniqueId(),
+        diaryId: generateRandomId(),
         id: localStorage.getItem('id'),
         name: localStorage.getItem('name'),
         nickname: localStorage.getItem('nickname'),

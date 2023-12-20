@@ -17,7 +17,7 @@ export default function PostList({ post }) {
       <S.RowStyle>
         <S.RowTitle>{post.postId}</S.RowTitle>
         <S.RowTitle>{post.title}</S.RowTitle>
-        <S.RowTitle>{post.nickname}</S.RowTitle>
+        <S.RowTitle>{post.name}</S.RowTitle>
         <S.RowTitle>{post.createdAt}</S.RowTitle>
         <S.detailedBtnWrapper>
           <Button onClick={moveToDetailedPage(post.postId)}>상세보기</Button>

@@ -25,10 +25,7 @@ export const respondToFriendRequest = async (memberId, senderId, accept) => {
   try {
     const response = await axios.patch(
       `${process.env.REACT_APP_AUTH_URL}/api/users/${memberId}/respondToFriendRequest`,
-      {
-        senderId,
-        accept,
-      }
+      { senderId, accept }
     );
     return response.data;
   } catch (error) {
@@ -48,3 +45,15 @@ export const fetchIncomingFriendRequests = async (memberId) => {
     return []; // Return an empty array or handle the error as appropriate
   }
 };
+
+export const fetchFriendRequests = async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_AUTH_URL}/api/users/friendRequests`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching all friend requests:", error);
+    return []; // Return an empty array or handle the error as appropriate
+  }
+}
